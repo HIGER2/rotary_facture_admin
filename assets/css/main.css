@@ -1,0 +1,17 @@
+ @import "tailwindcss";
+ 
+@theme {
+  --color-primary:#1F2923;
+  --color-sidebar:hsl(0 0% 98%);
+}
+
+
+@layer components {
+  .link {
+    @apply p-2 gap-2 flex  items-center cursor-pointer text-gray-700 font-[400] rounded-md w-full text-sm hover:bg-gray-200;
+  }
+  .box {
+    @apply rounded-xl border border-slate-200 shadow-xs bg-white text-slate-950  p-6 flex flex-col justify-between gap-3;
+  }
+  
+}
