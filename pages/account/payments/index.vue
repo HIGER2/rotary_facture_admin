@@ -1,30 +1,58 @@
 
 
 <script setup lang="ts">
+import { usePaymentViewModel } from '~/stores/viewModels/paymentViewmodel';
+
+
+const storePayments = usePaymentViewModel()
 
 const columns = [
-    { label: 'N°Facture', key: 'n' },
+    { label: 'référence', key: 'reference' },
     { label: 'Club', key: 'club' },
-    { label: 'Montant', key: 'amount' },
-    { label: 'restet à payer', key: 'amount_rest' },
+    { label: 'N°Facture', key: 'fac' },
+    // { label: 'montant à regler', key: 'club' },
+    { label: 'montant', key: 'amount' },
     { label: 'statut', key: 'status' },
-    { label: 'date émission', key: 'date' },
+    { label: 'mode paiement', key: 'mode_paiement' },
+    { label: 'date', key: 'date' },
 ]
-const data = [
-    {n:"16545646",club:"16545646",amount:"10000",amount_rest:"1000",status:"16545646",date:"16545646" },
-    {n:"16545646",club:"16545646",amount:"10000",amount_rest:"1000",status:"16545646",date:"16545646" },
-    {n:"16545646",club:"16545646",amount:"10000",amount_rest:"1000",status:"16545646",date:"16545646" },
-    {n:"16545646",club:"16545646",amount:"10000",amount_rest:"1000",status:"16545646",date:"16545646" },
-    {n:"16545646",club:"16545646",amount:"10000",amount_rest:"1000",status:"16545646",date:"16545646" },
-    {n:"16545646",club:"16545646",amount:"10000",amount_rest:"1000",status:"16545646",date:"16545646" },
-    {n:"16545646",club:"16545646",amount:"10000",amount_rest:"1000",status:"16545646",date:"16545646" },
-]
+
+
+const filters = reactive({
+  search: "",
+  status: "",
+});
+
+const handleListe =async (params:any={}) => {
+    const queryParams = new URLSearchParams({
+        search: filters.search || '',
+        status: params.status || '',
+    });
+
+    await storePayments.all(queryParams) 
+}
+
+watch(
+  filters,
+    (value:any) => {
+        let interval = setTimeout(async () => {
+        handleListe(value);
+        clearTimeout(interval);
+        }, 400);
+    },
+    { deep: true }
+);
+
+onMounted(() => {
+   handleListe()
+})
 </script>
 
 <template>
     <div>
     <NuxtLayout>
     <div class="w-full">
+        <!-- {{ storePayments?.payments[0] }} -->
         <div class="w-full p-2">
             <div class="w-full">
                 <div class="w-full flex items-center justify-between mb-10">
@@ -44,7 +72,7 @@ const data = [
                     <div class="w-auto">
                         <input 
                         class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[250px]"
-                         placeholder="Recherche une paiement..." value="" autocomplete="off">
+                         placeholder="Recherche paiement..." value="" autocomplete="off">
                     </div>
                     <div class="w-auto gap-2 flex items-center justify-between">
                         <select class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[120px]">
@@ -62,7 +90,13 @@ const data = [
                     </div>
                 </div>
             </div>
-            <UiDynamicTable :rowClick="()=>navigateTo('/payments/2')" :columns="columns" :data="data"/>
+            <UiDynamicTable :rowClick="()=>navigateTo('/payments/2')" :columns="columns" :data="storePayments?.payments">
+                <template #fac="{ item }">
+                    <NuxtLink :to="`/account/factures/${item?.fac}`"
+                    class="text-blue-500 hover:text-blue-700 hover:underline"
+                    >{{ item?.fac}}</NuxtLink>
+                </template>
+            </UiDynamicTable>
         </div>
     </div>
 

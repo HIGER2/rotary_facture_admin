@@ -1,14 +1,15 @@
 <template>
   <div class="mt-4 flex w-full flex-col justify-start gap-1">
-    <label class="text-[13px] font-md text-zinc-700" v-if="label">{{ label }}</label>
+    <label class="text-[13px] font-[500] text-zinc-700" v-if="label">{{ label }}</label>
     <select
       :name="name"
       :disabled="disabled"
-      class="w-full rounded-md border border-zinc-200 p-2 px-3 text-xs font-semibold outline-none transition-all placeholder:text-zinc-300 hover:border-zinc-500 focus:border-brand focus:outline-brand-light disabled:text-zinc-500"
-      v-model="selectedValue"
-      @change="handleChange"
+      v-bind="$attrs"
+      class="flex h-11 w-full rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-xs transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50"
+      :value="props.modelValue"
+      @change="emit('update:modelValue', $event.target.value)"
     >
-      <option  value="">{{ placeholder }}</option>
+      <option  value="" disabled>{{ placeholder }}</option>
       <option v-for="(option, index) in options" :key="index" :value="option.value">
         {{ option.label }}
       </option>

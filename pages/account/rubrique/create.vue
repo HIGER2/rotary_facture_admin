@@ -3,7 +3,7 @@
         <NuxtLayout>
         <div class="w-full">
             <div class="w-full p-2 mb-3">
-                <h5 class="text-sm font-semibold uppercase text-neutral-500">Créer une facture</h5>
+                <h5 class="text-sm font-semibold uppercase text-neutral-500">Créer un club</h5>
             </div>
             <div class="w-full p-2">
                 <div class="max-w-3xl">

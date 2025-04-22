@@ -3,9 +3,17 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
-
+  ssr:false,
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
+  typescript: {
+  strict: false
+  },
+   router: {
+    options: {
+      hashMode: true
+    }
+  },
   vite: {
     plugins: [
       tailwindcss(),
@@ -13,15 +21,22 @@ export default defineNuxtConfig({
   },
    app: {
     
-     head: {
+    head: {
         link: [
-       {
-         href: "https://unicons.iconscout.com/release/v4.0.8/css/line.css",
-           rel:"stylesheet"
-         }
-       ],
-     }
+      {
+        href: "https://unicons.iconscout.com/release/v4.0.8/css/line.css",
+          rel:"stylesheet"
+        }
+      ],
+    }
 
   },
-  modules: ['@nuxt/image', '@nuxt/scripts', '@nuxt/test-utils']
+ 
+  modules: ['@nuxt/image', '@nuxt/scripts', // '@nuxt/ui'
+    '@nuxt/test-utils', '@pinia/nuxt', 'nuxt-toastify'],
+    toastify: {
+     autoClose: 2000,
+     position: 'bottom-right',
+     theme: 'light',
+   },
 })

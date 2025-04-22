@@ -29,17 +29,18 @@ function handleRowClick(item: Record<string, any>, index: number) {
 </script>
 
 <template>
-  <div class="table w-full border border-gray-200 rounded-lg ">
+  <div class="table w-full border overflow-hidden  bg-white border-gray-200 rounded-lg ">
     <table class="w-full border-collapse ">
       <!-- En-tête dynamique -->
-      <thead class="border-b border-gray-100 capitalize text-[10px]">
+      <thead class="border-b bg-sidebar border-gray-100 capitalize text-[10px]">
         <tr>
-          <th v-for="(column, index) in columns" :key="index" class="p-2 text-left text-[11px] 
-          font-[500]
-          text-gray-500
+          <th v-for="(column, index) in columns" :key="index" class="
+          h-10 px-1 text-left align-middle 
+          text-gray-700 font-[400] rounded-md w-full text-sm
+          dark:text-slate-400 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]
           "
           >
-            {{ column.label }}
+            {{ column.label  }}
           </th>
         </tr>
       </thead>
@@ -49,15 +50,25 @@ function handleRowClick(item: Record<string, any>, index: number) {
         <tr
           v-for="(item, rowIndex) in data"
           :key="rowIndex"
-          class="text-gray-900 font-[400] border-b border-zinc-100 cursor-pointer hover:bg-zinc-50"
+          class="text-gray-800 font-[500] border-b border-zinc-100 cursor-pointer hover:bg-zinc-50"
           @click="handleRowClick(item, rowIndex)"
         >
           <td v-for="(column, colIndex) in columns" :key="colIndex" class="p-2" >
-            {{ item[column.key] }}
+            <!-- Slot personnalisé s'il existe -->
+            <template v-if="$slots[column.key]">
+              <slot :name="column.key" :item="item" :index="rowIndex" />
+            </template>
+            <!-- Sinon afficher du texte -->
+            <template v-else>
+              {{ item[column.key] || "N/A" }}
+            </template>
           </td>
         </tr>
       </tbody>
     </table>
+    <div v-if="data?.length ===0" class="w-full  bg-white p-3 flex items-center justify-center">
+        <h4>aucun element</h4>
+    </div>
   </div>
 </template>
 
@@ -72,11 +83,11 @@ table-layout: fixed; /* Colonne largeur égale */
 
 }
 thead th {
-  padding: 20px 10px;
+  padding: 15px 10px;
   text-align: left;
 }
 tbody tr td {
-  padding: 15px 15px;
+  padding: 12px 12px;
   font-size: 12px;
   text-align: left;
   word-wrap: break-word; 
