@@ -9,6 +9,11 @@ export default defineNuxtConfig({
   typescript: {
   strict: false
   },
+  runtimeConfig: {
+    public: {
+      apiBase: 'https://api.facturation.rotary-district9101.org'
+    }
+  },
    router: {
     options: {
       hashMode: true
