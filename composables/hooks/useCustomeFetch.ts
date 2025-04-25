@@ -6,7 +6,7 @@ export async function useCustomFetch<T>(url: string | (() => string),options: Us
 
     let option = {
         ...options,
-        baseURL:config.public.apiBase || 'http://localhost:8000/api/',
+        baseURL:`${config.public.apiBase}/api` || 'http://localhost:8000/api/',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
