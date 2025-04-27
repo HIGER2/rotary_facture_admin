@@ -28,6 +28,7 @@ export default defineNuxtConfig({
     
     head: {
         link: [
+      { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
       {
         href: "https://unicons.iconscout.com/release/v4.0.8/css/line.css",
           rel:"stylesheet"

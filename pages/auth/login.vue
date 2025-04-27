@@ -9,10 +9,11 @@ const {isLoading} = storeToRefs(useAuthViewModel())
 <template>
     <div class="w-full h-screen flex justify-center items-center">
         <div class="w-[370px] ">
-            <a href="https://lygosapp.com">
+            <a href="#">
                 <img alt="logo" 
                 fetchpriority="high" 
-                width="120" height="28.422" decoding="async" data-nimg="1" class="mb-5" src="~/assets/images/logo.svg" 
+                width="120" height="28.422" decoding="async" data-nimg="1" class="mb-5" 
+                src="~/assets/images/logo.svg" 
                 style="color: transparent;"></a>
             <div class="rounded-xl shadow w-full">
                     <div class="flex flex-col space-y-1.5 p-6 px-2 sm:px-6">
