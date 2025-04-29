@@ -29,7 +29,11 @@ const columns = [
                 </button> -->
             </div>
             <div class="mt-6 border-t border-gray-100">
-                <UiDynamicTable :rowClick="()=>navigateTo('/factures/2')" :columns="columns" :data="data?.paiements"/>
+                <UiDynamicTable  :columns="columns" :data="data?.paiements">
+                    <template #status="{ item }">
+                        <PaymentStatus :status="item?.status" />
+                    </template>
+                </UiDynamicTable>
             </div>
     </div>
 </template>

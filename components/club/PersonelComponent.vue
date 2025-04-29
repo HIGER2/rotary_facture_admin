@@ -37,7 +37,7 @@ const columns = [
                 </button>
             </div>
             <div class="mt-6 border-t border-gray-100">
-                <UiDynamicTable :rowClick="()=>navigateTo('/factures/2')" :columns="columns" :data="data?.personels"/>
+                <UiDynamicTable  :columns="columns" :data="data?.personels"/>
             </div>
             <ClubAddPersonelComponent :data="data" :setActive="setActive" :isActive="isActive"/>
     </div>

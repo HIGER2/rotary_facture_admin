@@ -18,15 +18,32 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
     const newClub = reactive({ ...initial });
     
 
-    async function all(queryParams ="") {
-        const data = await useClub.all(queryParams);
-        clubs.value = [...data.data?.data.map((item:any,index) => (
+    async function allByFilter(queryParams ="") {
+        const data = await useClub.allByFilter(queryParams);
+        clubs.value = [...data.data?.data?.data.map((item:any,index) => (
             {
                 id : item?.id,
                 uid : item?.club_uid,
                 name : item?.name,
+                language : item?.language,
                 desc : item?.description,
-                pays : item?.pays,
+                country : item?.country,
+            }
+        ))]
+
+        return data
+    }
+
+    async function all(queryParams ="") {
+        const data = await useClub.all(queryParams);
+            [...data.data?.data?.map((item:any,index) => (
+            {
+                id : item?.id,
+                uid : item?.club_uid,
+                name : item?.name,
+                language : item?.language,
+                desc : item?.description,
+                country : item?.country,
             }
         ))]
 
@@ -60,6 +77,7 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
         newClub,
         create,
         isLoading,
-        findDetail
+        findDetail,
+        allByFilter
     }
 })

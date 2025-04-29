@@ -37,7 +37,7 @@ const handleListe =async (params:any={}) => {
         status: params.status || '',
     });
 
-    await storeClub.all(queryParams) 
+    await storeClub.allByFilter(queryParams) 
 }
 
 watch(
@@ -60,6 +60,7 @@ onMounted(() => {
     <div>
     <NuxtLayout>
     <div class="w-full">
+        <!-- <pre>{{ storeClub?.clubs }}</pre> -->
         <div class="w-full p-2">
             <div class="w-full">
                 <div class="w-full flex items-center justify-between mb-10">
@@ -76,6 +77,7 @@ onMounted(() => {
                 <div class="w-full flex items-center justify-between mb-3 ">
                     <div class="w-auto">
                         <input 
+                        v-model="filters.search"
                         class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[250px]" 
                         placeholder="Recherche..." autocomplete="off">
                     </div>

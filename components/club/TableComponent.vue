@@ -8,8 +8,9 @@ const props = defineProps<TableProps>()
 
 const columns = [
     { label: '#', key: 'id' },
-    { label: 'name', key: 'name' },
-    { label: 'pays', key: 'pays' },
+    { label: 'nom club', key: 'name' },
+    { label: 'pays', key: 'country' },
+    { label: 'langue', key: 'language' },
     { label: 'Action', key: 'action' },
 ]
 

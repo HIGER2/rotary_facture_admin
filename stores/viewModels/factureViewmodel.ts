@@ -19,10 +19,11 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
         status:"",
     }
     const newFacture = reactive({...initial});
+    const updateFacture = reactive({...initial,id:null});
   
     async function all(queryParams) {
         const data = await useFacture.all(queryParams);
-        factures.value = [...data.data?.data]
+        factures.value = [...data.data?.data?.data]
     }
     async function create() {
         isLoading.value= true
@@ -38,9 +39,28 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
         isLoading.value= false
     }
 
-     async function findWithPaiement(reference:string) {
+    async function update() {
+        isLoading.value= true
+        let items={...updateFacture}
+        const data = await useFacture.update(items);
+          useToastify("Opération éffectuée", {
+            autoClose: 1000,
+            type: ToastifyOption.TYPE.SUCCESS,
+            // position: ToastifyOption.POSITION.TOP_RIGHT,
+            // transition: ToastifyOption.TRANSITIONS.,
+            // theme: ToastifyOption.THEME.LIGHT,
+        });
+        isLoading.value= false
+    }
+
+    async function findWithPaiement(reference:string) {
          const data = await useFacture.findWithPaiement(reference);
          facture.value = data?.data?.data
+    }
+
+    async function find(reference:string) {
+        const data = await useFacture.find(reference);
+        Object.assign(updateFacture,data?.data?.data)
     }
 
     return {
@@ -50,6 +70,9 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
         create,
         findWithPaiement,
         newFacture,
-        isLoading
+        isLoading,
+        find,
+        updateFacture,
+        update
     }
 })

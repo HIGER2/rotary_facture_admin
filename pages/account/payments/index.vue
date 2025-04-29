@@ -71,14 +71,18 @@ onMounted(() => {
                 <div class="w-full flex items-center justify-between mb-3 ">
                     <div class="w-auto">
                         <input 
+                        v-model="filters.search"
                         class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[250px]"
-                         placeholder="Recherche paiement..." value="" autocomplete="off">
+                        placeholder="Recherche paiement..." autocomplete="off">
                     </div>
                     <div class="w-auto gap-2 flex items-center justify-between">
-                        <select class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[120px]">
-                            <option value="">Tous</option>
-                            <option value="">Clubs</option>
-                            <option value="">Partenaires</option>
+                        <select 
+                        v-model="filters.status"
+                        class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[120px]">
+                            <option value="">Filtrer</option>
+                            <option value="1">en attente</option>
+                            <option value="2">payé</option>
+                            <option value="3">annulé</option>
                         </select>
                         <button class="inline-flex items-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 rounded-full px-3 text-xs h-8 w-full justify-start">
                             <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -90,13 +94,16 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-            <UiDynamicTable :rowClick="()=>navigateTo('/payments/2')" :columns="columns" :data="storePayments?.payments">
-                <template #fac="{ item }">
-                    <NuxtLink :to="`/account/factures/${item?.fac}`"
-                    class="text-blue-500 hover:text-blue-700 hover:underline"
-                    >{{ item?.fac}}</NuxtLink>
-                </template>
-            </UiDynamicTable>
+            <div class="w-full p-2">
+                <PaymentTableComponent :data="storePayments?.payments"/>
+                <!-- <UiDynamicTable  :columns="columns" :data="storePayments?.payments">
+                    <template #fac="{ item }">
+                        <NuxtLink :to="`/account/factures/${item?.fac}`"
+                        class="text-blue-500 hover:text-blue-700 hover:underline"
+                        >{{ item?.fac}}</NuxtLink>
+                    </template>
+                </UiDynamicTable> -->
+            </div>
         </div>
     </div>
 

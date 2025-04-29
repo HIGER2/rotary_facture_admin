@@ -103,9 +103,7 @@ const optionMethode = [
                                         Statut
                                     </dt>
                                     <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        <div class="inline-flex items-center rounded-md border border-slate-200 px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2 dark:border-slate-800 dark:focus:ring-slate-300 dark:text-slate-50 bg-green-50 text-green-700 ring-1 ring-green-600/20">
-                                            {{ storeFacture.facture?.status }}
-                                        </div>
+                                        <FactureStatus :status="storeFacture.facture?.status"/>
                                     </div>
                                 </div>
                                 <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">

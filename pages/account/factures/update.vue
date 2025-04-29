@@ -4,7 +4,7 @@
 import { useClubViewModel } from '~/stores/viewModels/clubViewmodel';
 import { useFactureViewModel } from '~/stores/viewModels/factureViewmodel';
 
-const { newFacture, create } = useFactureViewModel()
+const storeFacture = useFactureViewModel()
 const {isLoading} = storeToRefs(useFactureViewModel())
 const storeClub =useClubViewModel()
 const optionClub=ref([])
@@ -16,7 +16,7 @@ const optionStatus = [
     { label: 'arriérée', status:"arriérée"},
 ]
 
-const handleCulb = async () => {
+const handleClub = async () => {
     let response =await storeClub.all()
     optionClub.value = [...response.data?.data.map((item:any,index) => (
             {
@@ -26,10 +26,15 @@ const handleCulb = async () => {
         ))]
 }
 
-onMounted(() => {
 
-    handleCulb()
-})
+const handleFactre = async () => {
+    let route = useRoute();
+    let response =await storeFacture.find(route?.query?.ref)
+   
+}
+onMounted(async () => {
+    await Promise.all([handleClub(), handleFactre()]);
+});
 </script>
 
 
@@ -37,35 +42,36 @@ onMounted(() => {
     <div>
         <NuxtLayout>
         <div class="w-full">
+            <!-- <pre>{{ storeFacture.updateFacture }}</pre> -->
             <div class="w-[600px] m-auto">
                 <div class="w-full p-2 mb-3">
-                <h5 class="text-sm font-semibold uppercase text-neutral-500">Créer une facture</h5>
+                <h5 class="text-sm font-semibold uppercase text-neutral-500">Modifier la facture</h5>
             </div>
             <div class="w-full p-2 ">
-                <form class="max-w-3xl" @submit.prevent="create()">
+                <form class="max-w-3xl" @submit.prevent="storeFacture.update()">
                     <div class="w-full bg-white p-4 border overflow-hidden  border-gray-200 rounded-lg">
                         <div class="space-y-2 mb-4 flex gap-2">
                             <UiFormSelect 
-                            v-model="newFacture.club_id"
+                            v-model="storeFacture.updateFacture.club_id"
                             :options="optionClub" label="Club" 
                             required
                             placeholder="Selectionner un club" name="title" />
                             <UiFormSelect 
                             required
-                            v-model="newFacture.status"
+                            v-model="storeFacture.updateFacture.status"
                             :options="optionStatus" label="Statut" 
                             placeholder="Statut" name="title" />
                         </div>
                         <div class="space-y-2 mb-4">
                             <UiFormInput 
                             required
-                            v-model="newFacture.amount"
+                            v-model="storeFacture.updateFacture.amount"
                             type="number" label="Montant" placeholder="Montant" name="title" />
                         </div>
                         <div class="space-y-2 mb-4">
                             <UiFormInput 
                             required
-                            v-model="newFacture.date_echeance"
+                            v-model="storeFacture.updateFacture.date_echeance"
                             type="date" label="Date échéance" placeholder="Date échéance" name="title" />
                         </div>
                         <div class="space-y-2 mb-4">
@@ -73,8 +79,7 @@ onMounted(() => {
                                 <label  class="text-[13px] font-[500] text-zinc-700">
                                 </label>
                                 <UiFormTextArea
-                                required
-                                v-model="newFacture.objet"
+                                v-model="storeFacture.updateFacture.objet"
                                 placeholder="Objet"
                                 rows="4"
                                 />

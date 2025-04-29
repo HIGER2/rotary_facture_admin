@@ -38,16 +38,16 @@ const editUser = (user) => {
             <template #action="{ item }">
                   <!-- <NuxtLink to="" class="text-blue-600">ouvrir</NuxtLink> -->
                 <div class="flex items-center gap-1  text-[12px]">
-                     <NuxtLink :to="`/account/factures/${item?.reference}`"
+                    <NuxtLink :to="`/account/factures/${item?.reference}`"
                     class=" h-7 w-7 cursor-pointer hover:bg-gray-200  
                     flex items-center justify-center text-center rounded-full  px-2 py-1 
-                     border border-gray-200 text-gray-500 hover:text-gray-700
-                     shadow
+                    border border-gray-200 text-gray-500 hover:text-gray-700
+                    shadow
                     ">
                     <i class="uil uil-eye "></i>
                         <!-- <i class="uil uil-info-circle"></i> -->
                 </NuxtLink>
-                    <NuxtLink to="#"  
+                    <NuxtLink :to="`/account/factures/update?ref=${item?.reference}`"  
                         class=" h-7 w-7 cursor-pointer hover:bg-gray-200  
                         flex items-center justify-center text-center 
                         rounded-full
@@ -61,12 +61,7 @@ const editUser = (user) => {
                 </div>
             </template>
             <template #status="{ item }">
-                <!-- <div class="inline-flex items-center rounded-md border border-slate-200 px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-slate-950 focus:ring-offset-2 dark:border-slate-800 dark:focus:ring-slate-300 dark:text-slate-50 bg-green-50 text-green-700 ring-1 ring-green-600/20">
-                    payée
-                </div> -->
-                <span class="font-medium  inline-flex items-center text-xs px-2 py-1 gap-1 rounded-md bg-(--ui-success)/10 text-(--ui-success) ring ring-inset ring-(--ui-success)/25  lowercase">
-                    {{ item?.status }}
-                </span>
+                <FactureStatus :status="item?.status"/>
             </template>
         </UiDynamicTable>
     </div>

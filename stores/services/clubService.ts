@@ -8,10 +8,15 @@ export const useClubServices = defineStore('club', () => {
     async function all(queryParams:any) {
         return await useCustomFetch(`/club/all?${queryParams.toString()}`)
     }
+
+    async function allByFilter(queryParams:any) {
+        return await useCustomFetch(`/club/all/filter?${queryParams.toString()}`)
+    }
+    
     async function findDetail(params: any) {
         return await useCustomFetch(`/club/${params.id}/${params.uid}`)
     }
-      async function create(items:any) {
+    async function create(items:any) {
         return await useCustomFetch(`/club/create`, {
                 method: 'POST',
                 body:items
@@ -20,6 +25,7 @@ export const useClubServices = defineStore('club', () => {
     return {
         all,
         create,
-        findDetail
+        findDetail,
+        allByFilter
     }
 })

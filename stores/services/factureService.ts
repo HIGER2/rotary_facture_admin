@@ -16,13 +16,26 @@ export const useFactureServices = defineStore('facture', () => {
             })
     }
 
+    async function update(items:any) {
+        return await useCustomFetch(`/facture/update`, {
+                method: 'PUT',
+                body:items
+            })
+    }
+
     async function findWithPaiement(reference:string) {
         return await useCustomFetch(`/facture/find/${reference}`)
+    }
+
+    async function find(reference:string) {
+        return await useCustomFetch(`/facture/get/${reference}`)
     }
 
     return {
         all,
         create,
-        findWithPaiement
+        findWithPaiement,
+        find,
+        update
     }
 })
