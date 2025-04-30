@@ -16,6 +16,13 @@ export const usePaymentServices = defineStore('payment', () => {
             })
     }
 
+    async function update(items:any) {
+        return await useCustomFetch(`/payment/update`, {
+                method: 'put',
+                body:items
+            })
+    }
+
     async function findWithPaiement(reference:string) {
         return await useCustomFetch(`/payment/find/${reference}`)
     }
@@ -23,6 +30,7 @@ export const usePaymentServices = defineStore('payment', () => {
     return {
         all,
         create,
-        findWithPaiement
+        findWithPaiement,
+        update
     }
 })

@@ -19,6 +19,12 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
         mode_paiement:"",
     }
     const newPayment = reactive({...initial});
+    const updatePayment = reactive({
+        amount:null,
+        mode_paiement:"",
+        status:"",
+        id:"",
+    });
   
     async function all(queryParams) {
         const data = await usePayment.all(queryParams);
@@ -44,7 +50,24 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
         }
         const data = await usePayment.create(items);
           useToastify("Opération éffectuée", {
-             autoClose: 1000,
+            autoClose: 1000,
+            type: ToastifyOption.TYPE.SUCCESS,
+            // position: ToastifyOption.POSITION.TOP_RIGHT,
+            // transition: ToastifyOption.TRANSITIONS.,
+            // theme: ToastifyOption.THEME.LIGHT,
+        });
+        isLoading.value = false
+    }
+
+    async function update() {
+        isLoading.value = true
+        let items = {
+            ...updatePayment,
+        }
+
+        const data = await usePayment.update(items);
+          useToastify("Opération éffectuée", {
+            autoClose: 1000,
             type: ToastifyOption.TYPE.SUCCESS,
             // position: ToastifyOption.POSITION.TOP_RIGHT,
             // transition: ToastifyOption.TRANSITIONS.,
@@ -63,6 +86,8 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
         findWithPaiement,
         newPayment,
         payments,
-        isLoading
+        isLoading,
+        updatePayment,
+        update
     }
 })

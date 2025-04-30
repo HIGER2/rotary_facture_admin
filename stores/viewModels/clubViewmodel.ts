@@ -12,10 +12,11 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
     const useClub = useClubServices();
     let initial = {
         name: "",
-        pays: "",
+        country_id: "",
         status:""
     }
     const newClub = reactive({ ...initial });
+    const updateClub = reactive({ ...initial, id:""});
     
 
     async function allByFilter(queryParams ="") {
@@ -25,12 +26,13 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
                 id : item?.id,
                 uid : item?.club_uid,
                 name : item?.name,
-                language : item?.language,
+                language : item?.country?.langage,
                 desc : item?.description,
-                country : item?.country,
+                country : item?.country?.name,
+                country_id : item?.country?.id,
+                status : item?.status,
             }
         ))]
-
         return data
     }
 
@@ -50,7 +52,7 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
         return data
     }
 
-     async function findDetail(params:any) {
+    async function findDetail(params:any) {
         const data = await useClub.findDetail(params);
         club.value = data?.data?.data
         return data
@@ -70,6 +72,23 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
         isLoading.value = false
 
     }
+
+    async function update() {
+        isLoading.value = true
+        let items={...updateClub}
+
+        console.log('updateClub',updateClub);
+        const data = await useClub.update(items);
+          useToastify("Opération éffectuée", {
+             autoClose: 1000,
+            type: ToastifyOption.TYPE.SUCCESS,
+            // position: ToastifyOption.POSITION.TOP_RIGHT,
+            // transition: ToastifyOption.TRANSITIONS.,
+            // theme: ToastifyOption.THEME.LIGHT,
+        });
+        isLoading.value = false
+
+    }
     return {
         all,
         club,
@@ -78,6 +97,8 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
         create,
         isLoading,
         findDetail,
-        allByFilter
+        allByFilter,
+        updateClub,
+        update
     }
 })

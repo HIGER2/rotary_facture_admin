@@ -82,7 +82,7 @@ onMounted(() => {
                             <option value="">Filtrer</option>
                             <option value="1">en attente</option>
                             <option value="2">payé</option>
-                            <option value="3">annulé</option>
+                            <option value="3">échec</option>
                         </select>
                         <button class="inline-flex items-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 rounded-full px-3 text-xs h-8 w-full justify-start">
                             <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

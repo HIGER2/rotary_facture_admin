@@ -13,20 +13,41 @@ const filters = reactive({
   status: "",
 });
 
-const optionStatus = [
-    { label: 'actif', status:"actif"},
-    { label: 'inactif', status:"inactif"},
-]
-
 
 
 const isActive = ref(false)
-const setActive = (state) => {
+const isActiveUpdate = ref(false)
+
+const setActive = (state:boolean) => {
     isActive.value =state
+}
+
+const setActiveUpdate = (state:boolean) => {
+    isActiveUpdate.value =state
+}
+
+
+const setUpdate = (item:any) => {
+    // Object.assign(storeClub.updateClub, item) 
+    storeClub.updateClub.country_id = item?.country_id
+    storeClub.updateClub.status = item?.status
+    storeClub.updateClub.id = item?.id
+    storeClub.updateClub.name = item?.name
+
+    console.log(item);
+    
+    setActiveUpdate(true)
 }
 
 const createClub = async () => {
     await storeClub.create()
+    await handleListe()
+    // setActive(false) 
+}
+
+
+const updateClub = async () => {
+    await storeClub.update()
     await handleListe()
     // setActive(false) 
 }
@@ -81,8 +102,18 @@ onMounted(() => {
                         class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[250px]" 
                         placeholder="Recherche..." autocomplete="off">
                     </div>
-                    <!-- <div class="w-auto gap-2 flex items-center justify-between">
-                        <select class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[120px]">
+                    <div class="w-auto gap-2 flex items-center justify-between">
+                        <div class="flex gap-2 w-auto rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500  h-8 ">
+                            <div class="w-auto px-1 block border-r border-gray-300 ">Par page</div>
+                            <div class="w-auto flex items-center justify-center h-full">
+                                <select v-model="filters.status" class="w-full h-full bg-transparent border-none outline-none">
+                                    <option value="">Tous</option>
+                                    <option value="actif">22</option>
+                                    <option value="inactif">23</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- <select class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[120px]">
                             <option value="">Tous</option>
                             <option value="">Clubs</option>
                             <option value="">Partenaires</option>
@@ -93,50 +124,28 @@ onMounted(() => {
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.5l3 3 3-3"></path>
                             </svg>
                             Télécharger
-                        </button>
-                    </div> -->
+                        </button> -->
+                    </div>
                 </div>
             </div>
             <div class="w-full p-2">
-                <ClubTableComponent :data="storeClub?.clubs"/>
+                <ClubTableComponent :data="storeClub?.clubs" :setUpdate="setUpdate"/>
             </div>
-            <UiModal :isActive="isActive" :onClose="()=>setActive(false)">
-        <div  class=" grid mt-4 w-full max-w-lg  gap-4">
-                <div class="flex flex-col space-y-1.5 text-center sm:text-left">
-                    <h2 id="radix-:r70:" class="text-lg font-semibold leading-none tracking-tight">
-                        Nouveau club
-                    </h2>
-                </div>
-                <form class="" @submit.prevent="createClub()">
-                        <div class=" mb-4">
-                        <UiFormInput 
-                        required
-                        v-model="storeClub.newClub.name"
-                        label="Nom club" placeholder="Nom du club" name="title" />
-                    </div>
-                    <div class="">
-                    <UiFormSelect 
-                        required
-                        :options="country"
-                            v-model="storeClub.newClub.pays"
-                        placeholder="Pays" 
-                        label="Pays"
-                        />
-                        <UiFormSelect 
-                        required
-                        :options="optionStatus"
-                            v-model="storeClub.newClub.status"
-                        placeholder="Statut" 
-                        label="Statut"
-                        />
-                        
-                    </div>
-                    <div class="w-full mt-4">
-                        <UiButtonSubmit label="Créer" :isLoading="storeClub.isLoading"/>    
-                    </div>
-            </form>
-        </div>
-            </UiModal>
+           <ClubAddClubComponent
+           :new-club="storeClub.newClub"
+           :create-club="createClub"
+           :set-active="setActive"
+           :is-active="isActive"
+           :is-loading="storeClub.isLoading"
+           />
+
+           <ClubUpdateClubComponent
+           :update="storeClub.updateClub"
+           :update-club="updateClub"
+           :set-active="setActiveUpdate"
+           :is-active="isActiveUpdate"
+           :is-loading="storeClub.isLoading"
+           />
         </div>
     </div>
     

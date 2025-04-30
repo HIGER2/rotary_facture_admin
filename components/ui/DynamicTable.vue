@@ -53,6 +53,7 @@ function handleRowClick(item: Record<string, any>, index: number) {
           class="text-gray-800 font-[500] border-b border-zinc-100 cursor-pointer hover:bg-zinc-50"
           @click="handleRowClick(item, rowIndex)"
         >
+        <!-- {{ item }} -->
           <td v-for="(column, colIndex) in columns" :key="colIndex" class="p-2" >
             <!-- Slot personnalisé s'il existe -->
             <template v-if="$slots[column.key]">
@@ -60,7 +61,7 @@ function handleRowClick(item: Record<string, any>, index: number) {
             </template>
             <!-- Sinon afficher du texte -->
             <template v-else>
-              {{ item[column.key] || "N/A" }}
+              <span>{{ item[column.key] || "N/A" }}</span>
             </template>
           </td>
         </tr>

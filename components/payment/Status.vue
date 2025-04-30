@@ -8,8 +8,9 @@ const props = defineProps<{
 
 const statusChange = (status:string)=>{
   return  status == 'en attente' ? "text-yellow-600 bg-yellow-50"  :
-  status == 'payée' ? "text-green-600 bg-green-50" :
-  status == 'annulée' && "text-red-600 bg-red-50" 
+  status == 'payé' ? "text-green-600 bg-green-50" :
+  status == 'échec' ? "text-red-600 bg-red-50" :
+  status == 'annulé' && "text-orange-600 bg-orange-50" 
  };
 </script>
 

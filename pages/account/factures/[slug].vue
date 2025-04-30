@@ -4,50 +4,17 @@ import { useFactureViewModel } from '~/stores/viewModels/factureViewmodel';
 import { usePaymentViewModel } from '~/stores/viewModels/paymentViewmodel';
 
 const storeFacture = useFactureViewModel()
-const storePayment = usePaymentViewModel()
 
-const isActive = ref(false)
-const setActive = (state) => {
-    isActive.value =state
-}
-
-const handleListe =async () => {
+const handleListe = async () => {
     const route = useRoute()
     await storeFacture.findWithPaiement(route?.params?.slug) 
 }
 
-const createPayment = async (item) => {
-    await storePayment.create(item) 
-    await handleListe()
-}
 
 onMounted(() => {
     handleListe()
 })
 
-const columns = [
-    { label: 'référence', key: 'reference' },
-    // { label: 'montant à regler', key: 'club' },
-    { label: 'montant', key: 'amount' },
-    { label: 'statut', key: 'status' },
-    { label: 'mode paiement', key: 'mode_paiement' },
-    { label: 'date', key: 'date' },
-]
-
-const optionStatus = [
-    { label: 'en attente', status:"en attente"},
-    { label: 'payée', status:"payée"},
-    { label: 'annulée', status:"annulée"},
-]
-
-
-const optionMethode = [
-    { label: 'espèces', status:"espèces"},
-    { label: 'chèque', status:"chèque"},
-    { label: 'mobile money', status:"mobile money"},
-    { label: 'virement', status:"virement"},
-    { label: 'carte', status:"carte"},
-]
 
 
 </script>
@@ -133,56 +100,12 @@ const optionMethode = [
                             </dl>
                         </div>
                     </section>
-                    <section class="mt-4">
-                        <div class="px-4 sm:px-0 flex items-center justify-between">
-                            <h3 class="text-base font-semibold leading-7 text-gray-900">Paiements</h3>
-                            <button 
-                            type="button"
-                            @click="setActive(true)"
-                            class=" cursor-pointer items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none text-xs disabled:opacity-50 bg-[#1F2923] text-slate-50 shadow hover:bg-[#2f3a34]  px-4 py-3 self-start"
-                            >
-                                Nouveau paiement
-                            </button>
-                        </div>
-                        <div class="mt-6 ">
-                            <UiDynamicTable :rowClick="()=>navigateTo('/factures/2')" :columns="columns" :data="storeFacture.facture?.payments"/>
-                        </div>
-                    </section>
-                    <UiModal :isActive="isActive" :onClose="()=>setActive(false)">
-                            <div  class=" grid mt-4 w-full max-w-lg  gap-4">
-                                    <div class="flex flex-col space-y-1.5 text-center sm:text-left">
-                                        <h2 id="radix-:r70:" class="text-lg font-semibold leading-none tracking-tight">
-                                            Nouveau paiement
-                                        </h2>
-                                    </div>
-                                    <form class="space-y-8" @submit.prevent="createPayment(storeFacture.facture)">
-                                    <div class="space-y-2 mb-4 flex gap-2">
-                                        <UiFormSelect 
-                                            required
-                                            label="Statut"
-                                            v-model="storePayment.newPayment.status"
-                                            :options="optionStatus" 
-                                            placeholder="Statut" name="title" />
-
-                                            <UiFormSelect 
-                                            required
-                                            v-model="storePayment.newPayment.mode_paiement"
-                                            :options="optionMethode" label="Mode de paiement" 
-                                            placeholder="mode paiement" name="title" />
-                                        </div>
-                                        <div class="space-y-2 mb-4">
-                                            <UiFormInput 
-                                            required
-                                            v-model="storePayment.newPayment.amount"
-                                            min="1"
-                                            type="number" label="Montant" placeholder="Montant" name="title" />
-                                        </div>
-                                        
-                                        <UiButtonSubmit label="Créer" :isLoading="storePayment.isLoading"/>
-                                    </form>
-                            </div>
-                      
-                    </UiModal>
+                    <FacturePaymentComponent
+                    :payments="storeFacture.facture?.payments"
+                    :facture="storeFacture.facture"
+                    :handleListe="handleListe"
+                    />
+                   
             </div>
         </NuxtLayout>
     </div>

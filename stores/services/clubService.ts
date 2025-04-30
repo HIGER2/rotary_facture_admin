@@ -22,10 +22,18 @@ export const useClubServices = defineStore('club', () => {
                 body:items
             })
     }
+
+    async function update(items:any) {
+        return await useCustomFetch(`/club/update`, {
+                method: 'put',
+                body:items
+            })
+    }
     return {
         all,
         create,
         findDetail,
-        allByFilter
+        allByFilter,
+        update
     }
 })
