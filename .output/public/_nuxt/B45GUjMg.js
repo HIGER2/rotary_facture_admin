@@ -1,0 +1,1 @@
+async function a(n,t={}){var r;let o={...t,baseURL:"http://localhost:8000/api/",headers:{Accept:"application/json","Content-Type":"application/json"}};try{return{data:await $fetch(n,{...o}),error:null}}catch(e){return e.response?{data:null,error:((r=e.response)==null?void 0:r._data)||"Erreur inconnue"}:{data:null,error:"Une erreur inconnue est survenue"}}}export{a as u};

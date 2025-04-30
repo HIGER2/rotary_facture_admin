@@ -45,7 +45,7 @@ const prpos = defineProps<{
                                 type="number" label="Montant" placeholder="Montant" name="title" />
                             </div>
                             
-                            <UiButtonSubmit label="Créer" :isLoading="isLoading"/>
+                            <UiButtonSubmit label="Enregistrer" :isLoading="isLoading"/>
                         </form>
                 </div>
         </UiModal>

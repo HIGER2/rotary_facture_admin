@@ -17,7 +17,7 @@ const statusChange = (status:string)=>{
 
 <template>
     <div>
-      <div aria-label="status" :class="statusChange(status)" class=" text-center font-medium text-md min-w-[80px] max-w-max  px-3 rounded-full">{{ status }}</div>
+      <div aria-label="status" :class="statusChange(status)" class=" text-center font-medium text-md min-w-[80px] max-w-max  px-3 rounded-md">{{ status }}</div>
     </div>
 </template>
 
