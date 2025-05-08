@@ -8,6 +8,61 @@ const isOpen = ref(false)
 const setOpen = (state:boolean) => {
     isOpen.value = state
 }
+const connected = async () => {
+    await storeAuth.conntected()
+    provide('userConnected', storeAuth.userConnected)
+}
+
+const router = {
+    "admin":[
+        {
+            "path":"/account/home",
+            "name":"Tableau de bord",
+            "ico": ` <i class="uil uil-estate text-xl"></i>`
+        },
+        {
+            "path":"/account/clubs",
+            "name":"Clubs",
+            'ico':` <i class="uil uil-cube text-xl"></i>`
+        },
+        {
+            "path":"/account/factures",
+            "name":"Factures",
+            "ico":`<i class="uil uil-invoice text-xl"></i>`
+        },
+        {
+            "path":"/account/rubrique",
+            "name":"Rubriques",
+            "ico":` <i class="uil uil-wall text-xl"></i>`
+        },
+        {
+            "path":"/account/payments",
+            "name":"Paiements",
+            "ico":` <i class="uil uil-money-stack text-xl"></i>`
+        }
+
+    ],
+    "club":[
+        {
+            "path":"/account/home",
+            "name":"Tableau de bord",
+            "ico": ` <i class="uil uil-estate text-xl"></i>`
+        },
+        {
+            "path":"/account/factures",
+            "name":"Factures",
+            "ico":`<i class="uil uil-invoice text-xl"></i>`
+        },
+        {
+            "path":"/account/payments",
+            "name":"Paiements",
+            "ico":` <i class="uil uil-money-stack text-xl"></i>`
+        }
+    ]
+}
+onMounted(() => {
+    connected()
+})
 </script>
 
 <template>
@@ -20,18 +75,17 @@ const setOpen = (state:boolean) => {
                     </div>
                     <div class="w-full mt-3">
                         <ul class="w-full">
-                            <li class="w-full ">
-                                <NuxtLink to="/account/home" class="link">
-                                    <i class="uil uil-estate text-xl"></i>
-                                    <span> Tableau de bord</span>
+                            <li class="w-full "
+                            v-for="(item, index) in router[storeAuth.userConnected?.role]" :key="index"
+                            >
+                                <NuxtLink :to="item?.path" class="link">
+                                    <div v-html="item?.ico"> </div>
+                                    <!-- <i class="uil uil-estate text-xl"></i> -->
+                                    <span> {{ item?.name }}</span>
                                 </NuxtLink>
                             </li>
-                            <li>
-                                <NuxtLink to="/account/clubs" class="link">
-                                    <i class="uil uil-cube text-xl"></i>
-                                    <span>Clubs</span>
-                                </NuxtLink>
-                            </li>
+                            <!-- 
+                            
                             <li>
                                 <NuxtLink to="/account/factures" class="link">
                                     <i class="uil uil-invoice text-xl"></i>
@@ -49,7 +103,7 @@ const setOpen = (state:boolean) => {
                                     <i class="uil uil-money-stack text-xl"></i>
                                      <span>Paiements</span>
                                 </NuxtLink>
-                            </li>
+                            </li> -->
 
                         </ul>
 
@@ -86,14 +140,14 @@ const setOpen = (state:boolean) => {
                                         @click="storeAuth.logout()"
                                     class="cursor-pointer p-2 hover:bg-gray-100 rounded-md w-full">Déconnexion</button>
                                 </li>
-                              
-                                
                             </div>
                         </div>
                     </div>
                 </nav>     
-                <div class="w-full h-[calc(100vh-60px)] p-4 bg-gray-50 overflow-y-auto">
-                    <slot />
+                <div class="w-full h-[calc(100vh-60px)] p-4  overflow-y-auto">
+                    <template v-if="storeAuth.userConnected">
+                        <slot :userConnected="storeAuth.userConnected" />
+                    </template>
                 </div> 
                 </div>      
             </div>

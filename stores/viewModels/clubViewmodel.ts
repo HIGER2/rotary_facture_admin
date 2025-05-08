@@ -6,7 +6,10 @@ import { useClubServices } from '../services/clubService';
 
 export const useClubViewModel = defineStore('ClubViewModel', () => {
     
-    const clubs = ref([]);
+    const clubs = reactive({
+        data:[],
+        page: []
+    });
     const club = ref();
     const isLoading = ref(false);
     const useClub = useClubServices();
@@ -21,7 +24,12 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
 
     async function allByFilter(queryParams ="") {
         const data = await useClub.allByFilter(queryParams);
-        clubs.value = [...data.data?.data?.data.map((item:any,index) => (
+      
+        data.data?.data?.links.shift()
+        data.data?.data?.links.pop()
+        clubs.page = data.data?.data?.links
+        console.log(data.data?.data?.data);
+        clubs.data = [...data.data?.data?.data.map((item:any,index) => (
             {
                 id : item?.id,
                 uid : item?.club_uid,
@@ -62,13 +70,18 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
         isLoading.value = true
         let items={...newClub}
         const data = await useClub.create(items);
-          useToastify("Opération éffectuée", {
-             autoClose: 1000,
-            type: ToastifyOption.TYPE.SUCCESS,
-            // position: ToastifyOption.POSITION.TOP_RIGHT,
-            // transition: ToastifyOption.TRANSITIONS.,
-            // theme: ToastifyOption.THEME.LIGHT,
-        });
+        if (data?.error) {
+            alert(data?.error?.message)
+        }
+        if (data?.data) {
+            useToastify("Opération éffectuée", {
+                autoClose: 1000,
+                type: ToastifyOption.TYPE.SUCCESS,
+                // position: ToastifyOption.POSITION.TOP_RIGHT,
+                // transition: ToastifyOption.TRANSITIONS.,
+                // theme: ToastifyOption.THEME.LIGHT,
+            });
+        }
         isLoading.value = false
 
     }
@@ -79,13 +92,18 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
 
         console.log('updateClub',updateClub);
         const data = await useClub.update(items);
-          useToastify("Opération éffectuée", {
-             autoClose: 1000,
-            type: ToastifyOption.TYPE.SUCCESS,
-            // position: ToastifyOption.POSITION.TOP_RIGHT,
-            // transition: ToastifyOption.TRANSITIONS.,
-            // theme: ToastifyOption.THEME.LIGHT,
-        });
+        if (data?.error) {
+            alert(data?.error?.message)
+        }
+        if (data?.data) {
+            useToastify("Opération éffectuée", {
+                autoClose: 1000,
+                type: ToastifyOption.TYPE.SUCCESS,
+                // position: ToastifyOption.POSITION.TOP_RIGHT,
+                // transition: ToastifyOption.TRANSITIONS.,
+                // theme: ToastifyOption.THEME.LIGHT,
+            });
+        }
         isLoading.value = false
 
     }

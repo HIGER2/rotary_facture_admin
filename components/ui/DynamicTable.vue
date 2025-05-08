@@ -10,12 +10,16 @@ interface Column {
 
 interface TableProps {
   columns: Column[] // Liste des colonnes
+  loading?: boolean
   data: Record<string, any>[] // Liste des données du tableau
   rowClick?: (item: Record<string, any>, index: number) => void // Fonction optionnelle pour le clic sur les lignes
 }
 
 // Props pour le composant
-const props = defineProps<TableProps>()
+const props = withDefaults(defineProps<TableProps>(), {
+  loading: false
+})
+// const props = defineProps<TableProps>()
 const emit = defineEmits(['rowClick'])
 
 // Gérer le clic sur une ligne et émettre l'événement
@@ -44,32 +48,39 @@ function handleRowClick(item: Record<string, any>, index: number) {
           </th>
         </tr>
       </thead>
-
+      
       <!-- Corps du tableau -->
-      <tbody>
-        <tr
-          v-for="(item, rowIndex) in data"
-          :key="rowIndex"
-          class="text-gray-800 font-[500] border-b border-zinc-100 cursor-pointer hover:bg-zinc-50"
-          @click="handleRowClick(item, rowIndex)"
-        >
-        <!-- {{ item }} -->
-          <td v-for="(column, colIndex) in columns" :key="colIndex" class="p-2" >
-            <!-- Slot personnalisé s'il existe -->
-            <template v-if="$slots[column.key]">
-              <slot :name="column.key" :item="item" :index="rowIndex" />
-            </template>
-            <!-- Sinon afficher du texte -->
-            <template v-else>
-              <span>{{ item[column.key] || "N/A" }}</span>
-            </template>
-          </td>
-        </tr>
-      </tbody>
+      <template v-if="!loading && data?.length > 0">
+          <tbody>
+            <tr
+              v-for="(item, rowIndex) in data"
+              :key="rowIndex"
+              class="text-gray-800 font-[500] border-b border-zinc-100 cursor-pointer hover:bg-zinc-50"
+              @click="handleRowClick(item, rowIndex)"
+            >
+            <!-- {{ item }} -->
+              <td v-for="(column, colIndex) in columns" :key="colIndex" class="p-2" >
+                <!-- Slot personnalisé s'il existe -->
+                <template v-if="$slots[column.key]">
+                  <slot :name="column.key" :item="item" :index="rowIndex" />
+                </template>
+                <!-- Sinon afficher du texte -->
+                <template v-else>
+                  <span>{{ item[column.key] || "N/A" }}</span>
+                </template>
+              </td>
+            </tr>
+          </tbody>
+      </template>
     </table>
-    <div v-if="data?.length ===0" class="w-full  bg-white p-3 flex items-center justify-center">
-        <h4>aucun element</h4>
-    </div>
+  <template v-if="data?.length == 0 && !loading">
+      <div  class="w-full  bg-white p-3 flex items-center justify-center">
+          <h4>aucun element</h4>
+      </div>
+  </template>
+   <template v-if="loading && data.length ==0">
+    <UiLoader/>
+   </template> 
   </div>
 </template>
 

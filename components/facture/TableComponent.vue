@@ -2,11 +2,16 @@
 <script setup lang="ts">
 
 interface TableProps {
-  data: any
+  data: any,
+  user:any,
+  loading:boolean | null | undefined
 }
-const props = defineProps<TableProps>()
+const props = withDefaults(defineProps<TableProps>(),{
+    loading: false
+})
 
-const columns = [
+const columns = {
+    "admin":[
     { label: 'N°Facture', key: 'reference' },
     // { label: 'Club', key: 'club' },
     { label: 'Montant', key: 'amount' },
@@ -16,7 +21,17 @@ const columns = [
     { label: 'date échéance', key: 'date_echeance' },
     
     { label: 'Action', key: 'action' } 
+],
+"club":[
+    { label: 'N°Facture', key: 'reference' },
+    // { label: 'Club', key: 'club' },
+    { label: 'Montant', key: 'amount' },
+    { label: 'restet à payer', key: 'remaining_amount' },
+    { label: 'statut', key: 'status' },
+    { label: 'date émission', key: 'date_emission' },
+    { label: 'date échéance', key: 'date_echeance' },
 ]
+}
 
 const handleclick = (item) => {
     navigateTo(`/account/factures/${item?.reference}`)
@@ -29,14 +44,14 @@ const editUser = (user) => {
 
 <template>
     <div>
-        <UiDynamicTable  :columns="columns" :data="props.data">
+        <UiDynamicTable :loading="loading" :columns="columns[user?.role]" :data="props.data">
             <template #reference="{ item }">
                 <NuxtLink :to="`/account/factures/${item?.reference}`"
                 class="text-blue-500 hover:text-blue-700 hover:underline"
                 >{{ item?.reference}}</NuxtLink>
             </template>
             <template #action="{ item }">
-                  <!-- <NuxtLink to="" class="text-blue-600">ouvrir</NuxtLink> -->
+                <!-- <NuxtLink to="" class="text-blue-600">ouvrir</NuxtLink> -->
                 <div class="flex items-center gap-1  text-[12px]">
                     <NuxtLink :to="`/account/factures/${item?.reference}`"
                     class=" h-7 w-7 cursor-pointer hover:bg-gray-200  
@@ -57,7 +72,6 @@ const editUser = (user) => {
                         <!-- <i class="uil uil-eye text-sm"></i> -->
                         <i class="uil uil-pen"></i>
                     </NuxtLink>
-                   
                 </div>
             </template>
             <template #status="{ item }">

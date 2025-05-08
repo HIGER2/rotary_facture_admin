@@ -3,11 +3,15 @@
 <script setup lang="ts">
 import { useClubViewModel } from '~/stores/viewModels/clubViewmodel';
 import { useFactureViewModel } from '~/stores/viewModels/factureViewmodel';
+import { useRubriqueViewModel } from '~/stores/viewModels/rubriqueViewmodel';
 
 const { newFacture, create } = useFactureViewModel()
 const {isLoading} = storeToRefs(useFactureViewModel())
 const storeClub =useClubViewModel()
+const storeRubrique =useRubriqueViewModel()
 const optionClub=ref([])
+const optionRubrique=ref([])
+
 const optionStatus = [
     { label: 'en attente', status:"en attente"},
     { label: 'payée', status:"payée"},
@@ -26,9 +30,21 @@ const handleCulb = async () => {
         ))]
 }
 
-onMounted(() => {
 
-    handleCulb()
+const handRubrique = async () => {
+    let response =await storeRubrique.all()
+    optionRubrique.value = [...response.data?.data.map((item:any,index) => (
+            {
+                label : item?.libele,
+                value : item?.id,
+            }
+        ))]
+}
+onMounted(async () => {
+  await Promise.all([
+    handleCulb(),
+    handRubrique()
+  ])
 })
 </script>
 
@@ -37,7 +53,7 @@ onMounted(() => {
     <div>
         <NuxtLayout>
         <div class="w-full">
-            <div class="w-[600px] m-auto">
+            <div class="w-[550px] m-auto">
                 <div class="w-full p-2 mb-3">
                 <h5 class="text-sm font-semibold uppercase text-neutral-500">Créer une facture</h5>
             </div>
@@ -52,9 +68,21 @@ onMounted(() => {
                             placeholder="Selectionner un club" name="title" />
                             <UiFormSelect 
                             required
+                            v-model="newFacture.rubrique_id"
+                            :options="optionRubrique" 
+                            label="Rubrique" 
+                            placeholder="Selectionner une rubrique" name="title" />
+                        </div>
+                        <div class="space-y-2 mb-4 flex gap-1.5">
+                            <UiFormSelect 
+                            required
                             v-model="newFacture.status"
                             :options="optionStatus" label="Statut" 
                             placeholder="Statut" name="title" />
+                            <UiFormInput 
+                            required
+                            v-model="newFacture.date_echeance"
+                            type="date" label="Date échéance" placeholder="Date échéance" name="title" />
                         </div>
                         <div class="space-y-2 mb-4">
                             <UiFormInput 
@@ -62,12 +90,7 @@ onMounted(() => {
                             v-model="newFacture.amount"
                             type="number" label="Montant" placeholder="Montant" name="title" />
                         </div>
-                        <div class="space-y-2 mb-4">
-                            <UiFormInput 
-                            required
-                            v-model="newFacture.date_echeance"
-                            type="date" label="Date échéance" placeholder="Date échéance" name="title" />
-                        </div>
+                     
                         <div class="space-y-2 mb-4">
                              <div class="mt-4 flex w-full flex-col justify-start gap-1">
                                 <label  class="text-[13px] font-[500] text-zinc-700">
@@ -82,9 +105,9 @@ onMounted(() => {
                         </div>
                     </div>
                     <div class="flex justify-between mt-4">
-                        <button class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 text-slate-900 underline-offset-4 hover:underline h-11 px-4 py-2" type="button">
+                        <NuxtLink to="/account/factures" class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 text-slate-900 underline-offset-4 hover:underline h-11 px-4 py-2">
                             Annuler
-                        </button>
+                        </NuxtLink>
                         <div class="inline-flex">
                             <UiButtonSubmit label="Enregistrer" :isLoading="isLoading"/>
                         </div>    

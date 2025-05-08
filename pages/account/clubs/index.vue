@@ -7,10 +7,12 @@ import country from "~/jsons/country.json"
 
 
 const storeClub = useClubViewModel()
+const loading=ref(false)
 
 const filters = reactive({
   search: "",
   status: "",
+  limit: "1",
 });
 
 
@@ -53,19 +55,26 @@ const updateClub = async () => {
 }
 
 const handleListe =async (params:any={}) => {
+    if (storeClub?.clubs?.data?.length == 0) {
+        loading.value = true
+    }
     const queryParams = new URLSearchParams({
         search: filters.search || '',
+        page: filters.limit || '',
         status: params.status || '',
     });
 
     await storeClub.allByFilter(queryParams) 
+    loading.value = false
 }
 
 watch(
   filters,
     (value:any) => {
         let interval = setTimeout(async () => {
-        handleListe(value);
+        loading.value = true
+        storeClub.clubs.data = []
+        await handleListe(value);
         clearTimeout(interval);
         }, 400);
     },
@@ -106,10 +115,11 @@ onMounted(() => {
                         <div class="flex gap-2 w-auto rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500  h-8 ">
                             <div class="w-auto px-1 block border-r border-gray-300 ">Par page</div>
                             <div class="w-auto flex items-center justify-center h-full">
-                                <select v-model="filters.status" class="w-full h-full bg-transparent border-none outline-none">
-                                    <option value="">Tous</option>
-                                    <option value="actif">22</option>
-                                    <option value="inactif">23</option>
+                                <select v-model="filters.limit" class="w-full h-full bg-transparent border-none outline-none">
+                                    <option 
+                                    v-for="(item, index) in storeClub?.clubs.page" :key="index"
+                                    :value="item?.label">{{ item?.label }}</option>
+                                    <!-- <option value="all">Tout</option> -->
                                 </select>
                             </div>
                         </div>
@@ -129,7 +139,7 @@ onMounted(() => {
                 </div>
             </div>
             <div class="w-full p-2">
-                <ClubTableComponent :data="storeClub?.clubs" :setUpdate="setUpdate"/>
+                <ClubTableComponent :loading="loading" :data="storeClub?.clubs.data" :setUpdate="setUpdate"/>
             </div>
            <ClubAddClubComponent
            :new-club="storeClub.newClub"

@@ -11,18 +11,24 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: 'http://api.facturation.rotary-district9101.org'
+      apiBase: 'http://api.facturation.rotary-district9101.org/api'
     }
   },
    router: {
     options: {
-      hashMode: true
+      // hashMode: true
     }
   },
   vite: {
     plugins: [
       tailwindcss(),
     ],
+    server: {
+      allowedHosts: [
+        'localhost',
+        '8aba-160-154-130-253.ngrok-free.app' 
+      ]
+    }
   },
    app: {
     
@@ -42,7 +48,7 @@ export default defineNuxtConfig({
     '@nuxt/test-utils', '@pinia/nuxt', 'nuxt-toastify'],
     toastify: {
      autoClose: 2000,
-     position: 'bottom-right',
+     position: 'top-right',
      theme: 'light',
    },
 })

@@ -7,19 +7,26 @@ const storePayment = usePaymentViewModel()
 const props = defineProps<{
     payments: any,
     facture: any,
+    user:any,
     handleListe: ()=>void,
 }>()
 
 const isActive = ref(false)
 const isActiveUpdate = ref(false)
+const isActiveClub = ref(false)
+
 
 const setActiveUpdate = (state:boolean) => {
     isActiveUpdate.value =state
 }
-
 const setActive = (state) => {
     isActive.value =state
 }
+
+const setActiveClub = (state) => {
+    isActiveClub.value =state
+}
+
 const setUpdate = (item) => {
     // Object.assign(storePayment.newPayment, item) 
     storePayment.updatePayment.status = item?.status
@@ -30,8 +37,15 @@ const setUpdate = (item) => {
 }
 
 const createPayment = async (item) => {
+    await  storePayment.create(item),
+    props.handleListe()
+}
+
+
+
+const processPayment = async (item) => {
     await Promise.all([
-        storePayment.create(item),
+        storePayment.processePayment(item),
         props.handleListe()
     ])
 }
@@ -45,7 +59,8 @@ const updatePayment = async () => {
 }
 
 
-const columns = [
+const columns = {
+    "admin":[
     { label: 'référence', key: 'reference' },
     // { label: 'montant à regler', key: 'club' },
     { label: 'montant', key: 'amount' },
@@ -53,7 +68,16 @@ const columns = [
     { label: 'mode paiement', key: 'mode_paiement' },
     { label: 'date', key: 'date' },
     { label: 'action', key: 'action'},
+],
+"club":[
+    { label: 'référence', key: 'reference' },
+    // { label: 'montant à regler', key: 'club' },
+    { label: 'montant', key: 'amount' },
+    { label: 'statut', key: 'status' },
+    { label: 'mode paiement', key: 'mode_paiement' },
+    { label: 'date', key: 'date' },
 ]
+}
 
 const optionStatus = [
     { label: 'en attente', status:"en attente"},
@@ -77,16 +101,27 @@ const optionMethode = [
   <section class="mt-4">
         <div class="px-4 sm:px-0 flex items-center justify-between">
             <h3 class="text-base font-semibold leading-7 text-gray-900">Paiements</h3>
-            <button 
-            type="button"
-            @click="setActive(true)"
-            class=" cursor-pointer items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none text-xs disabled:opacity-50 bg-[#1F2923] text-slate-50 shadow hover:bg-[#2f3a34]  px-4 py-3 self-start"
-            >
-                Nouveau paiement
-            </button>
+            <template v-if="user?.role=='admin'">
+                <button 
+                type="button"
+                @click="setActive(true)"
+                class=" cursor-pointer items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none text-xs disabled:opacity-50 bg-[#1F2923] text-slate-50 shadow hover:bg-[#2f3a34]  px-4 py-3 self-start"
+                >
+                    Nouveau paiement
+                </button>
+            </template>
+            <template v-else>
+                <button 
+                type="button"
+                @click="setActiveClub(true)"
+                class=" cursor-pointer items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none text-xs disabled:opacity-50 bg-[#1F2923] text-slate-50 shadow hover:bg-[#2f3a34]  px-4 py-3 self-start"
+                >
+                  Effectué un paiement
+                </button>
+            </template>
         </div>
         <div class="mt-6 ">
-            <UiDynamicTable  :columns="columns" :data="payments">
+            <UiDynamicTable  :columns="columns[user?.role]" :data="payments">
                 <template #status="{ item }">
                     <PaymentStatus :status="item?.status" />
                 </template>   
@@ -113,6 +148,14 @@ const optionMethode = [
         :newPayment="storePayment.newPayment"
         :option-methode="optionMethode"
         :createPayment="()=>createPayment(facture)"
+        :is-loading="storePayment.isLoading"
+        />
+
+        <FactureAddPaymentClubComponent
+        :is-active="isActiveClub"
+        :set-active="setActiveClub"
+        :paymentAmount="storePayment.paymentAmount"
+        :processPayment="()=>processPayment(facture)"
         :is-loading="storePayment.isLoading"
         />
 

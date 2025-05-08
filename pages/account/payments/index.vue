@@ -5,6 +5,7 @@ import { usePaymentViewModel } from '~/stores/viewModels/paymentViewmodel';
 
 
 const storePayments = usePaymentViewModel()
+const loading=ref(false)
 
 const columns = [
     { label: 'référence', key: 'reference' },
@@ -24,18 +25,25 @@ const filters = reactive({
 });
 
 const handleListe =async (params:any={}) => {
+
+    if (storePayments?.payments?.length == 0) {
+        loading.value = true
+    }
     const queryParams = new URLSearchParams({
         search: filters.search || '',
         status: params.status || '',
     });
 
     await storePayments.all(queryParams) 
+    loading.value = false
 }
 
 watch(
   filters,
     (value:any) => {
         let interval = setTimeout(async () => {
+        loading.value = true
+        storePayments.payments = []
         handleListe(value);
         clearTimeout(interval);
         }, 400);
@@ -68,6 +76,15 @@ onMounted(() => {
                         </NuxtLink>
                     </div> -->
                 </div>
+                
+                <div class="w-full grid grid-cols-1 md:grid-cols-5 gap-4 p-2 mb-5">
+                    <template v-for="(item, index) in storePayments?.analityc" :key="index">
+                        <div class="box">
+                            <span class=" text-xs text-gray-500 font-medium">{{ item?.label }}</span>
+                            <h2 class="text-lg font-extrabold">{{ item?.value }}</h2>
+                        </div>
+                    </template>
+                </div>
                 <div class="w-full flex items-center justify-between mb-3 ">
                     <div class="w-auto">
                         <input 
@@ -79,7 +96,7 @@ onMounted(() => {
                         <select 
                         v-model="filters.status"
                         class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[120px]">
-                            <option value="">Filtrer</option>
+                            <option value="">Tout</option>
                             <option value="1">en attente</option>
                             <option value="2">payé</option>
                             <option value="3">échec</option>
@@ -95,7 +112,7 @@ onMounted(() => {
                 </div>
             </div>
             <div class="w-full p-2">
-                <PaymentTableComponent :data="storePayments?.payments"/>
+                <PaymentTableComponent :loading="loading" :data="storePayments?.payments"/>
                 <!-- <UiDynamicTable  :columns="columns" :data="storePayments?.payments">
                     <template #fac="{ item }">
                         <NuxtLink :to="`/account/factures/${item?.fac}`"

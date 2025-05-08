@@ -11,7 +11,8 @@ export const useAuthViewModel = defineStore('AuthViewModel', () => {
     
     const user = ref();
     const isLoading =ref(false);
-    const userConnected= ref();
+    const userConnected= ref(null);
+    const messageError =ref(null)
     const newUser = reactive<any>({
         name: "",
         last_name: "",
@@ -21,11 +22,16 @@ export const useAuthViewModel = defineStore('AuthViewModel', () => {
     });
     const authUser = reactive<any>({
         identifiant:"admin@gmail.com",
+        type:"admin",
         password:"password",
     })
     
     const clear = () => {
         userConnected.value = ''
+    }
+    
+    const setMessageError = (value : string | null | undefined=null) => {
+        messageError.value = value
     }
     async function register() {
         const data = await authService.register(newUser);
@@ -38,14 +44,23 @@ export const useAuthViewModel = defineStore('AuthViewModel', () => {
 
     async function login() {
         isLoading.value = true
-       
+        setMessageError()
         const data = await authService.login(authUser);
         isLoading.value = false
-        console.log(data);
-        
         if (!data.error) {
-            setCookie('token',data.data?.data?.token);
-            navigateTo('/account/home')
+            if (data.data.data?.redirect) {
+                setCookie('token',data.data?.data?.token);
+                navigateTo('/account/home')
+            }else{
+                navigateTo({
+                    path: '/auth/login',
+                    query: { success: 'true'}
+                },{replace: true})
+            }
+        }
+        
+        if (data.error) {
+            setMessageError(data.error?.message)
         }
     }
 
@@ -55,9 +70,24 @@ export const useAuthViewModel = defineStore('AuthViewModel', () => {
             navigateTo('/auth/login');
     }
 
+    async function loginWithToken(token: string) {
+        const data = await authService.loginWithToken(token);
+        console.log(data.error?.code);
+        
+        if (!data.error) {
+            setCookie('token',data.data?.data?.token);
+            navigateTo('/account/home')
+        }
+        else if (data.error && data.error?.code === 403) {
+            navigateTo('/auth/login')
+
+        }
+    }
+
     async function conntected() {
-        const { response, erreur } = await authService.connected();
-        userConnected.value = response
+       let data  = await authService.connected();
+       userConnected.value = data?.data?.data
+    //    provide('userConnected', userConnected.value)
     }
 
     return {
@@ -68,6 +98,9 @@ export const useAuthViewModel = defineStore('AuthViewModel', () => {
         conntected,
         userConnected,
         logout,
-        isLoading
+        isLoading,
+        loginWithToken,
+        setMessageError,
+        messageError
     }
 })

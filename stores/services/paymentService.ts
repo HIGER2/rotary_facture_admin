@@ -16,9 +16,23 @@ export const usePaymentServices = defineStore('payment', () => {
             })
     }
 
+    async function processePayment(items:any) {
+        return await useCustomFetch(`/payment/processe`, {
+                method: 'POST',
+                body:items
+            })
+    }
+
     async function update(items:any) {
         return await useCustomFetch(`/payment/update`, {
                 method: 'put',
+                body:items
+            })
+    }
+
+    async function checkPayment(items:any) {
+        return await useCustomFetch(`/payment/verify/token`, {
+                method: 'post',
                 body:items
             })
     }
@@ -31,6 +45,8 @@ export const usePaymentServices = defineStore('payment', () => {
         all,
         create,
         findWithPaiement,
-        update
+        update,
+        processePayment,
+        checkPayment
     }
 })

@@ -19,17 +19,22 @@ export const useAuthServices = defineStore('auth', () => {
         })
     }
     async function logout() {
-        return await useCustomFetch(`/logout`)
+        return await useCustomFetch(`/auth/logout`)
+    }
+
+    async function loginWithToken(token:string) {
+        return await useCustomFetch(`/auth/magic-login/${token}`)
     }
 
     async function connected() {
-        return await useCustomFetch(`/me`)
+        return await useCustomFetch(`/auth/connected`)
     }
     
     return {
         register,
         login,
         logout,
+        loginWithToken,
         connected
     }
 })

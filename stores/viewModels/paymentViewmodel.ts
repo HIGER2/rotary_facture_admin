@@ -10,6 +10,7 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
     
     const payments = ref([]);
     const payment = ref({});
+    const analityc = ref([]);
     const isLoading =ref(false)
     let initial = {
         facture_id: "",
@@ -19,15 +20,19 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
         mode_paiement:"",
     }
     const newPayment = reactive({...initial});
+    const paymentAmount = reactive({
+        amount:""
+    })
     const updatePayment = reactive({
         amount:null,
         mode_paiement:"",
         status:"",
         id:"",
     });
-  
+    
     async function all(queryParams) {
         const data = await usePayment.all(queryParams);
+        analityc.value =data?.data?.analytic
         payments.value = [...data.data?.data.map((item:any,index) => (
             {
                 reference: item?.reference,
@@ -49,13 +54,38 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
             facture_uid:item.facture_uid
         }
         const data = await usePayment.create(items);
-          useToastify("Opération éffectuée", {
-            autoClose: 1000,
-            type: ToastifyOption.TYPE.SUCCESS,
-            // position: ToastifyOption.POSITION.TOP_RIGHT,
-            // transition: ToastifyOption.TRANSITIONS.,
-            // theme: ToastifyOption.THEME.LIGHT,
-        });
+        if (data?.error) {
+            alert(data?.error?.message)
+        }
+        if (data?.data) {
+            useToastify("Opération éffectuée", {
+                autoClose: 1000,
+                type: ToastifyOption.TYPE.SUCCESS,
+                // position: ToastifyOption.POSITION.TOP_RIGHT,
+                // transition: ToastifyOption.TRANSITIONS.,
+                // theme: ToastifyOption.THEME.LIGHT,
+            });
+        }
+        isLoading.value = false
+    }
+
+    async function processePayment(item: any) {
+        isLoading.value = true
+        let items = {
+            ...paymentAmount,
+            facture_id:item.id,
+            facture_uid:item.facture_uid
+        }
+        const data = await usePayment.processePayment(items);
+        if (!data?.data?.error) {
+            navigateTo(data?.data?.data?.url ,{ external: true})
+        }
+        isLoading.value = false
+    }
+
+    async function checkPayment(item: any) {
+        isLoading.value = true
+        const data = await usePayment.checkPayment(item);
         isLoading.value = false
     }
 
@@ -66,18 +96,23 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
         }
 
         const data = await usePayment.update(items);
-          useToastify("Opération éffectuée", {
-            autoClose: 1000,
-            type: ToastifyOption.TYPE.SUCCESS,
-            // position: ToastifyOption.POSITION.TOP_RIGHT,
-            // transition: ToastifyOption.TRANSITIONS.,
-            // theme: ToastifyOption.THEME.LIGHT,
-        });
+        if (data?.error) {
+            alert(data?.error?.message)
+        }
+        if (data?.data) {
+            useToastify("Opération éffectuée", {
+                autoClose: 1000,
+                type: ToastifyOption.TYPE.SUCCESS,
+                // position: ToastifyOption.POSITION.TOP_RIGHT,
+                // transition: ToastifyOption.TRANSITIONS.,
+                // theme: ToastifyOption.THEME.LIGHT,
+            });
+        }
         isLoading.value = false
     }
 
-     async function findWithPaiement(reference:string) {
-         const data = await usePayment.findWithPaiement(reference);
+    async function findWithPaiement(reference:string) {
+        const data = await usePayment.findWithPaiement(reference);
     }
 
     return {
@@ -88,6 +123,10 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
         payments,
         isLoading,
         updatePayment,
-        update
+        update,
+        processePayment,
+        paymentAmount,
+        checkPayment,
+        analityc
     }
 })

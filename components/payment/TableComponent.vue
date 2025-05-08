@@ -2,7 +2,8 @@
 <script setup lang="ts">
 
 interface TableProps {
-  data: any
+  data: any,
+  loading: boolean
 }
 const props = defineProps<TableProps>()
 
@@ -21,7 +22,7 @@ const columns = [
 
 <template>
     <div>
-        <UiDynamicTable  :columns="columns" :data="data">
+        <UiDynamicTable :loading="loading"  :columns="columns" :data="data">
             <template #fac="{ item }">
                 <NuxtLink :to="`/account/factures/${item?.fac}`"
                 class="text-blue-500 hover:text-blue-700 hover:underline"

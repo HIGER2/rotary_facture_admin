@@ -4,6 +4,7 @@
 
 const props = defineProps<{
     data:any,
+    user:any
 }>()
 
 </script>
@@ -21,7 +22,7 @@ const props = defineProps<{
                 </button> -->
             </div>
             <div class="mt-6 border-t border-gray-100">
-              <FactureTableComponent :data="data?.factures"/>
+              <FactureTableComponent :user="user" :data="data?.factures"/>
             </div>
     </div>
 </template>

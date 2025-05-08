@@ -26,13 +26,18 @@ export const useClubPersonnelViewModel = defineStore('ClubPersonnelViewModel', (
             club_uid: item.club_uid
         }
         const data = await useClubPersonnel.create(items);
-        useToastify("Opération éffectuée", {
-             autoClose: 1000,
-            type: ToastifyOption.TYPE.SUCCESS,
-            // position: ToastifyOption.POSITION.TOP_RIGHT,
-            // transition: ToastifyOption.TRANSITIONS.,
-            // theme: ToastifyOption.THEME.LIGHT,
-        });
+        if (data?.error) {
+            alert(data?.error?.message)
+        }
+        if (data?.data) {
+            useToastify("Opération éffectuée", {
+                autoClose: 1000,
+                type: ToastifyOption.TYPE.SUCCESS,
+                // position: ToastifyOption.POSITION.TOP_RIGHT,
+                // transition: ToastifyOption.TRANSITIONS.,
+                // theme: ToastifyOption.THEME.LIGHT,
+            });
+        }
         isLoading.value = false
     }
     return {

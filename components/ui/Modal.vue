@@ -3,7 +3,7 @@
 
 const props = defineProps<{
     isActive: boolean,
-    onClose:() => void
+    onClose: () => void | null | undefined
 }>()
 
 </script>

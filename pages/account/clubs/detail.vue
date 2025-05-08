@@ -30,13 +30,13 @@ onMounted(() => {
 
 <template>
     <div>
-        <NuxtLayout>
+        <NuxtLayout v-slot="{userConnected}">
             <div class="w-full p-2">
                 <ClubDetailComponent :data="storeClub?.club" />
                 <ClubButtonTabsComponent :isActive="isActive" :setTabs="setTabs" />
 
                 <keep-alive>
-                <component :is="tabs[isActive]" :data="storeClub?.club" />
+                <component :is="tabs[isActive]" :user="userConnected" :data="storeClub?.club" />
                 </keep-alive>
             </div>
         </NuxtLayout>

@@ -4,6 +4,7 @@
 interface TableProps {
   data: any,
   setUpdate: (item:any) => void,
+  loading:boolean
 }
 const props = defineProps<TableProps>()
 
@@ -24,7 +25,7 @@ const editUser = (user) => {
 <template>
     <div>
         <!-- {{ data }} -->
-        <UiDynamicTable :columns="columns" :data="props.data">
+        <UiDynamicTable :loading="loading" :columns="columns" :data="props.data">
             <template #action="{ item }">
                   <!-- <NuxtLink to="" class="text-blue-600">ouvrir</NuxtLink> -->
                 <div class="flex items-center gap-1  text-[12px]">
@@ -38,7 +39,7 @@ const editUser = (user) => {
                         <!-- <i class="uil uil-info-circle"></i> -->
                 </NuxtLink>
                     <button 
-                    type="button"
+                        type="button"
                         @click="props.setUpdate(item)"
                         class=" h-7 w-7 cursor-pointer hover:bg-gray-200  
                         flex items-center justify-center text-center 
