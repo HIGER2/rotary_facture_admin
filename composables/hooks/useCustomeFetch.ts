@@ -7,8 +7,8 @@ export async function useCustomFetch<T>(url: string | (() => string),options: Us
     const token = getCookie('token')
     let option = {
         ...options,
-        // baseURL:'http://localhost:8000/api/',
-        baseURL:`${config.public.apiBase}`,
+        baseURL:'http://localhost:8000/api/',
+        // baseURL:`${config.public.apiBase}`,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',

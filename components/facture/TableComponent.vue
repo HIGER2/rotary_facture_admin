@@ -15,6 +15,7 @@ const columns = {
     { label: 'N°Facture', key: 'reference' },
     // { label: 'Club', key: 'club' },
     { label: 'Montant', key: 'amount' },
+    // { label: 'type', key: 'type' },
     { label: 'restet à payer', key: 'remaining_amount' },
     { label: 'statut', key: 'status' },
     { label: 'date émission', key: 'date_emission' },

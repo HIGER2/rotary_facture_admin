@@ -26,9 +26,9 @@ const router = {
             'ico':` <i class="uil uil-cube text-xl"></i>`
         },
         {
-            "path":"/account/factures",
-            "name":"Factures",
-            "ico":`<i class="uil uil-invoice text-xl"></i>`
+            "path":"/account/exercice",
+            "name":"Exercies",
+            "ico":` <i class="uil uil-wall text-xl"></i>`
         },
         {
             "path":"/account/rubrique",
@@ -36,8 +36,19 @@ const router = {
             "ico":` <i class="uil uil-wall text-xl"></i>`
         },
         {
+            "path":"/account/factures",
+            "name":"Factures",
+            "ico":`<i class="uil uil-invoice text-xl"></i>`
+        },
+      
+        {
             "path":"/account/payments",
             "name":"Paiements",
+            "ico":` <i class="uil uil-money-stack text-xl"></i>`
+        },
+        {
+            "path":"/account/rapport",
+            "name":"Rapports",
             "ico":` <i class="uil uil-money-stack text-xl"></i>`
         }
 

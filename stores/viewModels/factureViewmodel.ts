@@ -15,10 +15,10 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
     let initial = {
         club_id: "",
         rubrique_id: "",
+        exercice_id:"",
         amount: "",
-        date_echeance: "",
         objet: "",
-        status:"en attente",
+        status:"en_attente",
     }
     const newFacture = reactive({...initial});
     const updateFacture = reactive({...initial,id:null});

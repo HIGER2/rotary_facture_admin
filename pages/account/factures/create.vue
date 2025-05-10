@@ -2,22 +2,26 @@
 
 <script setup lang="ts">
 import { useClubViewModel } from '~/stores/viewModels/clubViewmodel';
+import { useExerciceViewModel } from '~/stores/viewModels/exerciceViewmodel';
 import { useFactureViewModel } from '~/stores/viewModels/factureViewmodel';
 import { useRubriqueViewModel } from '~/stores/viewModels/rubriqueViewmodel';
 
 const { newFacture, create } = useFactureViewModel()
 const {isLoading} = storeToRefs(useFactureViewModel())
 const storeClub =useClubViewModel()
+
 const storeRubrique =useRubriqueViewModel()
+const storeExerice =useExerciceViewModel()
 const optionClub=ref([])
 const optionRubrique=ref([])
+const optionExercice=ref([])
 
 const optionStatus = [
-    { label: 'en attente', status:"en attente"},
-    { label: 'payée', status:"payée"},
-    { label: 'annulée', status:"annulée"},
-    { label: 'échelonnée', status:"échelonnée"},
-    { label: 'arriérée', status:"arriérée"},
+    { label: 'en cours', value:"en_cours"},
+    { label: 'payée', value:"payée"},
+    { label: 'annulée', value:"annulée"},
+    { label: 'partiellement payé', value:"partiellement_payé"},
+    { label: 'arriérée', value:"arriérée"},
 ]
 
 const handleCulb = async () => {
@@ -40,10 +44,22 @@ const handRubrique = async () => {
             }
         ))]
 }
+
+
+const handExercice = async () => {
+    let response =await storeExerice.all()
+    optionExercice.value = [...response.data?.data.map((item:any,index) => (
+            {
+                label : `${item?.annee} : (du ${item?.begin_date} au ${item?.end_date})`,
+                value : item?.id,
+            }
+        ))]
+}
 onMounted(async () => {
   await Promise.all([
     handleCulb(),
-    handRubrique()
+    handRubrique(),
+    handExercice()
   ])
 })
 </script>
@@ -53,7 +69,7 @@ onMounted(async () => {
     <div>
         <NuxtLayout>
         <div class="w-full">
-            <div class="w-[550px] m-auto">
+            <div class="w-[600px] m-auto">
                 <div class="w-full p-2 mb-3">
                 <h5 class="text-sm font-semibold uppercase text-neutral-500">Créer une facture</h5>
             </div>
@@ -62,28 +78,36 @@ onMounted(async () => {
                     <div class="w-full bg-white p-4 border overflow-hidden  border-gray-200 rounded-lg">
                         <div class="space-y-2 mb-4 flex gap-2">
                             <UiFormSelect 
+                            v-model="newFacture.exercice_id"
+                            :options="optionExercice" label="Exercice" 
+                            required
+                            placeholder="Selectionner un Exercice" name="Exercice" />
+                            <UiFormSelect 
                             v-model="newFacture.club_id"
                             :options="optionClub" label="Club" 
                             required
                             placeholder="Selectionner un club" name="title" />
+                            
+                        </div>
+                        <div class="space-y-2 mb-4 flex gap-1.5">
                             <UiFormSelect 
                             required
                             v-model="newFacture.rubrique_id"
                             :options="optionRubrique" 
                             label="Rubrique" 
                             placeholder="Selectionner une rubrique" name="title" />
-                        </div>
-                        <div class="space-y-2 mb-4 flex gap-1.5">
                             <UiFormSelect 
                             required
                             v-model="newFacture.status"
                             :options="optionStatus" label="Statut" 
                             placeholder="Statut" name="title" />
+                        </div>
+                        <!-- <div class="space-y-2 mb-4">
                             <UiFormInput 
                             required
                             v-model="newFacture.date_echeance"
                             type="date" label="Date échéance" placeholder="Date échéance" name="title" />
-                        </div>
+                        </div> -->
                         <div class="space-y-2 mb-4">
                             <UiFormInput 
                             required

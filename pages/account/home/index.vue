@@ -10,7 +10,6 @@ const handleSats = async() => {
     if (userStore?.stats?.data?.length == 0) {
         loading.value = true
     }
-   
     await userStore.analityc()
     loading.value = false
 }

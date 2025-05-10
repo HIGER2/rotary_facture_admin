@@ -30,6 +30,10 @@ function handleRowClick(item: Record<string, any>, index: number) {
     emit('rowClick', item, index) 
   }
 }
+
+const displayValue = (val) => {
+  return val !== null && val !== undefined && val !== '' ? val : 'N/A';
+}
 </script>
 
 <template>
@@ -66,7 +70,7 @@ function handleRowClick(item: Record<string, any>, index: number) {
                 </template>
                 <!-- Sinon afficher du texte -->
                 <template v-else>
-                  <span>{{ item[column.key] || "N/A" }}</span>
+                  <span>{{displayValue(item[column.key]) }}</span>
                 </template>
               </td>
             </tr>

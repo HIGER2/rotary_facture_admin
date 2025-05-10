@@ -9,7 +9,7 @@ const route = useRoute()
 const isActive=ref(false)
 const loading = ref(false)
 const handleListe = async () => {
-    loading.value = true
+    // loading.value = true
     await storeFacture.findWithPaiement(route?.params?.slug) 
     loading.value = false
 }
@@ -143,9 +143,9 @@ onMounted(() => {
                 :facture="storeFacture.facture"
                 :handleListe="handleListe"
                 />
-                <FactureCheckPaymentComponent
-                 :isActive="isActive"
-                />
+                <!-- <FactureCheckPaymentComponent
+                    :isActive="isActive"
+                /> -->
             </div>
             </template>
         </NuxtLayout>

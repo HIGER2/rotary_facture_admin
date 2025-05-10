@@ -77,8 +77,12 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
             facture_uid:item.facture_uid
         }
         const data = await usePayment.processePayment(items);
-        if (!data?.data?.error) {
-            navigateTo(data?.data?.data?.url ,{ external: true})
+
+        if (data?.error) {
+            alert(data?.error?.message)
+        }
+        if (data?.data) {
+            // navigateTo(data?.data?.data?.url ,{ external: true})
         }
         isLoading.value = false
     }

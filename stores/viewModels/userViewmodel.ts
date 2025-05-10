@@ -7,7 +7,10 @@ import { useUserServices } from '../services/userService';
 export const useUserViewModel = defineStore('UserViewModel', () => {
    
     const userService = useUserServices();
-    
+    const rapports = reactive({
+        analityc:[],
+        club :[]
+    })
     const stats = reactive<any>({
         data: "",
         analityc: "",
@@ -19,10 +22,17 @@ export const useUserViewModel = defineStore('UserViewModel', () => {
         stats.analityc =data?.data?.analytic
     }
 
-    
-   
+    async function rapport(queryParams) {
+        const data = await userService.rapport(queryParams);
+
+        rapports.analityc = data?.data?.data?.analityc
+        rapports.club = data?.data?.data?.club
+        
+    }
     return {
         analityc,
-        stats
+        stats,
+        rapport,
+        rapports
     }
 })

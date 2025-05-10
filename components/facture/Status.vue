@@ -7,10 +7,10 @@ const props = defineProps<{
 }>();
 
 const statusChange = (status:string)=>{
-  return  status == 'en attente' ? "text-yellow-600 bg-yellow-50"  :
+  return  status == 'en_cours' ? "text-yellow-600 bg-yellow-50"  :
   status == 'payée' ? "text-green-600 bg-green-50" :
   status == 'annulée'  ? "text-red-600 bg-red-50" :
-  status == 'échelonnée' ? "text-blue-600 bg-blue-50" :
+  status == 'partiellement_payé' ? "text-blue-600 bg-blue-50" :
   status == 'arriérée' && "text-orange-500 bg-orange-50"
  };
 </script>
