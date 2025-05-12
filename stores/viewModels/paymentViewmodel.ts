@@ -82,7 +82,7 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
             alert(data?.error?.message)
         }
         if (data?.data) {
-            // navigateTo(data?.data?.data?.url ,{ external: true})
+            navigateTo(data?.data?.data?.url ,{ external: true}) 
         }
         isLoading.value = false
     }
