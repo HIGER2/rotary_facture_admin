@@ -7,6 +7,7 @@ import { useUserServices } from '../services/userService';
 export const useUserViewModel = defineStore('UserViewModel', () => {
    
     const userService = useUserServices();
+ 
     const rapports = reactive({
         analityc:[],
         club :[]
@@ -33,6 +34,6 @@ export const useUserViewModel = defineStore('UserViewModel', () => {
         analityc,
         stats,
         rapport,
-        rapports
+        rapports,
     }
 })

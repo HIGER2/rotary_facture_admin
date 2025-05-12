@@ -27,7 +27,7 @@ const router = {
         },
         {
             "path":"/account/exercice",
-            "name":"Exercies",
+            "name":"Exercices",
             "ico":` <i class="uil uil-wall text-xl"></i>`
         },
         {

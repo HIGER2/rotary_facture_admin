@@ -5,7 +5,7 @@ import { useCookies } from '#imports';
 import { useExercieServices } from '../services/exercieService';
 
 export const useExerciceViewModel = defineStore('ExerciceViewModel', () => {
-    
+    const optionExercice = ref([]);
     const exercices = reactive({
         data:[],
         page: []
@@ -114,6 +114,7 @@ export const useExerciceViewModel = defineStore('ExerciceViewModel', () => {
         findDetail,
         allByFilter,
         updateExercice,
-        update
+        update,
+        optionExercice
     }
 })

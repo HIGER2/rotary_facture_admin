@@ -7,8 +7,8 @@ export async function useCustomFetch<T>(url: string | (() => string),options: Us
     const token = getCookie('token')
     let option = {
         ...options,
-        baseURL:'http://localhost:8000/api/',
-        // baseURL:`${config.public.apiBase}`,
+        // baseURL:'http://localhost:8000/api/',
+        baseURL:`${config.public.apiBase}`,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -16,7 +16,6 @@ export async function useCustomFetch<T>(url: string | (() => string),options: Us
         }
     
     }
-
 //     return useFetch(url, {
 //     ...option,
 //     $fetch: useNuxtApp().$customFetch,
@@ -41,7 +40,6 @@ export async function useCustomFetch<T>(url: string | (() => string),options: Us
     // Gérer l'erreur
         if (error.response) return { data: null, error: error.response?._data || 'Erreur inconnue' }
         else return { data: null, error: 'Une erreur inconnue est survenue' }
-    
     }
 
     

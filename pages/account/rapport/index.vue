@@ -11,8 +11,6 @@ const filters = reactive({
   search: "",
   status: "1",
 });
-const optionExercice=ref([])
-
 
 const columns = [
     { label: 'club', key: 'name' },
@@ -27,9 +25,10 @@ const columns = [
 
 const handExercice = async () => {
     let response =await storeExerice.all()
-    optionExercice.value = [...response.data?.data.map((item:any,index) => (
+    storeExerice.optionExercice = [...response.data?.data.map((item:any,index) => (
             {
-                label : `${item?.annee} : (du ${item?.begin_date} au ${item?.end_date})`,
+                label : `${item?.begin_date} - ${item?.end_date}`,
+                // label : `${item?.annee} : (du ${item?.begin_date} au ${item?.end_date})`,
                 value : item?.id,
             }
         ))]
@@ -71,14 +70,13 @@ onMounted(async() => {
                     <div class="p-2">
                         <h5 class="text-sm font-semibold uppercase text-neutral-500">Rapports</h5>
                     </div>
-
                     <div class="w-auto gap-2 flex items-center justify-between my-4">
                         <div class="flex gap-2 w-auto rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500  h-8 ">
                             <div class="w-auto px-1 block border-r border-gray-300 ">Par exercice</div>
                             <div class="w-auto flex items-center justify-center h-full">
                                 <select v-model="filters.status" class="w-full h-full bg-transparent border-none outline-none">
                                     <option 
-                                    v-for="(item, index) in optionExercice" :key="index"
+                                    v-for="(item, index) in storeExerice.optionExercice" :key="index"
                                     :value="item?.value">{{ item?.label }}</option>
                                     <!-- <option value="all">Tout</option> -->
                                 </select>
