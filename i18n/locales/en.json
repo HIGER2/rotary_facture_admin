@@ -1,0 +1,31 @@
+{
+    "logout": "Logout",
+    "colunm_facture": {
+    "td1": "Invoice No.",
+    "td2": "Amount",
+    "td3": "Remaining to Pay",
+    "td4": "Status",
+    "td5": "Issue Date",
+    "td6": "Due Date",
+    "td7": "Action"
+    },
+    "tableau": {
+    "title": "Dashboard",
+    "box": {
+        "box1": "Total Invoices",
+        "box2": "Paid Invoices",
+        "box3": "Pending Invoices",
+        "box4": "Unpaid Invoices"
+        }
+    },
+    "sidebar": {
+    "dashboard": "Dashboard",
+    "clubs": "Clubs",
+    "exercises": "Exercises",
+    "categories": "Categories",
+    "invoices": "Invoices",
+    "payments": "Payments",
+    "reports": "Reports"
+  
+  }
+}

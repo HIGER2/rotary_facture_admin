@@ -10,11 +10,11 @@ const props = defineProps<TableProps>()
 
 const columns = [
     { label: '#', key: 'id' },
-    { label: 'Année', key: 'annee' },
-    { label: 'Début', key: 'begin_date' },
-    { label: 'Fin', key: 'end_date' },
-    { label: 'Statut', key: 'status' },
-    { label: 'action', key: 'action' },
+    { label: 'exercice.colunm.td1', key: 'annee' },
+    { label: 'exercice.colunm.td2', key: 'begin_date' },
+    { label: 'exercice.colunm.td3', key: 'end_date' },
+    { label: 'exercice.colunm.td4', key: 'status' },
+    { label: 'exercice.colunm.td5', key: 'action' },
 ]
 
 

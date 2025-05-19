@@ -37,56 +37,75 @@ const displayValue = (val) => {
 </script>
 
 <template>
-  <div class="table w-full border overflow-hidden  bg-white border-gray-200 rounded-lg ">
-    <table class="w-full border-collapse ">
+  <div class="overflow-x-auto overflow-y-auto max-h-[400px] border bg-white border-gray-200 rounded-lg">
+    <table class="min-w-max w-full border-collapse">
       <!-- En-tête dynamique -->
-      <thead class="border-b bg-sidebar border-gray-100 capitalize text-[10px]">
+      <thead class="border-b bg-sidebar sticky z-10 top-0 border-gray-100 capitalize text-[10px]">
         <tr>
-          <th v-for="(column, index) in columns" :key="index" class="
-          h-10 px-1 text-left align-middle 
-          text-gray-700 font-[400] rounded-md w-full text-sm
-          dark:text-slate-400 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]
+          <th v-for="(column, index) in columns" :key="index"
+          class="
+          bg-sidebar
+            h-10 px-1 text-left align-middle 
+            text-gray-700 font-[400] rounded-md text-sm
+            dark:text-slate-400
           "
+          :class="[
+            index === 0 ? 'sticky left-0  w-[150px]' : '',
+            // index === 1 ? 'sticky left-[150px] w-[150px]' : '',
+            // index === 2 ? 'sticky left-[300px] w-[150px]' : ''
+          ]"
           >
-            {{ column.label  }}
+            {{$t(column.label)}}
           </th>
         </tr>
       </thead>
       
       <!-- Corps du tableau -->
       <template v-if="!loading && data?.length > 0">
-          <tbody>
-            <tr
-              v-for="(item, rowIndex) in data"
-              :key="rowIndex"
-              class="text-gray-800 font-[500] border-b border-zinc-100 cursor-pointer hover:bg-zinc-50"
-              @click="handleRowClick(item, rowIndex)"
+        <tbody>
+          <tr
+            v-for="(item, rowIndex) in data"
+            :key="rowIndex"
+            class="text-gray-800 font-[500] border-b border-zinc-100 cursor-pointer hover:bg-zinc-50"
+            @click="handleRowClick(item, rowIndex)"
+          >
+            <td v-for="(column, colIndex) in columns" 
+                :key="colIndex" 
+                :class="[
+                'p-2 whitespace-nowrap bg-white', // base
+                colIndex === 0 ? 'sticky left-0 z-[5]  w-[150px]' : '',
+                // colIndex === 1 ? 'sticky left-[150px] z-[5] w-[150px]' : '',
+                // colIndex === 2 ? 'sticky left-[300px] z-[5] w-[150px]' : ''
+              ]"
             >
-            <!-- {{ item }} -->
-              <td v-for="(column, colIndex) in columns" :key="colIndex" class="p-2" >
-                <!-- Slot personnalisé s'il existe -->
-                <template v-if="$slots[column.key]">
-                  <slot :name="column.key" :item="item" :index="rowIndex" />
-                </template>
-                <!-- Sinon afficher du texte -->
-                <template v-else>
-                  <span>{{displayValue(item[column.key]) }}</span>
-                </template>
-              </td>
-            </tr>
-          </tbody>
+              <!-- Slot personnalisé s'il existe -->
+              <template v-if="$slots[column.key]">
+                <slot :name="column.key" :item="item" :index="rowIndex" />
+              </template>
+              <!-- Sinon afficher du texte -->
+              <template v-else>
+                <span>{{ displayValue(item[column.key]) }}</span>
+              </template>
+            </td>
+          </tr>
+        </tbody>
       </template>
     </table>
-  <template v-if="data?.length == 0 && !loading">
-      <div  class="w-full  bg-white p-3 flex items-center justify-center">
-          <h4>aucun element</h4>
+
+    <!-- Si vide -->
+    <template v-if="data?.length === 0 && !loading">
+      <div class="w-full bg-white p-3 flex items-center justify-center">
+        <h4>Aucun élément</h4>
       </div>
-  </template>
-   <template v-if="loading && data.length ==0">
-    <UiLoader/>
-   </template> 
+    </template>
+
+    <!-- Si loading -->
+    <template v-if="loading && data.length === 0">
+      <UiLoader />
+    </template>
   </div>
 </template>
+
 
 <style scoped>
 .table {
@@ -94,14 +113,15 @@ const displayValue = (val) => {
 }
 table {
   width: 100%;
-  border-collapse: collapse;
-table-layout: fixed; /* Colonne largeur égale */
+    border-collapse: collapse;
+  /* table-layout: fixed; */
 
 }
 thead th {
   padding: 15px 10px;
   text-align: left;
 }
+
 tbody tr td {
   padding: 12px 12px;
   font-size: 12px;

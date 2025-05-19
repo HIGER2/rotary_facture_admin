@@ -26,7 +26,7 @@ watch(
 
 <template>
     <div class="w-full h-screen flex justify-center items-center">
-        <div class="min-w-[370px] w-auto ">
+        <div class="w-[380px]  ">
             <a href="#">
                 <img alt="logo" 
                 fetchpriority="high" 
@@ -67,15 +67,16 @@ watch(
                     <div class="p-6 pt-0 px-2 sm:px-6 w-full text-[13px]">
                         <UiAlertError :message="messageError"/>
                         <div class=" w-full my-5 cursor-pointer h-auto items-center justify-center rounded-lg bg-slate-100 p-2 text-slate-500 dark:bg-slate-800 dark:text-slate-400"  style="outline: none;">
-                                <button @click="setTabs('admin')" type="button" :data-state="authUser.type == 'admin' && 'active'" 
-                                    class=" w-[50%] text-center cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-3 py-2  font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-white data-[state=active]:text-slate-950 data-[state=active]:shadow dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300 dark:data-[state=active]:bg-slate-950 dark:data-[state=active]:text-slate-50" tabindex="-1" data-orientation="horizontal" data-radix-collection-item="">
-                                    Administrateur
-                                </button>
                                 <button @click="setTabs('member')" :data-state="authUser.type == 'member' && 'active'" type="button"   
                                     class="w-[50%]  cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-3 py-2  font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 
                                     data-[state=active]:bg-white data-[state=active]:text-slate-950 data-[state=active]:shadow dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300 dark:data-[state=active]:bg-slate-950 dark:data-[state=active]:text-slate-50">
-                                    Membre
+                                    club
                                 </button>
+                                <button @click="setTabs('admin')" type="button" :data-state="authUser.type == 'admin' && 'active'" 
+                                    class=" w-[50%] text-center cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-3 py-2  font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-white data-[state=active]:text-slate-950 data-[state=active]:shadow dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300 dark:data-[state=active]:bg-slate-950 dark:data-[state=active]:text-slate-50" tabindex="-1" data-orientation="horizontal" data-radix-collection-item="">
+                                    District
+                                </button>
+                               
                         </div>
                         <div class="grid gap-10">
                             <form class="space-y-8" @submit.prevent="login">

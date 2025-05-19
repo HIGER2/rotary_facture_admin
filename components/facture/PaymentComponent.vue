@@ -102,13 +102,13 @@ const optionMethode = [
         <div class="px-4 sm:px-0 flex items-center justify-between">
             <h3 class="text-base font-semibold leading-7 text-gray-900">Paiements</h3>
             <template v-if="user?.role=='admin'">
-                <button 
+                <!-- <button 
                 type="button"
                 @click="setActive(true)"
                 class=" cursor-pointer items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none text-xs disabled:opacity-50 bg-[#1F2923] text-slate-50 shadow hover:bg-[#2f3a34]  px-4 py-3 self-start"
                 >
                     Nouveau paiement
-                </button>
+                </button> -->
             </template>
             <template v-else>
                 <button 

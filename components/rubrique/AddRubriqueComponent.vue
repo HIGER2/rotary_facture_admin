@@ -22,7 +22,7 @@ const optionStatus = [
         <div  class=" grid mt-4 w-full max-w-lg  gap-4">
                 <div class="flex flex-col space-y-1.5 text-center sm:text-left">
                     <h2 id="radix-:r70:" class="text-lg font-semibold leading-none tracking-tight">
-                        Nouvelle rubrique
+                        {{$t('rubrique.form.title_new')}}
                     </h2>
                 </div>
                 <form class="" @submit.prevent="createRubrique()">
@@ -30,25 +30,33 @@ const optionStatus = [
                         <UiFormInput 
                         required
                         v-model="newRubrique.libele"
-                        label="Libélé" placeholder="Libélé" name="title" />
+                        :label="$t('rubrique.form.label1')" 
+                        :placeholder="$t('rubrique.form.label1')" 
+                        name="title" 
+                        />
                         <UiFormSelect 
                             required
                             v-model="newRubrique.status"
-                            :options="optionStatus" label="Statut" 
-                            placeholder="Statut" name="title" />
+                            :options="optionStatus" 
+                            :label="$t('rubrique.form.label2')" 
+                            :placeholder="$t('rubrique.form.label2')"
+                            name="title" 
+                            />
                     </div>
                     <div class="">
                         <UiFormInput 
                         required
                         type="number"
                         v-model="newRubrique.price"
-                        label="Prix" placeholder="Prix" name="Prix" />
+                        :label="$t('rubrique.form.label3')" 
+                        :placeholder="$t('rubrique.form.label3')"
+                        name="Prix" />
                     </div>
                     <div class="">
                         <UiFormTextArea
-                            label="Désignation"
+                            :label="$t('rubrique.form.label4')" 
+                            :placeholder="$t('rubrique.form.label4')"
                             v-model="newRubrique.designation"
-                            placeholder="Désignation"
                             rows="3"
                             />
                     </div>

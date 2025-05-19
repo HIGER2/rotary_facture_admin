@@ -7,6 +7,9 @@ import { useFactureViewModel } from '~/stores/viewModels/factureViewmodel'
 const storeFacture = useFactureViewModel()
 const loading=ref(false)
 
+definePageMeta({
+  breadcrumb: 'Factures'
+})
 const filters = reactive({
   search: "",
   status: "",
@@ -82,11 +85,12 @@ onMounted(() => {
                         <div class="w-auto gap-2 flex items-center justify-between">
                             <select v-model="filters.status" class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[120px]">
                                 <option value="" >Tout</option>
-                                <option value="1">en attente</option>
-                                <option value="2">payée</option>
-                                <option value="3">annulée</option>
-                                <option value="4">échelonnée</option>
-                                <option value="5">arriérée</option>
+                                <option value="en_cours">en cours</option>
+                                <option value="brouillon">brouillon</option>
+                                <option value="payée">payée</option>
+                                <option value="annulée">annulée</option>
+                                <option value="partiellement_payé">partiellement payé</option>
+                                <option value="arriérée">arriérée</option>
                             </select>
                             <button class="inline-flex cursor-pointer items-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 rounded-full px-3 text-xs h-8 w-full justify-start">
                                 <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

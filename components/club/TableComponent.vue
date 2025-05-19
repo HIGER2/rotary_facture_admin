@@ -10,10 +10,10 @@ const props = defineProps<TableProps>()
 
 const columns = [
     { label: '#', key: 'id' },
-    { label: 'nom club', key: 'name' },
-    { label: 'pays', key: 'country' },
-    { label: 'langue', key: 'language' },
-    { label: 'Action', key: 'action' },
+    { label: 'colunm_club.td1', key: 'name' },
+    { label: 'colunm_club.td2', key: 'country' },
+    { label: 'colunm_club.td3', key: 'language' },
+    { label: 'colunm_club.td4', key: 'action' },
 ]
 
 const editUser = (user) => {

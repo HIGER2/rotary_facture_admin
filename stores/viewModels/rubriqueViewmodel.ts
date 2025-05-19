@@ -34,9 +34,10 @@ export const useRubriqueViewModel = defineStore('RubriqueViewModel', () => {
                 id : item?.id,
                 uid : item?.rubrique_uid,
                 libele : item?.libele,
-                designation : item?.designation,
-                price : item?.price,
-                status : item?.status,
+                comment : item?.comment,
+                quantity : item?.quantity,
+                amount : item?.amount,
+                // status : item?.status,
             }
         ))]
         return data

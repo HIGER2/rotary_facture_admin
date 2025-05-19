@@ -1,7 +1,6 @@
 import type { UseFetchOptions } from 'nuxt/app'
 
-export async function useCustomFetch<T>(url: string | (() => string),options: UseFetchOptions<T> = {},
-) {
+export async function useCustomFetch<T>(url: string | (() => string),options: UseFetchOptions<T> = {}) {
     const config = useRuntimeConfig()
     const { getCookie } = useCookies()
     const token = getCookie('token')

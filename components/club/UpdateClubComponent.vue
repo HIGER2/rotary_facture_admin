@@ -36,7 +36,7 @@ onMounted(() => {
             <div  class=" grid mt-4 w-full max-w-lg  gap-4">
                     <div class="flex flex-col space-y-1.5 text-center sm:text-left">
                         <h2 id="radix-:r70:" class="text-lg font-semibold leading-none tracking-tight">
-                           Modifier  club
+                          {{ $t('club.form.title_update') }}
                         </h2>
                     </div>
                     <form class="" @submit.prevent="updateClub()">
@@ -44,27 +44,29 @@ onMounted(() => {
                             <UiFormInput 
                             required
                             v-model="update.name"
-                            label="Nom club" placeholder="Nom du club" name="title" />
+                            :label="$t('club.form.label1')" 
+                            :placeholder="$t('club.form.label1')"
+                            name="title" />
                         </div>
                         <div class="">
                         <UiFormSelect 
                             required
                             :options="country"
                             v-model="update.country_id"
-                            placeholder="Pays" 
-                            label="Pays"
+                            :label="$t('club.form.label2')" 
+                            :placeholder="$t('club.form.label2')"
                             />
                             <UiFormSelect 
                             required
                             :options="optionStatus"
                             v-model="update.status"
-                            placeholder="Statut" 
-                            label="Statut"
+                            :label="$t('club.form.label3')" 
+                            :placeholder="$t('club.form.label3')"
                             />
                             
                         </div>
                         <div class="w-full mt-4">
-                            <UiButtonSubmit label="Enregistrer" :isLoading="isLoading"/>    
+                            <UiButtonSubmit :label="$t('club.form.button_update')" :isLoading="isLoading"/>    
                         </div>
                 </form>
             </div>

@@ -3,6 +3,9 @@
 import { ClubFactureComponent, ClubPaymentComponent, ClubPersonelComponent } from '#components'
 import { useClubViewModel } from '~/stores/viewModels/clubViewmodel'
 
+definePageMeta({
+  breadcrumb: 'Détail du club'
+})
 const storeClub = useClubViewModel()
 const isActive = ref(1)
 

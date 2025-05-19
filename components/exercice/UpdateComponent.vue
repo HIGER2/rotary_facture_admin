@@ -22,7 +22,7 @@ const optionStatus = [
         <div  class=" grid mt-4 w-full max-w-lg  gap-4">
                 <div class="flex flex-col space-y-1.5 text-center sm:text-left">
                     <h2 id="radix-:r70:" class="text-lg font-semibold leading-none tracking-tight">
-                        Modifier exercice
+                       {{ $t('exercice.form.title_update') }}
                     </h2>
                 </div>
                 <form class="" @submit.prevent="updateExercice()">
@@ -30,25 +30,34 @@ const optionStatus = [
                         <UiFormInput 
                         required
                         v-model="update.annee"
-                        type="number" name="annee" min="2025" max="2099" step="1"
-                        label="Année" placeholder="Année" />
+                        type="number" 
+                        name="annee" min="2025" max="2099" step="1"
+                        :label="$t('exercice.form.label1')" 
+                        :placeholder="$t('exercice.form.label1')"
+                        />
                         <UiFormSelect 
                             required
                             v-model="update.status"
-                            :options="optionStatus" label="Statut" 
-                            placeholder="Statut" name="title" />
+                            :options="optionStatus"
+                            :label="$t('exercice.form.label2    ')" 
+                            :placeholder="$t('exercice.form.label2  ')" 
+                             name="title" />
                     </div>
                     <div class=" mb-4 flex gap-1.5">
                         <UiFormInput 
                         required
                         v-model="update.begin_date"
                         type="date"
-                        label="Date début" placeholder="Date début" name="Date début" />
+                        :label="$t('exercice.form.label3')" 
+                        :placeholder="$t('exercice.form.label3')"
+                        name="Date début" />
                         <UiFormInput 
                         required
                         v-model="update.end_date"
                          type="date"
-                        label="Date fin" placeholder="Date fin" name="Date fin" />
+                         :label="$t('exercice.form.label4')" 
+                         :placeholder="$t('exercice.form.label4')"   
+                         name="Date fin" />
                     </div>
                     <div class="w-full mt-4">
                         <UiButtonSubmit label="Enregistrer" :isLoading="isLoading"/>    

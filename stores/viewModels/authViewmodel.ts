@@ -22,7 +22,7 @@ export const useAuthViewModel = defineStore('AuthViewModel', () => {
     });
     const authUser = reactive<any>({
         identifiant:"admin@gmail.com",
-        type:"admin",
+        type:"member",
         password:"password",
     })
     

@@ -30,25 +30,31 @@ const optionStatus = [
                         <UiFormInput 
                         required
                         v-model="update.libele"
-                        label="Libélé" placeholder="Libélé" name="title" />
+                        :label="$t('rubrique.form.label1')" 
+                        :placeholder="$t('rubrique.form.label1')"
+                        name="title" />
                         <UiFormSelect 
                             required
                             v-model="update.status"
-                            :options="optionStatus" label="Statut" 
-                            placeholder="Statut" name="title" />
+                            :options="optionStatus" 
+                            :label="$t('rubrique.form.label2')" 
+                            :placeholder="$t('rubrique.form.label2')"
+                            name="title" />
                     </div>
                     <div class="">
                         <UiFormInput 
                         required
                         type="number"
                         v-model="update.price"
-                        label="Prix" placeholder="Prix" name="Prix" />
+                        :label="$t('rubrique.form.label3')" 
+                        :placeholder="$t('rubrique.form.label3')"
+                        name="Prix" />
                     </div>
                     <div class="">
                         <UiFormTextArea
-                            label="Désignation"
                             v-model="update.designation"
-                            placeholder="Désignation"
+                            :label="$t('rubrique.form.label4')" 
+                            :placeholder="$t('rubrique.form.label4')"
                             rows="3"
                             />
                     </div>

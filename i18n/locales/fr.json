@@ -1,0 +1,145 @@
+{
+    "logout": "Déconnexion",
+    "filter_page":"Par page",
+    "placeholder_search":"Recherche",
+    "detail_title":"Général",
+    "colunm_facture":{
+        "td1":"N°Facture",
+        "td2":"Montant",
+        "td9":"Montant payé",
+        "td3":"restet à payer",
+        "td4":"statut",
+        "td5":"date émission",
+        "td6":"date échéance",
+        "td7":"Action",
+        "td8":"Type"
+    },
+    "colunm_club":{
+        "td1":"nom club",
+        "td2":"pays",
+        "td3":"langue",
+        "td4":"Action"
+    },
+    "tableau":{
+        "title":"Tableau de bord",
+        "box":{
+            "box1":"Total Factures",
+            "box2":"Factures payée",
+            "box3":"Factures en attente",
+            "box4":"Factures Impayées"
+        }
+    },
+    "club":{
+        "title":"Clubs",
+        "title_facture":"Factures",
+        "title_detail":"Détail du club",
+        "button":"Ajouter un club",
+        "tab":{
+            "tab1":"Membres",
+            "tab2":"Factures",
+            "tab3":"Paiements"
+        },
+        "personnel":{
+            "title":"Membres",
+            "button":"Nouveau membre",
+            "form":{
+                "title_new":"Nouveau membre",
+                "title_update":"Modifier membre",
+                "label1":"Nom",
+                "label2":"Prénoms",
+                "label3":"Email",
+                "label4":"Téléphone",
+                "label5":"Fonction",
+                "button_new":"Créer",
+                "button_update":"Enregistrer"
+            },
+            "colunm":{
+                "td1":"Nom",
+                "td2":"Prénoms",
+                "td3":"Fonction",
+                "td4":"email",
+                "td5":"téléphone"
+            }
+        },
+        "payment":{
+            "title":"Paiements",
+            "colunm":{
+                "td1":"référence",
+                "td2":"montant",
+                "td3":"statut",
+                "td4":"mode paiement",
+                "td5":"date"
+            }
+        },
+        "detail":{
+            "label1":"Nom du club",
+            "label2":"Pays",
+            "label3":"Langue",
+            "label4":"Statut"
+        },
+        "form":{
+            "title_new":"Informations club",
+            "title_member":"Informations membre",
+            "title_update":"Modifier club",
+            "label1":"Nom club",
+            "label2":"Pays",
+            "label3":"Statut",
+            "label4":"Effectif",
+            "button_new":"Créer",
+            "button_update":"Enregistrer"
+        }
+    },
+    "exercice":{
+        "title":"Exercices",
+        "button":"Ajouter un exercice",
+        "colunm":{
+                "td1":"Année",
+                "td2":"Début",
+                "td3":"Fin",
+                "td4":"Statut",
+                "td5":"action"
+            },
+        "form":{
+            "title_new":"Nouveau exercice",
+            "title_update":"Modifier exercice",
+            "label1":"Année",
+            "label2":"Statut",
+            "label3":"Date début",
+            "label4":"Date fin",
+            "button_new":"Créer",
+            "button_update":"Enregistrer"
+        }
+    },
+    "rubrique":{
+        "title":"Rubriques",
+        "button":"Ajouter une rubrique",
+        "colunm":{
+                "td1":"code",
+                "td2":"libélé",
+                "td3":"quantité",
+                "td4":"prix"
+                // "td5":"designation",
+                // "td6":"action"
+            },
+        "form":{
+            "title_new":"Nouvelle rubrique",
+            "title_update":"Modifier rubrique",
+            "label1":"Libélé",
+            "label2":"Statut",
+            "label3":"Prix",
+            "label4":"Désignation",
+            "button_new":"Créer",
+            "button_update":"Enregistrer"
+        }
+    },
+    "sidebar": {
+        "dashboard": "Tableau de bord",
+        "clubs": "Clubs",
+        "exercises": "Exercices",
+        "categories": "Rubriques",
+        "invoices": "Factures",
+        "payments": "Paiements",
+        "reports": "Rapports"
+     
+    }
+}

@@ -12,6 +12,11 @@ const filters = reactive({
   status: "1",
 });
 
+
+definePageMeta({
+  breadcrumb: 'Rapports'
+})
+
 const columns = [
     { label: 'club', key: 'name' },
     { label: 'total facture', key: 'total_facture' },

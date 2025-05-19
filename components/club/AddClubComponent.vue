@@ -24,7 +24,6 @@ const optionStatus = [
 ]
 
 onMounted(() => {
-    
     getCountry()
 })
 
@@ -34,43 +33,44 @@ onMounted(() => {
 <template>
     <div>   
         <UiModal :isActive="isActive" :onClose="()=>setActive(false)">
-                <div  class=" grid mt-4 w-full max-w-lg  gap-4">
-                        <div class="flex flex-col space-y-1.5 text-center sm:text-left">
-                            <h2 id="radix-:r70:" class="text-lg font-semibold leading-none tracking-tight">
-                                Nouveau club
-                            </h2>
+            <div  class=" grid mt-4 w-full max-w-lg  gap-4">
+                    <div class="flex flex-col space-y-1.5 text-center sm:text-left">
+                        <h2 id="radix-:r70:" class="text-lg font-semibold leading-none tracking-tight">
+                            {{ $t('club.form.title_new') }}
+                        </h2>
+                    </div>
+                    <form class="" @submit.prevent="createClub()">
+                            <div class=" mb-4">
+                            <UiFormInput 
+                            required
+                            v-model="newClub.name"
+                            :label="$t('club.form.label1')" 
+                            :placeholder="$t('club.form.label1')" 
+                            name="title" />
                         </div>
-                        <form class="" @submit.prevent="createClub()">
-                                <div class=" mb-4">
-                                <UiFormInput 
-                                required
-                                v-model="newClub.name"
-                                label="Nom club" placeholder="Nom du club" name="title" />
-                            </div>
-                            <div class="">
+                        <div class="">
+                        <UiFormSelect 
+                            required
+                            :options="country"
+                            v-model="newClub.country_id"
+                            :label="$t('club.form.label2')" 
+                            :placeholder="$t('club.form.label2')" 
+                            />
                             <UiFormSelect 
-                                required
-                                :options="country"
-                                v-model="newClub.country_id"
-                                placeholder="Pays" 
-                                label="Pays"
-                                />
-                                <UiFormSelect 
-                                required
-                                :options="optionStatus"
-                                    v-model="newClub.status"
-                                placeholder="Statut" 
-                                label="Statut"
-                                />
-                                
-                            </div>
-                            <div class="w-full mt-4">
-                                <UiButtonSubmit label="Créer" :isLoading="isLoading"/>    
-                            </div>
-                    </form>
-                </div>
-            </UiModal>
-
+                            required
+                            :options="optionStatus"
+                            v-model="newClub.status"
+                            :label="$t('club.form.label3')" 
+                            :placeholder="$t('club.form.label3')"
+                            />
+                            
+                        </div>
+                        <div class="w-full mt-4">
+                            <UiButtonSubmit :label="$t('club.form.button_new')" :isLoading="isLoading"/>    
+                        </div>
+                </form>
+            </div>
+        </UiModal>
     </div>
 </template>
 

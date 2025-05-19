@@ -12,25 +12,32 @@ const props = withDefaults(defineProps<TableProps>(),{
 
 const columns = {
     "admin":[
-    { label: 'N°Facture', key: 'reference' },
+    { label: 'colunm_facture.td1', key: 'reference' },
     // { label: 'Club', key: 'club' },
-    { label: 'Montant', key: 'amount' },
-    // { label: 'type', key: 'type' },
-    { label: 'restet à payer', key: 'remaining_amount' },
-    { label: 'statut', key: 'status' },
-    { label: 'date émission', key: 'date_emission' },
-    { label: 'date échéance', key: 'date_echeance' },
+    { label: 'colunm_facture.td2', key: 'amount' },
+    { label: 'colunm_facture.td9', key: 'amount_pay' },
+    { label: 'colunm_facture.td3', key: 'remaining_amount' },
+    { label: 'colunm_facture.td8', key: 'type' },
+
+    { label: 'colunm_facture.td4', key: 'status' },
+
+    { label: 'colunm_facture.td5', key: 'date_emission' },
+    { label: 'colunm_facture.td6', key: 'date_echeance' },
     
-    { label: 'Action', key: 'action' } 
+    { label: 'colunm_facture.td7', key: 'action' } 
 ],
 "club":[
-    { label: 'N°Facture', key: 'reference' },
+{ label: 'colunm_facture.td1', key: 'reference' },
     // { label: 'Club', key: 'club' },
-    { label: 'Montant', key: 'amount' },
-    { label: 'restet à payer', key: 'remaining_amount' },
-    { label: 'statut', key: 'status' },
-    { label: 'date émission', key: 'date_emission' },
-    { label: 'date échéance', key: 'date_echeance' },
+    { label: 'colunm_facture.td2', key: 'amount' },
+    // { label: 'type', key: 'type' },
+    { label: 'colunm_facture.td3', key: 'remaining_amount' },
+    { label: 'colunm_facture.td8', key: 'type' },
+
+    { label: 'colunm_facture.td4', key: 'status' },
+
+    { label: 'colunm_facture.td5', key: 'date_emission' },
+    { label: 'colunm_facture.td6', key: 'date_echeance' },
 ]
 }
 
@@ -62,22 +69,26 @@ const editUser = (user) => {
                     ">
                     <i class="uil uil-eye "></i>
                         <!-- <i class="uil uil-info-circle"></i> -->
-                </NuxtLink>
-                    <NuxtLink :to="`/account/factures/update?ref=${item?.reference}`"  
-                        class=" h-7 w-7 cursor-pointer hover:bg-gray-200  
-                        flex items-center justify-center text-center 
-                        rounded-full
-                        border border-gray-200 text-gray-500 hover:text-gray-700
-                        shadow
-                        ">
-                        <!-- <i class="uil uil-eye text-sm"></i> -->
-                        <i class="uil uil-pen"></i>
                     </NuxtLink>
+                    <!-- <NuxtLink :to="`/account/factures/update?ref=${item?.reference}`"  
+                            class=" h-7 w-7 cursor-pointer hover:bg-gray-200  
+                            flex items-center justify-center text-center 
+                            rounded-full
+                            border border-gray-200 text-gray-500 hover:text-gray-700
+                            shadow
+                            ">
+                            <i class="uil uil-eye text-sm"></i>
+                            <i class="uil uil-pen"></i>
+                    </NuxtLink> -->
                 </div>
+            </template>
+            <template #type="{ item }">
+                <FactureType :status="item?.type"/>
             </template>
             <template #status="{ item }">
                 <FactureStatus :status="item?.status"/>
             </template>
+          
         </UiDynamicTable>
     </div>
 </template>

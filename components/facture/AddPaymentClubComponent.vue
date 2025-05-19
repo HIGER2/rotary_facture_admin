@@ -25,7 +25,7 @@ const props = defineProps<{
                                 <UiFormInput 
                                 required
                                 v-model="paymentAmount.amount"
-                                min="1"
+                                min="100"
                                 type="number" label="Montant" placeholder="Montant" name="title" />
                             </div>
                             

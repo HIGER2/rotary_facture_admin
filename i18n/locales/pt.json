@@ -1,0 +1,30 @@
+{
+    "logout": "Sair",
+    "colunm_facture": {
+        "td1": "Nº da Fatura",
+        "td2": "Montante",
+        "td3": "Restante a Pagar",
+        "td4": "Estado",
+        "td5": "Data de Emissão",
+        "td6": "Data de Vencimento",
+        "td7": "Ação"
+    },
+    "tableau": {
+        "title": "Painel de controle",
+        "box": {
+            "box1": "Total de Faturas",
+            "box2": "Faturas Pagas",
+            "box3": "Faturas Pendentes",
+            "box4": "Faturas Não Pagas"
+        }
+    },
+    "sidebar": {
+        "dashboard": "Painel de controle",
+        "clubs": "Clubes",
+        "exercises": "Exercícios",
+        "categories": "Categorias",
+        "invoices": "Faturas",
+        "payments": "Pagamentos",
+        "reports": "Relatórios"
+    }
+}

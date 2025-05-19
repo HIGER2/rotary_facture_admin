@@ -16,7 +16,31 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
     let initial = {
         name: "",
         country_id: "",
-        status:""
+        status:"",
+        effectif:"",
+        club_personel:[
+            {
+                name: "",
+                last_name: "",
+                function:"président",
+                phone:"",
+                email: "",
+            },
+            {
+                name: "",
+                last_name: "",
+                function:"secrétaire",
+                phone:"",
+                email: "",
+            },
+            {
+                name: "",
+                last_name: "",
+                function:"trésorier",
+                phone:"",
+                email: "",
+            }
+        ]
     }
     const newClub = reactive({ ...initial });
     const updateClub = reactive({ ...initial, id:""});
