@@ -55,7 +55,7 @@ onMounted(() => {
                 <div class="w-full">
                     <div class="w-full flex items-center justify-between mb-10">
                         <h5 class="text-sm font-semibold uppercase text-neutral-500">Factures</h5>
-                        <template v-if="userConnected?.role === 'admin'">
+                        <template v-if="userConnected?.role !== 'club'">
                             <div class="w-auto">
                                 <NuxtLink 
                                 class="inline-flex items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none text-xs disabled:opacity-50 bg-[#1F2923] text-slate-50 shadow hover:bg-[#2f3a34]  px-4 py-3 self-start"
