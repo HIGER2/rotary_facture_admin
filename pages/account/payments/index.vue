@@ -21,7 +21,7 @@ const columns = [
     { label: 'date', key: 'date' },
 ]
 
-const isActive=ref(2)
+const isActive=ref(1)
 
 const filters = reactive({
     search: "",
@@ -68,7 +68,6 @@ onMounted(() => {
         <NuxtLayout v-slot="{ userConnected }">
         <div class="w-full">
             <!-- {{ storePayments?.payments[0] }} -->
-            {{ userConnected?.role }}
             <div class="w-full p-2">
                 <div class="w-full">
                     <div class="w-full flex items-center justify-between mb-5">

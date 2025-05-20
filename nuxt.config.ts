@@ -12,8 +12,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: 'http://api.facturation.rotary-district9101.org/api'
-    }
+      apiBase: process.env.API_BASE
+    },
+
   },
    router: {
     options: {

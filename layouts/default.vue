@@ -26,6 +26,15 @@ const router = {
     { path: "/account/payments", name: "sidebar.payments", ico: `<i class="uil uil-money-stack text-xl"></i>` },
     { path: "/account/rapport", name: "sidebar.reports", ico: `<i class="uil uil-chart text-xl"></i>` }
   ],
+  super_admin: [
+    { path: "/account/home", name: "sidebar.dashboard", ico: `<i class="uil uil-estate text-xl"></i>` },
+    { path: "/account/clubs", name: "sidebar.clubs", ico: `<i class="uil uil-cube text-xl"></i>` },
+    { path: "/account/factures", name: "sidebar.invoices", ico: `<i class="uil uil-invoice text-xl"></i>` },
+    // { path: "/account/exercice", name: "sidebar.exercises", ico: `<i class="uil uil-clipboard-notes text-xl"></i>` },
+    { path: "/account/rubrique", name: "sidebar.categories", ico: `<i class="uil uil-wall text-xl"></i>` },
+    { path: "/account/payments", name: "sidebar.payments", ico: `<i class="uil uil-money-stack text-xl"></i>` },
+    { path: "/account/rapport", name: "sidebar.reports", ico: `<i class="uil uil-chart text-xl"></i>` }
+  ],
   club: [
     { path: "/account/home", name: "sidebar.dashboard", ico: `<i class="uil uil-estate text-xl"></i>` },
     { path: "/account/factures", name: "sidebar.invoices", ico: `<i class="uil uil-invoice text-xl"></i>` },
@@ -39,6 +48,7 @@ onMounted(() => {
 
 <template>
     <div>
+        <!-- {{storeAuth.userConnected?.role}} -->
         <main class="w-full h-screen flex overflow-hidden">
             <nav class="w-[240px] h-screen bg-black border-r border-r-gray-200">
                 <div class="flex flex-col h-full p-4">

@@ -10,22 +10,22 @@ const props = withDefaults(defineProps<TableProps>(),{
     loading: false
 })
 
+const sharedAdminColumns = [
+  { label: 'colunm_facture.td1', key: 'reference' },
+  { label: 'colunm_facture.td2', key: 'amount' },
+  { label: 'colunm_facture.td9', key: 'amount_pay' },
+  { label: 'colunm_facture.td3', key: 'remaining_amount' },
+  { label: 'colunm_facture.td8', key: 'type' },
+  { label: 'colunm_facture.td4', key: 'status' },
+  { label: 'colunm_facture.td5', key: 'date_emission' },
+  { label: 'colunm_facture.td6', key: 'date_echeance' },
+  { label: 'colunm_facture.td7', key: 'action' }
+];
+
+
 const columns = {
-    "admin":[
-    { label: 'colunm_facture.td1', key: 'reference' },
-    // { label: 'Club', key: 'club' },
-    { label: 'colunm_facture.td2', key: 'amount' },
-    { label: 'colunm_facture.td9', key: 'amount_pay' },
-    { label: 'colunm_facture.td3', key: 'remaining_amount' },
-    { label: 'colunm_facture.td8', key: 'type' },
-
-    { label: 'colunm_facture.td4', key: 'status' },
-
-    { label: 'colunm_facture.td5', key: 'date_emission' },
-    { label: 'colunm_facture.td6', key: 'date_echeance' },
-    
-    { label: 'colunm_facture.td7', key: 'action' } 
-],
+    "admin":sharedAdminColumns,
+    "super_admin":sharedAdminColumns,
 "club":[
 { label: 'colunm_facture.td1', key: 'reference' },
     // { label: 'Club', key: 'club' },

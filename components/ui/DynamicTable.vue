@@ -37,7 +37,7 @@ const displayValue = (val) => {
 </script>
 
 <template>
-  <div class="overflow-x-auto overflow-y-auto max-h-[400px] border bg-white border-gray-200 rounded-lg">
+  <div class="overflow-x-auto overflow-y-auto max-h-[450px] border bg-white border-gray-200 rounded-lg">
     <table class="min-w-max w-full border-collapse">
       <!-- En-tête dynamique -->
       <thead class="border-b bg-sidebar sticky z-10 top-0 border-gray-100 capitalize text-[10px]">
