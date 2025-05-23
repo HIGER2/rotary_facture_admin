@@ -7,6 +7,7 @@ import { usePaymentViewModel } from '~/stores/viewModels/paymentViewmodel';
 const storeFacture = useFactureViewModel()
 const storePayment = usePaymentViewModel()
 const route = useRoute()
+const router = useRouter()
 const isActive=ref(false)
 const loading = ref(false)
 
@@ -30,13 +31,14 @@ const setTabs= (state)=>{
 const checkPayment = async (token) => {
     isActive.value=true
     await storePayment.checkPayment({TransactionToken:token}) 
+    await handleListe() 
+    router.replace({ query: {} })
     isActive.value=false
 }
 
 
 onMounted(() => {
-    handleListe()
-
+    handleListe() 
     if (Object.keys(route.query).length > 0 && route.query?.TransactionToken) {
         checkPayment(route.query?.TransactionToken) 
     }

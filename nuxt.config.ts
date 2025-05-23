@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   },
    router: {
     options: {
-      hashMode: true
+      // hashMode: true
     }
   },
   vite: {
@@ -28,14 +28,17 @@ export default defineNuxtConfig({
     server: {
       allowedHosts: [
         'localhost',
-        'a1f0-105-235-112-130.ngrok-free.app',
-        '5a08-213-136-109-131.ngrok-free.app'
+        '8d0a-160-154-149-164.ngrok-free.app/',
+        '7eae-160-154-129-194.ngrok-free.app'
       ]
     }
   },
-   app: {
+  app: {
     
     head: {
+      meta: [
+        { charset: 'utf-8' },
+      ],
         link: [
       { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
       {

@@ -15,6 +15,38 @@ const filters = reactive({
   status: "",
 });
 
+
+    const sharedAdminColumns = [
+    { label: 'colunm_facture.td1', key: 'reference' },
+    { label: 'colunm_facture.td2', key: 'amount' },
+    { label: 'colunm_facture.td9', key: 'amount_pay' },
+    { label: 'colunm_facture.td3', key: 'remaining_amount' },
+    { label: 'colunm_facture.td8', key: 'type' },
+    { label: 'colunm_facture.td4', key: 'status' },
+    { label: 'colunm_facture.td5', key: 'date_emission' },
+    { label: 'colunm_facture.td6', key: 'date_echeance' },
+    { label: 'colunm_facture.td7', key: 'action' }
+    ];
+
+
+const columns = {
+    "admin":sharedAdminColumns,
+    "super_admin":sharedAdminColumns,
+"club":[
+{ label: 'colunm_facture.td1', key: 'reference' },
+    // { label: 'Club', key: 'club' },
+    { label: 'colunm_facture.td2', key: 'amount' },
+    // { label: 'type', key: 'type' },
+    { label: 'colunm_facture.td3', key: 'remaining_amount' },
+    { label: 'colunm_facture.td8', key: 'type' },
+
+    { label: 'colunm_facture.td4', key: 'status' },
+
+    { label: 'colunm_facture.td5', key: 'date_emission' },
+    { label: 'colunm_facture.td6', key: 'date_echeance' },
+]
+}
+
 const handleListe =async (params:any={}) => {
 
     if (storeFacture?.factures?.length == 0) {
@@ -59,7 +91,7 @@ onMounted(() => {
                             <div class="w-auto">
                                 <NuxtLink 
                                 class="inline-flex items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none text-xs disabled:opacity-50 bg-[#1F2923] text-slate-50 shadow hover:bg-[#2f3a34]  px-4 py-3 self-start"
-                                to="factures/create"
+                                to="/account/factures/create"
                                 >
                                     Nouvelle Facture
                                 </NuxtLink>
@@ -92,17 +124,15 @@ onMounted(() => {
                                 <option value="partiellement_payé">partiellement payé</option>
                                 <option value="arriérée">arriérée</option>
                             </select>
-                            <button class="inline-flex cursor-pointer items-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900 rounded-full px-3 text-xs h-8 w-full justify-start">
-                                <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM12 8.5v6"></path>
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.5l3 3 3-3"></path>
-                                </svg>
-                                Télécharger
-                            </button>
+                            <GlobaleUploadCsv
+                            :data="storeFacture?.factures"
+                            :colunm="columns[userConnected?.role]"
+                            lang
+                            />
                         </div>
                 </div>
                 <div class="w-full p-2">
-                    <FactureTableComponent :loading="loading" :user="userConnected" :data="storeFacture?.factures"/>
+                    <FactureTableComponent :columns="columns" :loading="loading" :user="userConnected" :data="storeFacture?.factures"/>
                 </div>
             </div>
         </div>

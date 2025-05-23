@@ -60,7 +60,16 @@ const updatePayment = async () => {
 
 
 const columns = {
-    "admin":[
+"admin":[
+    { label: 'référence', key: 'reference' },
+    // { label: 'montant à regler', key: 'club' },
+    { label: 'montant', key: 'amount' },
+    { label: 'statut', key: 'status' },
+    { label: 'mode paiement', key: 'mode_paiement' },
+    { label: 'date', key: 'date' },
+    { label: 'action', key: 'action'},
+],
+"super_admin":[
     { label: 'référence', key: 'reference' },
     // { label: 'montant à regler', key: 'club' },
     { label: 'montant', key: 'amount' },

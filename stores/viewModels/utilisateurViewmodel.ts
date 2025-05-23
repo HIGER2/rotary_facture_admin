@@ -5,6 +5,7 @@ import { useCookies } from '#imports';
 import { useExercieServices } from '../services/exercieService';
 
 export const useUserViewModel = defineStore('UserViewModel', () => {
+
     const users = reactive({
         data:[],
         page: []
@@ -23,7 +24,7 @@ export const useUserViewModel = defineStore('UserViewModel', () => {
     const newUser = reactive({ ...initial });
     const updateUser = reactive({ ...initial, id:""});
     
-
+    
     async function allByFilter(queryParams ="") {
         const data = await useExercice.allByFilter(queryParams);
         data.data?.data?.links.shift()

@@ -19,6 +19,15 @@ const filters = reactive({
 });
 
 
+const columns = [
+    { label: '#', key: 'id' },
+    { label: 'colunm_club.td1', key: 'name' },
+    { label: 'colunm_club.td2', key: 'country' },
+    { label: 'colunm_club.td3', key: 'language' },
+    { label: 'colunm_club.td4', key: 'action' },
+]
+
+
 
 const isActive = ref(false)
 const isActiveUpdate = ref(false)
@@ -134,6 +143,11 @@ onMounted(() => {
                                 </select>
                             </div>
                         </div>
+                        <GlobaleUploadCsv
+                        :data="storeClub?.clubs.data"
+                            :colunm="columns"
+                            lang
+                        />
                         <!-- <select class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[120px]">
                             <option value="">Tous</option>
                             <option value="">Clubs</option>
@@ -150,7 +164,7 @@ onMounted(() => {
                 </div>
             </div>
             <div class="w-full p-2">
-                <ClubTableComponent :loading="loading" :data="storeClub?.clubs.data" :setUpdate="setUpdate"/>
+                <ClubTableComponent :loading="loading" :columns="columns" :data="storeClub?.clubs.data" :setUpdate="setUpdate"/>
             </div>
            <ClubAddClubComponent
            :new-club="storeClub.newClub"

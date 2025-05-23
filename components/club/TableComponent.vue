@@ -4,17 +4,11 @@
 interface TableProps {
   data: any,
   setUpdate: (item:any) => void,
-  loading:boolean
+  loading:boolean,
+  columns: any
 }
 const props = defineProps<TableProps>()
 
-const columns = [
-    { label: '#', key: 'id' },
-    { label: 'colunm_club.td1', key: 'name' },
-    { label: 'colunm_club.td2', key: 'country' },
-    { label: 'colunm_club.td3', key: 'language' },
-    { label: 'colunm_club.td4', key: 'action' },
-]
 
 const editUser = (user) => {
   console.log('Modifier :', user)

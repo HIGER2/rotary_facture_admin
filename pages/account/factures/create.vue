@@ -29,6 +29,17 @@ const handleSubmit = async (event) => {
     let response =await create(send)
 }
 
+const handleAdd=()=>{
+    if (newFacture.club_id=="") {
+        alert("Veuillez selectionner un club")
+        return
+    }
+    let club = optionClub.value.find((item:any) => item.value == newFacture.club_id)
+    if (club) {
+        addRubrique(club.effectif)
+    }
+    
+}
 
 const handleCulb = async () => {
     let response =await storeClub.all()
@@ -36,6 +47,7 @@ const handleCulb = async () => {
             {
                 label : item?.name,
                 value : item?.id,
+                effectif: item?.effectif,
             }
         ))]
 }
@@ -149,6 +161,7 @@ onMounted(async () => {
                                 @click="removeRubrique(index)"
                                 type="button"
                                 class="
+                                mt-2
                                 mx-auto cursor-pointer
                                 text-[13px] 
                                 rounded-lg border border-slate-200 bg-transparent p-2
@@ -189,7 +202,7 @@ onMounted(async () => {
                             </div>
                             <div class="w-full grid items-center mt-3">
                                 <button 
-                                @click="addRubrique"
+                                @click="handleAdd"
                                 type="button"
                                 class="
                                 mx-auto cursor-pointer

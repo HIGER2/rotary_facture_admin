@@ -17,6 +17,17 @@ const columns = {
     // { label: 'montant à regler', key: 'club' },
     { label: 'quantité', key: 'quantity' },
     { label: 'montant', key: 'amount' },
+    
+    // { label: 'mode paiement', key: 'mode_paiement' },
+    // { label: 'date', key: 'date' },
+    // { label: 'action', key: 'action'},
+],
+"super_admin":[
+    { label: 'libélé', key: 'libele' },
+    // { label: 'montant à regler', key: 'club' },
+    { label: 'quantité', key: 'quantity' },
+    { label: 'montant', key: 'amount' },
+    
     // { label: 'mode paiement', key: 'mode_paiement' },
     // { label: 'date', key: 'date' },
     // { label: 'action', key: 'action'},
@@ -76,7 +87,7 @@ const columns = {
                     </template>    
             </UiDynamicTable>
         </div>
-        <FactureAddPaymentComponent
+        <!-- <FactureAddPaymentComponent
         :is-active="isActive"
         :set-active="setActive"
         :option-status="optionStatus"
@@ -102,7 +113,7 @@ const columns = {
         :option-methode="optionMethode"
         :updatePayment="updatePayment"
         :is-loading="storePayment.isLoading"
-        />
+        /> -->
     </section>
 </template>
 

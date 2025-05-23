@@ -133,8 +133,8 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
         Object.assign(updateFacture,data?.data?.data)
     }
 
-    const addRubrique =()=>{
-        newRubrique.push({...initiaRubrique})
+    const addRubrique =(quantity=0)=>{
+        newRubrique.push({...initiaRubrique,quantity:quantity ? quantity : ""})
     }
 
     const removeRubrique =(index:number)=>{
