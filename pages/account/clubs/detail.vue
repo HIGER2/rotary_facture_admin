@@ -39,7 +39,7 @@ onMounted(() => {
                 <ClubButtonTabsComponent :isActive="isActive" :setTabs="setTabs" />
 
                 <keep-alive>
-                <component :is="tabs[isActive]" :user="userConnected" :data="storeClub?.club" />
+                 <component :is="tabs[isActive]" :user="userConnected" :data="storeClub?.club" />
                 </keep-alive>
             </div>
         </NuxtLayout>

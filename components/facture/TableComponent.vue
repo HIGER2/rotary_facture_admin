@@ -4,7 +4,7 @@
 interface TableProps {
   data: any,
   user:any,
-  loading:boolean | null | undefined,
+  loading?:boolean,
   columns: any
 }
 const props = withDefaults(defineProps<TableProps>(),{

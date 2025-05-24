@@ -7,6 +7,38 @@ const props = defineProps<{
     user:any
 }>()
 
+
+const sharedAdminColumns = [
+    { label: 'colunm_facture.td1', key: 'reference' },
+    { label: 'colunm_facture.td2', key: 'amount' },
+    { label: 'colunm_facture.td9', key: 'amount_pay' },
+    { label: 'colunm_facture.td3', key: 'remaining_amount' },
+    { label: 'colunm_facture.td8', key: 'type' },
+    { label: 'colunm_facture.td4', key: 'status' },
+    { label: 'colunm_facture.td5', key: 'date_emission' },
+    { label: 'colunm_facture.td6', key: 'date_echeance' },
+    { label: 'colunm_facture.td7', key: 'action' }
+    ];
+
+
+const columns = {
+    "admin":sharedAdminColumns,
+    "super_admin":sharedAdminColumns,
+"club":[
+{ label: 'colunm_facture.td1', key: 'reference' },
+    // { label: 'Club', key: 'club' },
+    { label: 'colunm_facture.td2', key: 'amount' },
+    // { label: 'type', key: 'type' },
+    { label: 'colunm_facture.td3', key: 'remaining_amount' },
+    { label: 'colunm_facture.td8', key: 'type' },
+
+    { label: 'colunm_facture.td4', key: 'status' },
+
+    { label: 'colunm_facture.td5', key: 'date_emission' },
+    { label: 'colunm_facture.td6', key: 'date_echeance' },
+]
+}
+
 </script>
 
 
@@ -24,7 +56,7 @@ const props = defineProps<{
                 </button> -->
             </div>
             <div class="mt-6 border-t border-gray-100">
-            <FactureTableComponent :user="user" :data="data?.factures"/>
+                <FactureTableComponent  :user="user" :columns="columns" :data="data?.factures"/>
             </div>
     </div>
 </template>
