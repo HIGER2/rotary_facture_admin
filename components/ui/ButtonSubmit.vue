@@ -1,5 +1,6 @@
 
 <script setup lang="ts">
+
  interface typeProps{
     label?: string;
     isLoading?: boolean;
