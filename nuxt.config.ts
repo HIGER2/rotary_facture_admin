@@ -52,10 +52,12 @@ export default defineNuxtConfig({
  
   modules: [
     '@nuxt/image', '@nuxt/scripts', // '@nuxt/ui'
-    '@nuxt/test-utils', '@pinia/nuxt', 
+    '@nuxt/test-utils',
+    '@pinia/nuxt', 
     'nuxt-toastify',
     '@nuxtjs/i18n'
   ],
+  
   i18n: {
     locales: [
       { code: 'fr', name: 'Français', file: 'fr.json' },

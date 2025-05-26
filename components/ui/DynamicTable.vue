@@ -47,7 +47,7 @@ const displayValue = (val) => {
           bg-sidebar
             h-10 px-1 text-left align-middle 
             text-gray-700 font-[400] rounded-md text-sm
-            dark:text-slate-400
+           
           "
           :class="[
             index === 0 ? 'sticky left-0  w-[150px]' : '',

@@ -110,7 +110,7 @@ const optionMethode = [
   <section class="mt-4">
         <div class="px-4 sm:px-0 flex items-center justify-between">
             <h3 class="text-base font-semibold leading-7 text-gray-900">Paiements</h3>
-            <template v-if="user?.role=='admin'">
+            <template v-if="user?.role =='club'">
                 <!-- <button 
                 type="button"
                 @click="setActive(true)"
@@ -123,7 +123,7 @@ const optionMethode = [
                 <button 
                 type="button"
                 @click="setActiveClub(true)"
-                class=" cursor-pointer items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none text-xs disabled:opacity-50 bg-[#1F2923] text-slate-50 shadow hover:bg-[#2f3a34]  px-4 py-3 self-start"
+                class=" cursor-pointer items-center bg-primary justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1  disabled:pointer-events-none text-xs disabled:opacity-50 bg-pri text-slate-50 shadow  px-4 py-3 self-start"
                 >
                   Effectué un paiement
                 </button>

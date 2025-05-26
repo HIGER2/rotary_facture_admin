@@ -50,8 +50,8 @@ onMounted(() => {
     <div>
         <!-- {{storeAuth.userConnected?.role}} -->
         <main class="w-full h-screen flex overflow-hidden">
-            <nav class="w-[240px] h-screen bg-black border-r border-r-gray-200">
-                <div class="flex flex-col h-full p-4">
+            <nav class="w-[240px] h-screen bg-sidebar border-r border-r-gray-200">
+                <div class="flex flex-col h-full px-4">
                     <div class="flex p-2">
                         <img src="~/assets/images/logo.svg" alt="Logo" class="w-28  " />
                     </div>
@@ -93,7 +93,7 @@ onMounted(() => {
             </nav>
             <div class="flex-1 max-w-[calc(100%-240px)] bg-white ">
                 <div class="w-full h-full">
-                <nav class="w-full h-[60px] p-4  flex justify-between items-center border-b border-b-gray-200">
+                <nav class="w-full bg-white  h-[60px] p-4  flex justify-between items-center border-b border-b-gray-200">
                     <!-- <span>Tableau de bord</span> -->
                      <div>
                         <GlobaleBreadcrumb/>
@@ -123,12 +123,12 @@ onMounted(() => {
                             cursor-pointer 
                             rounded-full 
                             justify-between
-                            border-1 border-slate-200 flex  items-center bg-white  hover:bg-slate-100 hover:text-slate-900 
+                            border-1 text-gray-200 flex  items-center bg-primary  
                             px-2 
                             text-xl
                             ">
-                            <i class="uil  uil-user"></i>
                             <i class="uil uil-bars"></i>
+                            <i class="uil  uil-user"></i>
                             </button>
                             <div 
                             :class="{'hidden': !isOpen}"
