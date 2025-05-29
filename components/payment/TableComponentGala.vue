@@ -9,27 +9,33 @@ interface TableProps {
 }
 const props = defineProps<TableProps>()
 const response = ref([])
-
 const columns = [
-    { label: 'Nom', key: 'firstName' },
-    { label: 'Prénoms', key: 'lastName' },
-    { label: 'Nom de badge', key: 'nameOnBadge' },
-    { label: 'Téléphone', key: 'phoneNumber' },
-    { label: 'Email', key: 'clientEmail' },
-
-    // { label: 'montant à regler', key: 'club' },
-    // { label: 'Pays', key: 'country' },
-    { label: 'Club', key: 'rotaryClub' },
-    // { label: 'Date arrivé', key: 'arrivalDate' },
-    // { label: 'Date départ', key: 'departureDate' },
-    // { label: 'Mode transport', key: 'transportationMode' },
-    { label: 'Invité', key: 'guestNumber' },
-    { label: 'Methode de paiement', key: 'paymentMethod' },
-    { label: 'Date Paiement', key: 'paymentDate' },
-    { label: 'Status', key: 'state' },
-    { label: 'Amount', key: 'paidAmount' },
-]
-
+{ label: 'payment.tab2.colunm.civility', key: 'civility' },
+  { label: 'payment.tab2.colunm.title', key: 'title' },
+  { label: 'payment.tab2.colunm.firstName', key: 'firstName' },
+  { label: 'payment.tab2.colunm.lastName', key: 'lastName' },
+  { label: 'payment.tab2.colunm.nameOnBadge', key: 'nameOnBadge' },
+  { label: 'payment.tab2.colunm.email', key: 'email' },
+  { label: 'payment.tab2.colunm.country', key: 'country' },
+  { label: 'payment.tab2.colunm.phoneNumber', key: 'phoneNumber' },
+  { label: 'payment.tab2.colunm.classification', key: 'classification' },
+  { label: 'payment.tab2.colunm.rotaryClub', key: 'rotaryClub' },
+  { label: 'payment.tab2.colunm.rotaryClubFunction', key: 'rotaryClubFunction' },
+  { label: 'payment.tab2.colunm.districtNumber', key: 'districtNumber' },
+  { label: 'payment.tab2.colunm.districtFunction', key: 'districtFunction' },
+  { label: 'payment.tab2.colunm.contributionLevel', key: 'contributionLevel' },
+  { label: 'payment.tab2.colunm.dietaryPlan', key: 'dietaryPlan' },
+  { label: 'payment.tab2.colunm.guestNumber', key: 'guestNumber' },
+  { label: 'payment.tab2.colunm.clientUniqId', key: 'clientUniqId' },
+  { label: 'payment.tab2.colunm.clientEmail', key: 'clientEmail' },
+  { label: 'payment.tab2.colunm.subscriptionCode', key: 'subscriptionCode' },
+  { label: 'payment.tab2.colunm.paymentMethod', key: 'paymentMethod' },
+  { label: 'payment.tab2.colunm.paymentDate', key: 'paymentDate' },
+  { label: 'payment.tab2.colunm.message', key: 'message' },
+  { label: 'payment.tab2.colunm.transactionId', key: 'transactionId' },
+  { label: 'payment.tab2.colunm.state', key: 'state' },
+  { label: 'payment.tab2.colunm.paidAmount', key: 'paidAmount' },            // Amount
+];
 
 const filters = reactive({
     // rotaryClubName: '',
@@ -73,17 +79,19 @@ onMounted(async () => {
                 <select 
                 v-model="filters.status"
                 class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[120px]">
-                    <option value="">Tout</option>
-                    <option value="PENDING">En attente</option>
-                    <option value="SUCCESSFUL">Succès</option>
-                    <option value="FAILED">Échoué</option>
+                    <option value="">{{ $t('payment.tab2.filter.x1') }}</option>
+                    <option value="PENDING">{{ $t('payment.tab2.filter.x2') }}</option>
+                    <option value="SUCCESSFUL">{{ $t('payment.tab2.filter.x3') }}</option>
+                    <option value="FAILED">{{ $t('payment.tab2.filter.x4') }}</option>
                 </select>
 
                 <div class="w-auto">
                 <input 
                 v-model="filters.search"
                 class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[150px]"
-                placeholder="Recherche paiement..." autocomplete="off">
+               
+                :placeholder="`${$t('placeholder_search')}...`" 
+                 autocomplete="off">
                 </div>
 
                 <div class="flex items-center gap-2">
@@ -98,6 +106,7 @@ onMounted(async () => {
                 </div>
                <GlobaleUploadCsv
                :data="response"
+               lang
                 :colunm="columns"
                />
             </div>

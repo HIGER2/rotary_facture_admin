@@ -89,7 +89,9 @@ onMounted(async () => {
         <div class="w-full">
             <div class="w-full m-auto">
                 <div class="w-full p-2 mb-3">
-                    <h5 class="text-sm font-semibold uppercase text-neutral-500">Créer une facture</h5>
+                    <h5 class="text-sm font-semibold uppercase text-neutral-500">
+                        {{ $t('facture.form.title_new') }}
+                    </h5>
                 </div>
                 <div class="w-full p-2 ">
                 <div class="w-full flex items-start gap-2">
@@ -103,7 +105,8 @@ onMounted(async () => {
                                 placeholder="Selectionner un Exercice" name="Exercice" /> -->
                                 <UiFormSelect 
                                 v-model="newFacture.club_id"
-                                :options="optionClub" label="Club" 
+                                :options="optionClub" 
+                                :label="$t('facture.form.label1')" 
                                 required
                                 placeholder="Selectionner un club" name="title" />
                                 
@@ -147,13 +150,16 @@ onMounted(async () => {
                                     <UiFormTextArea
                                     required
                                     v-model="newFacture.objet"
-                                    placeholder="Objet"
+                                    :placeholder="$t('facture.form.label2')"
+                                     :label="$t('facture.form.label2')"
                                     rows="4"
                                     />
                                 </div>
                             </div>
                         </div>
-                        <h5 class="text-sm  my-4 font-semibold uppercase text-neutral-500">Rubriques</h5>
+                        <h5 class="text-sm  my-4 font-semibold uppercase text-neutral-500">
+                            {{ $t('facture.form.rubrique_title') }}
+                        </h5>
                         <div class="w-full  bg-white p-4 border overflow-hidden  border-gray-200 rounded-lg">
                             <div class="w-full border-b border-b-gray-200" 
                             v-for="(item, index) in newRubrique" :key="index">
@@ -166,25 +172,34 @@ onMounted(async () => {
                                 text-[13px] 
                                 rounded-lg border border-slate-200 bg-transparent p-2
                                 shadow-xs transition-colors file:border-0 file:bg-transparent
-                                ">Rétirer</button>
+                                ">
+                                {{ $t('facture.form.delete') }}
+                                </button>
                             <div class="space-y-2  flex gap-1.5">
                                 <div class="space-y-2 ">
                                     <UiFormInput 
                                     required
                                     v-model="item.libele"
-                                    label="libélé" placeholder="libélé" name="title" />
+                                    :label="$t('facture.form.label3')" 
+                                    :placeholder="$t('facture.form.label3')" 
+                                    name="title" />
                                 </div>
                                 <div class="space-y-2 ">
                                     <UiFormInput 
                                     required
                                     v-model="item.quantity"
-                                    type="number" label="Quantité" placeholder="Quantité" name="title" />
+                                    type="number" 
+                                    :label="$t('facture.form.label4')"
+                                    :placeholder="$t('facture.form.label4')" name="title" />
                                 </div>
                                 <div class="space-y-2 ">
                                     <UiFormInput 
                                     required
                                     v-model="item.amount"
-                                    type="number" label="Tarif" placeholder="Tarif" name="title" />
+                                    type="number" 
+                                    :label="$t('facture.form.label5')"
+                                    :placeholder="$t('facture.form.label5')" 
+                                    name="title" />
                                 </div>
                             </div>
                             <div class="space-y-2 mb-4">
@@ -194,7 +209,8 @@ onMounted(async () => {
                                         <UiFormTextArea
                                         required
                                         v-model="item.comment"
-                                        placeholder="Commentaire"
+                                        :label="$t('facture.form.label6')"
+                                        :placeholder="$t('facture.form.label6')" 
                                         rows="3"
                                         />
                                     </div>
@@ -209,12 +225,14 @@ onMounted(async () => {
                                 text-[13px] 
                                 rounded-lg border border-slate-200 bg-transparent p-2
                                 shadow-xs transition-colors file:border-0 file:bg-transparent
-                                ">Ajouter une rubrique</button>
+                                ">
+                                {{ $t('facture.form.add_rubrique') }}
+                                </button>
                             </div>
                         </div>
                         <div class="flex justify-between mt-4">
                             <NuxtLink to="/account/factures" class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50 text-slate-900 underline-offset-4 hover:underline h-11 px-4 py-2">
-                                Annuler
+                                {{ $t('facture.form.cancel') }}
                             </NuxtLink>
                             <div class="inline-flex gap-2">
                                 <UiButtonSubmit 
@@ -224,12 +242,14 @@ onMounted(async () => {
                                 "
                                 type="submit"
                                 name="action"
-                                label="Enregistrer au brouillon" :isLoading="isLoading && isLoading=='draft'"/>
+                                :label="$t('facture.form.button_b')" 
+                                :isLoading="isLoading && isLoading=='draft'"/>
                                 <UiButtonSubmit
                                 name="action"
                                 type="submit"
                                 value="send"
-                                label="Enregistrer et envoyer" :isLoading="isLoading && isLoading=='send'"/>
+                                :label="$t('facture.form.button_new')"
+                                :isLoading="isLoading && isLoading=='send'"/>
                             </div>   
                         </div>
                     </form>
@@ -237,15 +257,21 @@ onMounted(async () => {
                     sticky top-[20px]
                     w-[350px] min-h-20 bg-white p-4 border overflow-hidden  border-gray-200 rounded-lg">
                         <div class="w-full flex mb-2 p-2 items-center justify-between">
-                            <span>Nombre de rubrique</span>
+                            <span>
+                                {{ $t('facture.form.rubrique') }}
+                            </span>
                             <span>{{ total_rubrique }}</span>
                         </div>
                         <div class="w-full flex p-2 mb-2 items-center justify-between">
-                            <span>Quantité total</span>
+                            <span>
+                                {{ $t('facture.form.quantity') }}
+                            </span>
                             <span>{{ total_quantity }}</span>
                         </div>
                         <div class="w-full flex p-2 mb-2 items-center justify-between">
-                            <span>Montant total facture</span>
+                            <span>
+                                {{ $t('facture.form.amount') }}
+                            </span>
                             <span>{{ total_amount }}</span>
                         </div>
                     </div>

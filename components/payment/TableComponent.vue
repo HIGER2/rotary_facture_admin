@@ -8,14 +8,14 @@ interface TableProps {
 const props = defineProps<TableProps>()
 
 const columns = [
-    { label: 'référence', key: 'reference' },
-    { label: 'Club', key: 'club' },
-    { label: 'N°Facture', key: 'fac' },
+    { label: 'payment.tab1.colunm.td1', key: 'reference' },
+    { label: 'payment.tab1.colunm.td2', key: 'club' },
+    { label: 'payment.tab1.colunm.td3', key: 'fac' },
     // { label: 'montant à regler', key: 'club' },
-    { label: 'montant', key: 'amount' },
-    { label: 'statut', key: 'status' },
-    { label: 'mode paiement', key: 'mode_paiement' },
-    { label: 'date', key: 'date' },
+    { label: 'payment.tab1.colunm.td4', key: 'amount' },
+    { label: 'payment.tab1.colunm.td5', key: 'status' },
+    { label: 'payment.tab1.colunm.td6', key: 'mode_paiement' },
+    { label: 'payment.tab1.colunm.td7', key: 'date' },
 ]
 
 </script>

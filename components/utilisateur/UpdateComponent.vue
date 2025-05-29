@@ -23,7 +23,7 @@ const optionStatus = [
         <div  class=" grid  w-full max-w-300  gap-4">
                 <div class="flex flex-col space-y-1.5 text-center sm:text-left">
                     <h2 id="radix-:r70:" class="text-lg font-semibold leading-none tracking-tight">
-                        Modifier utilisateur
+                       {{ $t('user.form.title_update') }}
                     </h2>
                 </div>
                 <form class="" @submit.prevent="updateUser()">
@@ -31,14 +31,14 @@ const optionStatus = [
                         <UiFormInput 
                         required
                         v-model="update.name"
-                        :label="'Nom'" 
-                        :placeholder="'Nom'"
+                        :label="$t('user.form.label1')" 
+                        :placeholder="$t('user.form.label1')"
                         />
                         <UiFormInput 
                         required
                         v-model="update.last_name"
-                        :label="'Prénoms'" 
-                        :placeholder="'Prénoms'"
+                        :label="$t('user.form.label2')" 
+                        :placeholder="$t('user.form.label2')"
                         />
                     </div>
                     <div class="mb-2">
@@ -46,8 +46,8 @@ const optionStatus = [
                             required
                             v-model="update.role"
                             :options="optionStatus" 
-                            :label="'Role'" 
-                            :placeholder="'Role'"
+                            :label="$t('user.form.label3')" 
+                            :placeholder="$t('user.form.label3')"
                             name="title" />
                     </div>
                     <div class=" mb-2 flex gap-1.5">
@@ -55,14 +55,14 @@ const optionStatus = [
                         required
                         v-model="update.phone"
                         name="annee" min="2025" max="2099" step="1"
-                        :label="'Téléphone'" 
-                        :placeholder="'Téléphone'"
+                        :label="$t('user.form.label4')" 
+                        :placeholder="$t('user.form.label4')"
                         />
                         <UiFormInput 
                         required
                         v-model="update.email"
-                        :label="'Email'" 
-                        :placeholder="'Email'"
+                        :label="$t('user.form.label5')" 
+                        :placeholder="$t('user.form.label5')"
                         />
                     </div>
                     <div class=" mb-2 flex gap-1.5">
@@ -70,12 +70,12 @@ const optionStatus = [
                         v-model="update.password"
                         type="password"
                         name="annee" min="2025" max="2099" step="1"
-                        :label="'Mot de passe temporaire'" 
-                        :placeholder="'Mot de passe temporaire'"
+                        :label="$t('user.form.label6')" 
+                        :placeholder="$t('user.form.label6')"
                         />
                     </div>
                     <div class="w-full mt-3">
-                        <UiButtonSubmit :label="'Mettre à jour'" :isLoading="isLoading"/>    
+                        <UiButtonSubmit :label="$t('user.form.button_update')" :isLoading="isLoading"/>    
                     </div>
             </form>
         </div>

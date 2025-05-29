@@ -13,8 +13,9 @@ const filters = reactive({
 
 
 definePageMeta({
-  breadcrumb: 'Rubriques'
+  breadcrumb: 'navbar.bread.categories'
 })
+
 
 const isActive = ref(false)
 const isActiveUpdate = ref(false)

@@ -1,24 +1,60 @@
 {
-    "logout": "Déconnexion",
+    "navbar": {
+        "btn2":{
+            "logout": "Déconnexion",
+            "user": "Utilisateurs"
+        },
+        "bread":{
+            "dashboard": "Tableau de bord",
+            "clubs": "Clubs",
+            "exercises": "Exercices",
+            "categories": "Rubriques",
+            "invoices": "Factures",
+            "invoices_add": "Créer une facture",
+            "payments": "Paiements",
+            "reports": "Rapports"
+        }
+    },
     "filter_page":"Par page",
     "placeholder_search":"Recherche",
     "detail_title":"Général",
-    "colunm_facture":{
-        "td1":"N°Facture",
-        "td2":"Montant",
-        "td9":"Montant payé",
-        "td3":"restet à payer",
-        "td4":"statut",
-        "td5":"date émission",
-        "td6":"date échéance",
-        "td7":"Action",
-        "td8":"Type"
-    },
+    // "colunm_facture":{
+    //     "td1":"N°Facture",
+    //     "td2":"Montant",
+    //     "td3":"Montant payé",
+    //     "td4":"restet à payer",
+    //     "td5":"Type",
+    //     "td6":"statut",
+    //     "td7":"date émission",
+    //     "td8":"date échéance",
+    //     "td9":"Action"
+    // },
     "colunm_club":{
         "td1":"nom club",
         "td2":"pays",
         "td3":"langue",
         "td4":"Action"
+    },
+    "login":{
+        "title":"Connexion",
+        "tab":{
+            "tab1":"Club",
+            "tab2":"District"
+        },
+        "form":{
+            "label1":"Email",
+            "label2":"Mot de passe",
+            "place1":"Entrez votre email",
+            "place2":"Entrez votre mot de passe",
+            "button_new":"Se connecter"
+        },
+        "notfy":{
+            "title":"Veuillez vérifier votre e-mail",
+            "title2":"Nous avons envoyé un lien de connexion",
+            "title3":"Vous ne le trouvez pas ?",
+            "title4":"Vérifiez votre dossier spam ou",
+            "title5":"réessayez."
+        }
     },
     "tableau":{
         "title":"Tableau de bord",
@@ -131,6 +167,238 @@
             "button_new":"Créer",
             "button_update":"Enregistrer"
         }
+    },
+
+    "user":{
+        "title":"Utilisateurs",
+        "button":"Ajouter un Utilisateur",
+        "colunm":{
+                "td1":"#",
+                "td2":"Nom",
+                "td3":"Prénoms",
+                "td4":"Role",
+                "td5":"téléphone",
+                "td6":"email",
+                "td7":"Action"
+            },
+        "form":{
+            "title_new":"Nouveau utilisateur",
+            "title_update":"Modifier rubrique",
+            "label1":"Nom",
+            "label2":"Prénoms", 
+            "label3":"Role",
+            "label4":"Téléphone",
+            "label5":"Email",
+            "label6":"Mot de passe temporaire",
+            "button_new":"Créer",
+            "button_update":"Mettre à jour"
+        }
+    },
+
+    "payment":{
+        "title":"Paiements",
+        "tab":{
+            "tab1":"Paiement Facture Per capita",
+            "tab2":"Paiement gala",
+            "tab3":"  Paiement particiaption ACD"
+            },
+        "tab1":{
+            "box":{
+                "box1":"Total Paiement",
+                "box2":"En attente",
+                "box3":"Payé",
+                "box4":"échoué",
+                "box5":"Annulé"
+            },
+            "filter":{
+                "x1":"Tout",
+                "x2":"en attente",
+                "x3":"payé",
+                "x4":"échec"
+            },
+            "colunm":{
+                "td1":"référence",
+                "td2":"Club",
+                "td3":"N°Facture",
+                "td4":"montant",
+                "td5":"statut",
+                "td6":"mode paiement",
+                "td7":"date"
+            }
+
+        },
+        "tab2":{
+            "filter":{
+                "x1":"Tout",
+                "x2":"En attente",
+                "x3":"Succès",
+                "x4":"Échoué"
+            },
+            "colunm":{
+                "civility": "Civilité",
+                "title": "Titre",
+                "firstName": "Nom",
+                "lastName": "Prénoms",
+                "nameOnBadge": "Nom sur badge",
+                "email": "Email",
+                "country": "Pays",
+                "phoneNumber": "Téléphone",
+                "classification": "Classification",
+                "rotaryClub": "Club Rotary",
+                "rotaryClubFunction": "Fonction au club",
+                "districtNumber": "Numéro de district",
+                "districtFunction": "Fonction au district",
+                "contributionLevel": "Niveau de contribution",
+                "dietaryPlan": "Régime alimentaire",
+                "guestNumber": "Nombre d'invités",
+                "clientUniqId": "Identifiant client",
+                "clientEmail": "Email client",
+                "subscriptionCode": "Code d'inscription",
+                "paymentMethod": "Méthode de paiement",
+                "paymentDate": "Date de paiement",
+                "message": "Message",
+                "transactionId": "Réf. interne de paiement",
+                "state": "Statut",
+                "paidAmount": "Montant payé"
+            }
+
+        },
+        "tab3":{
+            "filter":{
+                "x1":"Tout",
+                "x2":"En attente",
+                "x3":"Succès",
+                "x4":"Échoué"
+            },
+            "colunm":{
+                "td1":"Nom",
+                "td2":"Prénoms",
+                "td3":"Nom de badge",
+                "td4":"Pays",
+                "td5":"Club",
+                "td6":"Téléphone",
+                "td7":"Date arrivé",
+                "td8":"Date départ",
+                "td9":"Mode transport",
+                "td10":"Invité",
+                "td11":"Methode de paiement",
+                "td12":"Date Paiement",
+                "td13":"Status",
+                "td14":"Amount"
+            }
+
+        }
+    },
+
+    "facture":{
+        "title":"Factures",
+        "button":"Nouvelle Facture",
+        "colunm":{
+            "td1":"N°Facture",
+            "td2":"Montant",
+            "td3":"Montant payé",
+            "td4":"restet à payer",
+            "td5":"Type",
+            "td6":"statut",
+            "td7":"date émission",
+            "td8":"date échéance",
+            "td9":"Action"
+        },
+        "filter":{
+            "x1":"Tout",
+            "x2":"en cours",
+            "x3":"brouillon",
+            "x4":"payée",
+            "x5":"annulée",
+            "x6":"partiellement payé",
+            "x7":"arriérée"
+        },
+        "box":{
+            "box1":"Total Factures",
+            "box2":"Total à Payer",
+            "box3":"Montant Encaissé",
+            "box4":"Factures Impayées"
+        },
+        "detail":{
+            "title":"Général",
+            "title_payment":"Paiements",
+            "btn_payment":" Effectué un paiement",
+            "desc":"Détail de la facture",
+            "payment_form":{
+                "title_new":"Effectué un paiement",
+                "title_member":"Informations membre",
+                "title_update":"Modifier club",
+                "label1":"Montant",
+                "button_new":"payé maintenant",
+                "button_update":"Enregistrer"
+            },
+            "payment_colunm":{
+                "td1":"référence",
+                "td2":"montant",
+                "td3":"statut",
+                "td4":"mode paiement",
+                "td5":"date"
+            },
+            "tab":{
+                "tab1":"Paiements",
+                "tab2":"Rubriques"
+                },
+            "label1":"N°Facture",
+            "label2":"Total rubrique",
+            "label3":"Total quantité",
+            "label4":"Montant total",
+            "label5":"Montant payé",
+            "label6":"Reste à payer",
+            "label7":"Type",
+            "label8":"Statut",
+            "label9":"Description",
+            "label10":"Club",
+            "label11":"Date émission",
+            "label12":"Date d'échéance"
+        },
+        "form":{
+            "title_new":"Créer une facture",
+            "title_update":"Modifier rubrique",
+            "delete":"Rétirer",
+            "cancel":"Annluer",
+            "rubrique_title":"Rubriques",
+            "rubrique":"Nombre de rubrique",
+            "add_rubrique":"Ajouter une rubrique",
+            "quantity":"Quantité total",
+            "amount":"Montant total facture",
+            "label1":"Club",
+            "label2":"Objet",
+            "label3":"libélé",
+            "label4":"Quantité",
+            "label5":"Tarif",
+            "label6":"Commentaire",
+            "button_new":"Enregistrer et envoyer",
+            "button_b":"Enregistrer au brouillon",
+            "button_update":"Enregistrer"
+        }
+    },
+
+    "rapport":{
+        "title":"Rapports",
+        "title_filter":"Par exercice",
+        "box":{
+            "box1":"Total Factures",
+            "box2":"Factures payée",
+            "box3":"Factures en attente",
+            "box4":"Factures Impayées",
+            "box5":"Montant total",
+            "box6":"montant en attente",
+            "box7":"Montant payée",
+            "box8":"Montant Impayées"
+        },
+        "colunm":{
+                "td1":"club",
+                "td2":"total facture",
+                "td3":"montant total",
+                "td4":"total payé",
+                "td5":"total impayé",
+                "td6":"total en cours",
+            }
     },
     "sidebar": {
         "dashboard": "Tableau de bord",

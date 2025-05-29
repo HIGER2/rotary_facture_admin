@@ -8,21 +8,21 @@ interface TableProps {
 const props = defineProps<TableProps>()
 const response = ref([])
 const columns = [
-    { label: 'Nom', key: 'firstName' },
-    { label: 'Prénoms', key: 'lastName' },
-    { label: 'Nom de badge', key: 'nameOnBadge' },
+    { label: 'payment.tab3.colunm.td1', key: 'firstName' },
+    { label: 'payment.tab3.colunm.td2', key: 'lastName' },
+    { label: 'payment.tab3.colunm.td3', key: 'nameOnBadge' },
     // { label: 'montant à regler', key: 'club' },
-    { label: 'Pays', key: 'country' },
-    { label: 'Club', key: 'rotaryClub' },
-    { label: 'Téléphone', key: 'phoneNumber' },
-    { label: 'Date arrivé', key: 'arrivalDate' },
-    { label: 'Date départ', key: 'departureDate' },
-    { label: 'Mode transport', key: 'transportationMode' },
-    { label: 'Invité', key: 'guestNumber' },
-    { label: 'Methode de paiement', key: 'paymentMethod' },
-    { label: 'Date Paiement', key: 'paymentDate' },
-    { label: 'Status', key: 'state' },
-    { label: 'Amount', key: 'paidAmount' },
+    { label: 'payment.tab3.colunm.td4', key: 'country' },
+    { label: 'payment.tab3.colunm.td5', key: 'rotaryClub' },
+    { label: 'payment.tab3.colunm.td6', key: 'phoneNumber' },
+    { label: 'payment.tab3.colunm.td7', key: 'arrivalDate' },
+    { label: 'payment.tab3.colunm.td8', key: 'departureDate' },
+    { label: 'payment.tab3.colunm.td9', key: 'transportationMode' },
+    { label: 'payment.tab3.colunm.td10', key: 'guestNumber' },
+    { label: 'payment.tab3.colunm.td11', key: 'paymentMethod' },
+    { label: 'payment.tab3.colunm.td12', key: 'paymentDate' },
+    { label: 'payment.tab3.colunm.td13', key: 'state' },
+    { label: 'payment.tab3.colunm.td14', key: 'paidAmount' },
 ]
 
 
@@ -71,17 +71,18 @@ onMounted(async () => {
             <select 
             v-model="filters.status"
             class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[120px]">
-                <option value="">Tout</option>
-                <option value="PENDING">En attente</option>
-                <option value="SUCCESSFUL">Succès</option>
-                <option value="FAILED">Échoué</option>
+                <option value="">{{ $t('payment.tab2.filter.x1') }}</option>
+                <option value="PENDING">{{ $t('payment.tab2.filter.x2') }}</option>
+                <option value="SUCCESSFUL">{{ $t('payment.tab2.filter.x3') }}</option>
+                <option value="FAILED">{{ $t('payment.tab2.filter.x4') }}</option>
             </select>
 
             <div class="w-auto">
             <input 
             v-model="filters.search"
             class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[150px]"
-            placeholder="Recherche paiement..." autocomplete="off">
+            :placeholder="`${$t('placeholder_search')}...`"
+            autocomplete="off">
             </div>
 
             <div class="flex items-center gap-2">
@@ -97,6 +98,7 @@ onMounted(async () => {
             <GlobaleUploadCsv
                :data="response"
                 :colunm="columns"
+                lang
                />
         </div>
         <UiDynamicTable :loading="loading"  :columns="columns" :data="response">

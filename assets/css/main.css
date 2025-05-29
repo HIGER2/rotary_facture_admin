@@ -4,6 +4,7 @@
 @plugin "daisyui" {
   themes: false;
 }
+
 @theme {
   --color-primary:#1F2923;
   --color-sidebar:hsl(0 0% 98%);

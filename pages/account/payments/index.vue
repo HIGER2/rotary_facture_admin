@@ -6,19 +6,21 @@ import { usePaymentViewModel } from '~/stores/viewModels/paymentViewmodel';
 
 const storePayments = usePaymentViewModel()
 const loading=ref(false)
+
+
 definePageMeta({
-    breadcrumb: 'Paiements'
+  breadcrumb: 'navbar.bread.payments'
 })
 
 const columns = [
-    { label: 'référence', key: 'reference' },
-    { label: 'Club', key: 'club' },
-    { label: 'N°Facture', key: 'fac' },
+    { label: 'payment.tab1.colunm.td1', key: 'reference' },
+    { label: 'payment.tab1.colunm.td2', key: 'club' },
+    { label: 'payment.tab1.colunm.td3', key: 'fac' },
     // { label: 'montant à regler', key: 'club' },
-    { label: 'montant', key: 'amount' },
-    { label: 'statut', key: 'status' },
-    { label: 'mode paiement', key: 'mode_paiement' },
-    { label: 'date', key: 'date' },
+    { label: 'payment.tab1.colunm.td4', key: 'amount' },
+    { label: 'payment.tab1.colunm.td5', key: 'status' },
+    { label: 'payment.tab1.colunm.td6', key: 'mode_paiement' },
+    { label: 'payment.tab1.colunm.td7', key: 'date' },
 ]
 
 const isActive=ref(1)
@@ -72,7 +74,7 @@ onMounted(() => {
                 <div class="w-full">
                     <div class="w-full flex items-center justify-between mb-5">
                         <h5 class="text-sm font-semibold uppercase text-neutral-500">
-                            Paiements
+                            {{ $t('payment.title') }}
                         </h5>
                         <!-- <div class="w-auto">
                             <NuxtLink 
@@ -93,7 +95,9 @@ onMounted(() => {
                     <div class="w-full grid grid-cols-1 md:grid-cols-5 gap-4 p-2 mb-5">
                         <template v-for="(item, index) in storePayments?.analityc" :key="index">
                             <div class="box">
-                                <span class=" text-xs text-gray-500 font-medium">{{ item?.label }}</span>
+                                <span class=" text-xs text-gray-500 font-medium">
+                                    {{ $t(item.label) }}
+                                </span>
                                 <h2 class="text-lg font-extrabold">{{ item?.value }}</h2>
                             </div>
                         </template>
@@ -103,20 +107,21 @@ onMounted(() => {
                             <input 
                             v-model="filters.search"
                             class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[250px]"
-                            placeholder="Recherche paiement..." autocomplete="off">
+                            :placeholder="`${$t('placeholder_search')}...`" autocomplete="off">
                         </div>
                         <div class="w-auto gap-2 flex items-center justify-between">
                             <select 
                             v-model="filters.status"
                             class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[120px]">
-                                <option value="">Tout</option>
-                                <option value="1">en attente</option>
-                                <option value="2">payé</option>
-                                <option value="3">échec</option>
+                                <option value="">{{$t('payment.tab1.filter.x1') }}</option>
+                                <option value="1">{{$t('payment.tab1.filter.x2') }}</option>
+                                <option value="2">{{$t('payment.tab1.filter.x3') }}</option>
+                                <option value="3">{{$t('payment.tab1.filter.x4') }}</option>
                             </select>
                             <GlobaleUploadCsv
                             :data="storePayments?.payments"
                             :colunm="columns"
+                            lang
                             />
                         </div>
                     </div>

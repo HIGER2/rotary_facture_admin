@@ -14,17 +14,16 @@ const filters = reactive({
 
 
 definePageMeta({
-  breadcrumb: 'Rapports'
+  breadcrumb: 'navbar.bread.reports'
 })
-
 const columns = [
-    { label: 'club', key: 'name' },
-    { label: 'total facture', key: 'total_facture' },
-    { label: 'montant total', key: 'total_montant' },
-    { label: 'total payé', key: 'total_paye' },
+    { label: 'rapport.colunm.td1', key: 'name' },
+    { label: 'rapport.colunm.td2', key: 'total_facture' },
+    { label: 'rapport.colunm.td3', key: 'total_montant' },
+    { label: 'rapport.colunm.td4', key: 'total_paye' },
     // { label: 'montant à regler', key: 'club' },
-    { label: 'total impayé', key: 'total_impaye' },
-    { label: 'total en cours', key: 'total_en_cours' },
+    { label: 'rapport.colunm.td5', key: 'total_impaye' },
+    { label: 'rapport.colunm.td6', key: 'total_en_cours' },
 ]
 
 
@@ -73,11 +72,15 @@ onMounted(async() => {
         <NuxtLayout v-slot="{ userConnected }">
             <div class="w-full">
                     <div class="p-2">
-                        <h5 class="text-sm font-semibold uppercase text-neutral-500">Rapports</h5>
+                        <h5 class="text-sm font-semibold uppercase text-neutral-500">
+                            {{ $t('rapport.title') }}
+                        </h5>
                     </div>
                     <div class="w-auto gap-2 flex items-center justify-between my-4">
                         <div class="flex gap-2 w-auto rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500  h-8 ">
-                            <div class="w-auto px-1 block border-r border-gray-300 ">Par exercice</div>
+                            <div class="w-auto px-1 block border-r border-gray-300 ">
+                                {{ $t('rapport.title_filter') }}
+                            </div>
                             <div class="w-auto flex items-center justify-center h-full">
                                 <select v-model="filters.status" class="w-full h-full bg-transparent border-none outline-none">
                                     <option 
@@ -103,7 +106,7 @@ onMounted(async() => {
                     <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-2 my-3">
                         <template v-for="(item, index) in userStore?.rapports?.analityc" :key="index">
                             <div class="box">
-                                <span class="text-xs text-gray-500 font-medium">{{ item?.label }}</span>
+                                <span class="text-xs text-gray-500 font-medium">{{$t(item?.label) }}</span>
                                 <h2 class="text-lg font-extrabold">{{ item?.value }}</h2>
                             </div>
                         </template>

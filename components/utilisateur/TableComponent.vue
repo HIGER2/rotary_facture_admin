@@ -9,13 +9,13 @@ interface TableProps {
 const props = defineProps<TableProps>()
 
 const columns = [
-    { label: '#', key: 'id' },
-    { label: 'Nom', key: 'name' },
-    { label: 'Prénoms', key: 'last_name' },
-    { label: 'Role', key: 'role' },
-    { label: 'téléphone', key: 'phone' },
-    { label: 'email', key: 'email' },
-    { label: 'Action', key: 'action' },
+    { label: 'user.colunm.td1', key: 'id' },
+    { label: 'user.colunm.td2', key: 'name' },
+    { label: 'user.colunm.td3', key: 'last_name' },
+    { label: 'user.colunm.td4', key: 'role' },
+    { label: 'user.colunm.td5', key: 'phone' },
+    { label: 'user.colunm.td6', key: 'email' },
+    { label: 'user.colunm.td7', key: 'action' },
 ]
 
 

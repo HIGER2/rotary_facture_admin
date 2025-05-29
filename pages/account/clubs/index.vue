@@ -7,7 +7,7 @@ import country from "~/jsons/country.json"
 
 
 definePageMeta({
-  breadcrumb: 'Clubs'
+  breadcrumb: 'navbar.bread.clubs'
 })
 const storeClub = useClubViewModel()
 const loading=ref(false)
@@ -111,7 +111,7 @@ onMounted(() => {
                     </h5>
                     <div class="w-auto">
                         <nuxt-link 
-                        class=" cursor-pointer items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors e text-xs disabled:opacity-50 bg-primary text-slate-50 shadow  px-4 py-3 self-start"
+                        class=" cursor-pointer items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors e text-xs disabled:opacity-50 bg-primary text-slate-50 shadow   px-4 py-3 self-start"
                         to="/account/clubs/create">
                             {{ $t("club.button") }}
                         </nuxt-link>

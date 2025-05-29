@@ -25,8 +25,12 @@ watch(
 </script>
 
 <template>
-    <div class="w-full h-screen flex justify-center items-center bg-white">
-        <div class="w-[380px]  ">
+    <div class="w-full h-screen bg-white">
+        <div class="w-full flex justify-end p-2 px-8 sticky top-0 z-50">
+            <GlobaleLangage/>
+        </div>
+        <div class="w-full h-full flex justify-center items-center bg-white">
+            <div class="w-[380px]  ">
             <a href="#">
                 <img alt="logo" 
                 fetchpriority="high" 
@@ -39,20 +43,22 @@ watch(
                 <div class="rounded-xl shadow w-full min-h-auto">
                         <div class="flex flex-col space-y-1.5 p-6 px-2 sm:px-6">
                             <h3 class="font-semibold text-center tracking-tight text-2xl">
-                                Veuillez vérifier votre e-mail
+                                {{ $t('login.notfy.title') }}
                             </h3>
                         </div>
                         <div class="p-6 pt-0 px-2 sm:px-6 w-full text-[13px]">
                             <div class="w-full my-5 cursor-pointer h-auto items-center justify-center rounded-lg bg-slate-100 p-2 text-slate-500 dark:bg-slate-800 dark:text-slate-400"  style="outline: none;">
                                 <p class="text-center">
-                                    Nous avons envoyé un lien de connexion
+                                    {{ $t('login.notfy.title2') }}
                                 </p>
                             </div>
                             <div class="w-full text-center">
-                                <h3>Vous ne le trouvez pas ?</h3>
+                                <h3>{{ $t('login.notfy.title3') }}</h3>
                                 <p class="text-sm text-slate-500 dark:text-slate-400 mt-5">
-                                    Vérifiez votre dossier spam ou
-                                    <NuxtLink to="/auth/login" class="text-blue-800 underline">réessayez.</NuxtLink>
+                                    {{ $t('login.notfy.title4') }}
+                                    <NuxtLink to="/auth/login" class="text-blue-800 underline">
+                                        {{ $t('login.notfy.title5') }}
+                                    </NuxtLink>
                                 </p>
                             </div>
                         </div>
@@ -61,7 +67,9 @@ watch(
             <template v-else>
             <div class="rounded-xl shadow w-full min-h-[400px]">
                     <div class="flex flex-col space-y-1.5 p-6 px-2 sm:px-6">
-                        <h3 class="font-semibold tracking-tight text-2xl">Connexion</h3>
+                        <h3 class="font-semibold tracking-tight text-2xl">
+                            {{$t('login.title')}}
+                        </h3>
                     </div>
                     
                     <div class="p-6 pt-0 px-2 sm:px-6 w-full text-[13px]">
@@ -70,24 +78,24 @@ watch(
                                 <button @click="setTabs('member')" :data-state="authUser.type == 'member' && 'active'" type="button"   
                                     class="w-[50%]  cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-3 py-2  font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2  focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 
                                     data-[state=active]:bg-white data-[state=active]:shadow  ">
-                                    club
+                                    {{ $t('login.tab.tab1') }}
                                 </button>
                                 <button @click="setTabs('admin')" type="button" :data-state="authUser.type == 'admin' && 'active'" 
                                     class=" w-[50%] text-center cursor-pointer items-center justify-center whitespace-nowrap rounded-md px-3 py-2  font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2  focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-white  data-[state=active]:shadow  " tabindex="-1" data-orientation="horizontal" data-radix-collection-item="">
-                                    District
+                                    {{ $t('login.tab.tab2') }}
                                 </button>
                         </div>
                         <div class="grid gap-10">
                             <form class="space-y-8" @submit.prevent="login">
                                     <div class="space-y-2">
                                         <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r6:-form-item">
-                                            Email 
+                                            {{ $t('login.form.label1') }} 
                                         </label>
                                         <input 
                                         v-model="authUser.identifiant"
                                         class="flex h-11 w-full rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1
                                         focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50" 
-                                        placeholder="Entrez votre email "
+                                        :placeholder="$t('login.form.place1')"
                                         id=":r6:-form-item" aria-describedby=":r6:-form-item-description" aria-invalid="false" autocomplete="off">
                                         <!-- <p id=":r6:-form-item-description" class="text-[0.8rem] text-slate-500">
                                             Ajouter l'indicatif du pays si numéro
@@ -96,7 +104,7 @@ watch(
                                     <template v-if="authUser.type == 'admin'">
                                         <div class="space-y-2"><div class="flex items-center">
                                                 <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for=":r7:-form-item">
-                                                    Mot de passe
+                                                    {{ $t('login.form.label2') }}
                                                 </label>
                                                 <!-- <a class="ml-auto inline-block text-xs underline sm:text-sm" href="/reset-password">
                                                     Mot de passe oublié?
@@ -105,16 +113,17 @@ watch(
                                             <input 
                                             v-model="authUser.password"
                                             class="flex h-11 w-full rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50" 
-                                            placeholder="Entrez votre mot de passe" id=":r7:-form-item" aria-describedby=":r7:-form-item-description" aria-invalid="false" type="password"  name="password">
+                                            :placeholder="$t('login.form.place2')" id=":r7:-form-item" aria-describedby=":r7:-form-item-description" aria-invalid="false" type="password"  name="password">
                                         </div>
                                     </template>
-                                <UiButtonSubmit label="Se connecter" :isLoading="isLoading"/>
+                                <UiButtonSubmit :label="$t('login.form.button_new')" :isLoading="isLoading"/>
                             </form>
                     </div>
                         
                     </div>
             </div>
             </template>
+        </div>
         </div>
     </div>
 </template>

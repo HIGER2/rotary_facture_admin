@@ -12,6 +12,37 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
     const analityc = ref([]);
     const facture = ref({});
     const isLoading =ref<any>(false)
+    
+    const sharedAdminColumns = [
+        { label: 'facture.colunm.td1', key: 'reference' },
+        { label: 'facture.colunm.td2', key: 'amount' },
+        { label: 'facture.colunm.td3', key: 'amount_pay' },
+        { label: 'facture.colunm.td4', key: 'remaining_amount' },
+        { label: 'facture.colunm.td5', key: 'type' },
+        { label: 'facture.colunm.td6', key: 'status' },
+        { label: 'facture.colunm.td7', key: 'date_emission' },
+        { label: 'facture.colunm.td8', key: 'date_echeance' },
+        { label: 'facture.colunm.td9', key: 'action' }
+        ];
+    
+    
+    const columns = {
+        "admin":sharedAdminColumns,
+        "super_admin":sharedAdminColumns,
+    "club":[
+    { label: 'facture.colunm.td1', key: 'reference' },
+        // { label: 'Club', key: 'club' },
+        { label: 'facture.colunm.td2', key: 'amount' },
+        { label: 'facture.colunm.td3', key: 'amount_pay' },
+        { label: 'facture.colunm.td3', key: 'remaining_amount' },
+        { label: 'facture.colunm.td5', key: 'type' },
+    
+        { label: 'facture.colunm.td6', key: 'status' },
+    
+        { label: 'facture.colunm.td7', key: 'date_emission' },
+        { label: 'facture.colunm.td8', key: 'date_echeance' },
+    ]
+    }
     // let initial = {
     //     club_id: "",
     //     rubrique_id: "",
@@ -159,5 +190,6 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
         total_quantity,
         total_amount,
         sendFacture,
+        columns
     }
 })

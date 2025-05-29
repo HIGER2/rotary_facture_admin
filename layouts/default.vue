@@ -3,10 +3,7 @@
 import { useAuthViewModel } from '~/stores/viewModels/authViewmodel';
 
 const storeAuth = useAuthViewModel()
-const { locale, locales, setLocale } = useI18n()
-const changeLanguage = (event) => {
-    setLocale(event.target.value); // Change la langue en fonction de la sélection du select
-};
+
 const isOpen = ref(false)
 const setOpen = (state:boolean) => {
     isOpen.value = state
@@ -99,20 +96,8 @@ onMounted(() => {
                         <GlobaleBreadcrumb/>
                      </div>
                     <div class="w-auto flex gap-2 ">
-                        <label for="#lang" class="flex items-center gap-2
-                        cursor-pointer
-                        rounded-full 
-                        border-1 border-slate-200 p-1 px-2">
-                            <span><i class="uil text-xl uil-english-to-chinese cursor-pointer"></i></span>
-                            <select 
-                            :value="locale"
-                            @change="changeLanguage"
-                            id="lang" class=" outline-0 capitalize">
-                                <option
-                                v-for="(item, index) in locales" :key="index"
-                                :value="item?.code">{{ item?.code }}</option>
-                            </select>
-                        </label>
+                        <GlobaleLangage />
+                        
                         <div class="relative">
                             <button 
                             @click="setOpen(!isOpen)"
@@ -136,15 +121,17 @@ onMounted(() => {
                                 <li class="w-full  cursor-pointer ">
                                         <NuxtLink 
                                         to="/account/utilisateur"
-                                        class="cursor-pointer lex items-center block gap-2 p-2 hover:bg-gray-100 rounded-md w-full">
-                                        <i class="uil uil-user"></i> Utilisateurs
+                                        class="cursor-pointer flex items-center block gap-2 p-2 hover:bg-gray-100 rounded-md w-full">
+                                        <i class="uil uil-user"></i> 
+                                        <span>{{ $t('navbar.btn2.user') }}</span>
                                         </NuxtLink>
                                 </li>
                                 <li class="w-full  cursor-pointer ">
                                         <button type="button"
                                             @click="storeAuth.logout()"
                                         class="cursor-pointer p-2 flex items-center gap-2 hover:bg-gray-100 rounded-md w-full">
-                                        <i class="uil uil-signout"></i> {{ $t('logout') }}
+                                        <i class="uil uil-signout"></i>
+                                        <span>{{ $t('navbar.btn2.logout') }}</span>
                                     </button>
                                 </li>
                             </div>

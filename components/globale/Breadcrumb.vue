@@ -1,7 +1,7 @@
 <template>
     <nav class="text-sm flex items-center space-x-2">
       <NuxtLink to="/">
-        <span class="text-gray-600 hover:underline">Tableau de bord</span>
+        <span class="text-gray-600 hover:underline">{{ $t('navbar.bread.dashboard') }}</span>
       </NuxtLink>
       <span v-for="(crumb, index) in breadcrumbs" :key="index" class="flex items-center space-x-2">
         <span >
@@ -10,7 +10,7 @@
         <NuxtLink v-if="index < breadcrumbs.length - 1" :to="crumb.to" class="text-gray-600 hover:underline">
           {{ crumb.label }}
         </NuxtLink>
-        <span v-else class="font-semibold">{{ crumb.label }}</span>
+        <span v-else class="font-semibold">{{$t(crumb.label) }}</span>
       </span>
     </nav>
   </template>

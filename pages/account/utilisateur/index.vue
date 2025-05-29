@@ -90,14 +90,14 @@ onMounted(() => {
             <div class="w-full">
                 <div class="w-full flex items-center justify-between mb-10">
                     <h5 class="text-sm font-semibold uppercase text-neutral-500">
-                        Utilisateurs
+                        {{ $t('user.title') }}
                     </h5>
                     <div class="w-auto">
                         <button 
                         @click="setActive(true)"
                         class=" cursor-pointer items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors   text-xs disabled:opacity-50 bg-primary text-slate-50 shadow   px-4 py-3 self-start"
                         >
-                        Ajouter un Utilisateur
+                        {{ $t('user.button') }}
                         </button>
                     </div>
                 </div>

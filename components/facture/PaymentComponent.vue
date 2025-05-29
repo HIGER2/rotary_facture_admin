@@ -58,34 +58,20 @@ const updatePayment = async () => {
     ])
 }
 
+const shareGlobal = [
+    { label: 'facture.detail.payment_colunm.td1', key: 'reference' },
+    // { label: 'montant à regler', key: 'club' },
+    { label: 'facture.detail.payment_colunm.td2', key: 'amount' },
+    { label: 'facture.detail.payment_colunm.td3', key: 'status' },
+    { label: 'facture.detail.payment_colunm.td4', key: 'mode_paiement' },
+    { label: 'facture.detail.payment_colunm.td5', key: 'date' },
+    // { label: 'action', key: 'action'},
+]
 
 const columns = {
-"admin":[
-    { label: 'référence', key: 'reference' },
-    // { label: 'montant à regler', key: 'club' },
-    { label: 'montant', key: 'amount' },
-    { label: 'statut', key: 'status' },
-    { label: 'mode paiement', key: 'mode_paiement' },
-    { label: 'date', key: 'date' },
-    { label: 'action', key: 'action'},
-],
-"super_admin":[
-    { label: 'référence', key: 'reference' },
-    // { label: 'montant à regler', key: 'club' },
-    { label: 'montant', key: 'amount' },
-    { label: 'statut', key: 'status' },
-    { label: 'mode paiement', key: 'mode_paiement' },
-    { label: 'date', key: 'date' },
-    { label: 'action', key: 'action'},
-],
-"club":[
-    { label: 'référence', key: 'reference' },
-    // { label: 'montant à regler', key: 'club' },
-    { label: 'montant', key: 'amount' },
-    { label: 'statut', key: 'status' },
-    { label: 'mode paiement', key: 'mode_paiement' },
-    { label: 'date', key: 'date' },
-]
+"admin":shareGlobal,
+"super_admin":shareGlobal,
+"club":shareGlobal
 }
 
 const optionStatus = [
@@ -109,7 +95,9 @@ const optionMethode = [
 <template>
   <section class="mt-4">
         <div class="px-4 sm:px-0 flex items-center justify-between">
-            <h3 class="text-base font-semibold leading-7 text-gray-900">Paiements</h3>
+            <h3 class="text-base font-semibold leading-7 text-gray-900">
+                {{ $t('facture.detail.title_payment') }}
+            </h3>
             <template v-if="user?.role =='club'">
                 <!-- <button 
                 type="button"
@@ -125,7 +113,7 @@ const optionMethode = [
                 @click="setActiveClub(true)"
                 class=" cursor-pointer items-center bg-primary justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1  disabled:pointer-events-none text-xs disabled:opacity-50 bg-pri text-slate-50 shadow  px-4 py-3 self-start"
                 >
-                  Effectué un paiement
+                    {{ $t('facture.detail.btn_payment') }}
                 </button>
             </template>
         </div>

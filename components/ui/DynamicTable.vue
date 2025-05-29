@@ -30,10 +30,18 @@ function handleRowClick(item: Record<string, any>, index: number) {
     emit('rowClick', item, index) 
   }
 }
+const displayValue = (val: any): string => {
+  if (
+    val === null ||
+    val === undefined ||
+    val === '' ||
+    (typeof val === 'object' && Object.keys(val).length === 0)
+  ) {
+    return 'N/A';
+  }
 
-const displayValue = (val) => {
-  return val !== null && val !== undefined && val !== '' ? val : 'N/A';
-}
+  return String(val);
+};
 </script>
 
 <template>
