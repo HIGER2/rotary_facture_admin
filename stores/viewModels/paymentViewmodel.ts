@@ -21,7 +21,8 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
     }
     const newPayment = reactive({...initial});
     const paymentAmount = reactive({
-        amount:""
+        amount:"",
+        mode_paiement:"mobile_money",
     })
     const updatePayment = reactive({
         amount:null,
@@ -41,6 +42,9 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
                 amount: item?.amount,
                 status: item?.status,
                 mode_paiement: item?.mode_paiement,
+                provider_reference:item?.provider_reference,
+                fee: item?.fee,
+                total_amount: item?.total_amount,
                 date: item?.date,
             }
         ))]
@@ -81,6 +85,7 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
         if (data?.error) {
             alert(data?.error?.message)
         }
+        resetPaymentAmount()
         if (data?.data) {
             navigateTo(data?.data?.data?.url ,{ external: true}) 
         }
@@ -117,6 +122,13 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
 
     async function findWithPaiement(reference:string) {
         const data = await usePayment.findWithPaiement(reference);
+    }
+
+    function resetPaymentAmount() {
+        Object.assign(paymentAmount,{
+            amount:"",
+            mode_paiement:"mobile_money",
+        });
     }
 
     return {

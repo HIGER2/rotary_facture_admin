@@ -1,6 +1,7 @@
 
 import Papa from "papaparse";
 import { useI18n } from 'vue-i18n'
+import dayjs from 'dayjs' // si tu utilises dayjs pour le formatage
 
 type CsvColumn = {
   key: string         // Clé dans l'objet d'origine
@@ -23,7 +24,13 @@ export const useCsv = (
       id: index + 1,
     }   
     columns.forEach(({ key, label }) => {
-        const columnLabel = t ? t(label) : label // ✅ si t existe, on l'utilise
+        const columnLabel = t ? t(label) : label 
+        let value = item[key];
+
+        if (value && typeof value === "string" && value.match(/^\d{4}-\d{2}-\d{2} /)) {
+          value = dayjs(value).format("DD/MM/YYYY HH:mm"); // ou juste "DD/MM/YYYY"
+        }
+  
         row[columnLabel] = item[key]
   
     })
@@ -40,7 +47,7 @@ export const useCsv = (
 
   const csvWithBom = '\uFEFF' + csv
 
-  console.log(csvWithBom);
+  console.log(JSON.stringify(csv, null, 2));
   
   const blob = new Blob([csvWithBom], { type: "text/csv" });
   const link = document.createElement("a");

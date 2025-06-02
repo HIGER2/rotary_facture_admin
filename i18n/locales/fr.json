@@ -104,7 +104,10 @@
                 "td2":"montant",
                 "td3":"statut",
                 "td4":"mode paiement",
-                "td5":"date"
+                "td5":"date",
+                "provider_reference":"référence DPO",
+                "fees": "frais",
+                "total_amount": "montant total"
             }
         },
         "detail":{
@@ -223,7 +226,10 @@
                 "td4":"montant",
                 "td5":"statut",
                 "td6":"mode paiement",
-                "td7":"date"
+                "td7":"date",
+                "provider_reference":"référence DPO",
+                "fees": "frais",
+                "total_amount": "montant total"
             }
 
         },
@@ -235,6 +241,7 @@
                 "x4":"Échoué"
             },
             "colunm":{
+                "uniqId": "ID",
                 "civility": "Civilité",
                 "title": "Titre",
                 "firstName": "Nom",
@@ -245,12 +252,19 @@
                 "phoneNumber": "Téléphone",
                 "classification": "Classification",
                 "rotaryClub": "Club Rotary",
+                "otherRotaryClub": "Autre club Rotary",
                 "rotaryClubFunction": "Fonction au club",
                 "districtNumber": "Numéro de district",
+                "district": "District",
+                "NumTransaction": "NumTransaction",
+                "typeInscription": " Type d'inscription",
+                "dpo": "DPO REF",
+                "otherDistrictNumber": "Autre numéro de district",
                 "districtFunction": "Fonction au district",
                 "contributionLevel": "Niveau de contribution",
                 "dietaryPlan": "Régime alimentaire",
                 "guestNumber": "Nombre d'invités",
+                "subscription": "Code souscription",
                 "clientUniqId": "Identifiant client",
                 "clientEmail": "Email client",
                 "subscriptionCode": "Code d'inscription",
@@ -259,7 +273,13 @@
                 "message": "Message",
                 "transactionId": "Réf. interne de paiement",
                 "state": "Statut",
-                "paidAmount": "Montant payé"
+                "amount": "Montant",
+                "paidAmount": "Montant payé",
+                "fees": "Frais",
+                "activities": "Activités",
+                "guests": "Invités",
+                "createdAt": "Date inscription",
+                "updatedAt": "Date de mise à jour"
             }
 
         },
@@ -322,10 +342,10 @@
         "detail":{
             "title":"Général",
             "title_payment":"Paiements",
-            "btn_payment":" Effectué un paiement",
+            "btn_payment":"Effectuer un paiement",
             "desc":"Détail de la facture",
             "payment_form":{
-                "title_new":"Effectué un paiement",
+                "title_new":"Effectuer un paiement",
                 "title_member":"Informations membre",
                 "title_update":"Modifier club",
                 "label1":"Montant",
@@ -336,6 +356,9 @@
                 "td1":"référence",
                 "td2":"montant",
                 "td3":"statut",
+                "td6":"référence DPO",
+                "fees": "frais",
+                "total_amount": "montant total",
                 "td4":"mode paiement",
                 "td5":"date"
             },

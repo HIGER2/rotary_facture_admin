@@ -26,6 +26,7 @@ export const useClubPersonnelViewModel = defineStore('ClubPersonnelViewModel', (
             club_uid: item.club_uid
         }
         const data = await useClubPersonnel.create(items);
+        reset();
         if (data?.error) {
             alert(data?.error?.message)
         }
@@ -40,6 +41,13 @@ export const useClubPersonnelViewModel = defineStore('ClubPersonnelViewModel', (
         }
         isLoading.value = false
     }
+
+    function reset() {
+        Object.assign(newClubPersonnel,initial);
+    }
+
+
+
     return {
         newClubPersonnel,
         create,

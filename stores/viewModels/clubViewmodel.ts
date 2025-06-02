@@ -97,6 +97,7 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
         if (data?.error) {
             alert(data?.error?.message)
         }
+        resetNewClub()
         if (data?.data) {
             useToastify("Opération éffectuée", {
                 autoClose: 1000,
@@ -131,6 +132,40 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
         isLoading.value = false
 
     }
+
+    function resetNewClub() {
+        Object.assign(newClub, {
+            name: "",
+            country_id: "",
+            status: "",
+            effectif: "",
+            club_personel: [
+                {
+                    name: "",
+                    last_name: "",
+                    function: "président",
+                    phone: "",
+                    email: "",
+                },
+                {
+                    name: "",
+                    last_name: "",
+                    function: "secrétaire",
+                    phone: "",
+                    email: "",
+                },
+                {
+                    name: "",
+                    last_name: "",
+                    function: "trésorier",
+                    phone: "",
+                    email: "",
+                }
+            ]
+        });
+    }
+
+    
     return {
         all,
         club,

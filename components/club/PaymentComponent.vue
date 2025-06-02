@@ -10,7 +10,10 @@ const columns = [
     { label: 'club.payment.colunm.td1', key: 'reference' },
     // { label: 'montant à regler', key: 'club' },
     { label: 'club.payment.colunm.td2', key: 'amount' },
+    { label: 'facture.detail.payment_colunm.fees', key: 'fee' },
+    { label: 'facture.detail.payment_colunm.total_amount', key: 'total_amount' },
     { label: 'club.payment.colunm.td3', key: 'status' },
+    { label: 'facture.detail.payment_colunm.td6', key: 'provider_reference' },
     { label: 'club.payment.colunm.td4', key: 'mode_paiement' },
     { label: 'club.payment.colunm.td5', key: 'date' },
 ]

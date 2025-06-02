@@ -102,6 +102,8 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
         if (data?.error) {
             alert(data?.error?.message)
         }
+        resetNewFacture()
+        resetNewRubrique()
         if (data?.data) {
             useToastify("Opération éffectuée", {
                 autoClose: 1000,
@@ -170,6 +172,31 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
 
     const removeRubrique =(index:number)=>{
         newRubrique.splice(index, 1)
+    }
+
+    function resetNewFacture() {
+        Object.assign(newFacture, {
+            club_id: "",
+            objet: ""
+        });
+    }
+    function resetNewRubrique() {
+        newRubrique.splice(0, newRubrique.length);
+    }
+    function resetNewRubriqueWithEmptyLine() {
+        newRubrique.splice(0, newRubrique.length, {
+            libele: "",
+            amount: "",
+            quantity: "",
+            comment: ""
+        });
+    }
+    function resetUpdateFacture() {
+        Object.assign(updateFacture, {
+            club_id: "",
+            objet: "",
+            id: null
+        });
     }
     return {
         all,

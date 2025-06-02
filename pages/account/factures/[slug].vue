@@ -260,7 +260,6 @@ onMounted(() => {
                     :facture="storeFacture.facture"
                     />
                 </template>
-
                 <FactureCheckPaymentComponent
                     :isActive="isActive"
                 /> 

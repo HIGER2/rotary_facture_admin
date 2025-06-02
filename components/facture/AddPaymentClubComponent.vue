@@ -30,7 +30,24 @@ const props = defineProps<{
                                 :label="$t('facture.detail.payment_form.label1')" 
                                 :placeholder="$t('facture.detail.payment_form.label1')" name="title" />
                             </div>
-                            
+                            <div class="w-full">
+                                <h3 class="mb-3">Moyen de paiement</h3>
+                                <div class="w-full flex gap-4 items-center">
+                                    <div class="flex items-center cursor-pointer">
+                                        <input type="radio" id="mm" name="mode_paiement" 
+                                        v-model="paymentAmount.mode_paiement"
+                                        value="mobile_money" class="peer checked:bg-primary mr-2 cursor-pointer" checked>
+                                        <label for="mm" class="peer-checked:text-primary text-[13px] font-[500] text-zinc-700">Mobile Money</label>
+                                    </div>
+                                    <div class="flex items-center cursor-pointer">
+                                        <input type="radio" 
+                                        v-model="paymentAmount.mode_paiement"
+                                        id="cb" name="mode_paiement" value="credit_card"
+                                         class="peer  checked:bg-primary mr-2 cursor-pointer" >
+                                        <label for="cb" class="peer-checked:text-primary text-[13px] font-[500] text-zinc-700">Carte de Crédit</label>
+                                    </div>
+                                </div>
+                            </div>
                             <UiButtonSubmit :label="$t('facture.detail.payment_form.button_new')" :isLoading="isLoading"/>
                         </form>
                 </div>

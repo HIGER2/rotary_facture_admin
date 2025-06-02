@@ -62,7 +62,10 @@ const shareGlobal = [
     { label: 'facture.detail.payment_colunm.td1', key: 'reference' },
     // { label: 'montant à regler', key: 'club' },
     { label: 'facture.detail.payment_colunm.td2', key: 'amount' },
+    { label: 'facture.detail.payment_colunm.fees', key: 'fee' },
+    { label: 'facture.detail.payment_colunm.total_amount', key: 'total_amount' },
     { label: 'facture.detail.payment_colunm.td3', key: 'status' },
+    { label: 'facture.detail.payment_colunm.td6', key: 'provider_reference' },
     { label: 'facture.detail.payment_colunm.td4', key: 'mode_paiement' },
     { label: 'facture.detail.payment_colunm.td5', key: 'date' },
     // { label: 'action', key: 'action'},
@@ -98,7 +101,7 @@ const optionMethode = [
             <h3 class="text-base font-semibold leading-7 text-gray-900">
                 {{ $t('facture.detail.title_payment') }}
             </h3>
-            <template v-if="user?.role =='club'">
+            <template v-if="user?.role!=='club'">
                 <!-- <button 
                 type="button"
                 @click="setActive(true)"
