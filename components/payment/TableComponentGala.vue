@@ -24,7 +24,7 @@ const columns = [
   { label: 'payment.tab2.colunm.phoneNumber', key: 'phoneNumber' },
   { label: 'payment.tab2.colunm.rotaryClub', key: 'rotaryClub' },
 
-  { label: 'payment.tab2.colunm.district', key: 'district' },
+  { label: 'payment.tab2.colunm.districtNumber', key: 'districtNumber' },
   { label: 'payment.tab2.colunm.NumTransaction', key: 'NumTransaction' },
   { label: 'payment.tab2.colunm.dpo', key: 'dpo'},
 
