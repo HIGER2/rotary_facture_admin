@@ -241,6 +241,8 @@
                 "x4":"Échoué"
             },
             "colunm":{
+                "memberType": "Type d'inscription",
+                "createdAt": "Date d'inscription",
                 "uniqId": "ID",
                 "civility": "Civilité",
                 "title": "Titre",
@@ -252,19 +254,15 @@
                 "phoneNumber": "Téléphone",
                 "classification": "Classification",
                 "rotaryClub": "Club Rotary",
-                "otherRotaryClub": "Autre club Rotary",
                 "rotaryClubFunction": "Fonction au club",
                 "districtNumber": "Numéro de district",
-                "district": "District",
-                "NumTransaction": "NumTransaction",
-                "typeInscription": " Type d'inscription",
-                "dpo": "DPO REF",
-                "otherDistrictNumber": "Autre numéro de district",
                 "districtFunction": "Fonction au district",
+                "professionalFunction": "Fonction professionnelle",
+                "society": "Société",
+                "whatsappPhoneNumber": "Numéro WhatsApp",
                 "contributionLevel": "Niveau de contribution",
                 "dietaryPlan": "Régime alimentaire",
                 "guestNumber": "Nombre d'invités",
-                "subscription": "Code souscription",
                 "clientUniqId": "Identifiant client",
                 "clientEmail": "Email client",
                 "subscriptionCode": "Code d'inscription",
@@ -273,14 +271,9 @@
                 "message": "Message",
                 "transactionId": "Réf. interne de paiement",
                 "state": "Statut",
-                "amount": "Montant",
-                "paidAmount": "Montant payé",
-                "fees": "Frais",
-                "activities": "Activités",
-                "guests": "Invités",
-                "createdAt": "Date inscription",
-                "updatedAt": "Date de mise à jour"
-            }
+                "amountHT": "Montant HT",
+                "paidAmount": "Montant payé"
+              }
 
         },
         "tab3":{

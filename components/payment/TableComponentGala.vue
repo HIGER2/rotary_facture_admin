@@ -9,8 +9,9 @@ interface TableProps {
 }
 const props = defineProps<TableProps>()
 const response = ref([])
+
 const columns = [
-  { label: 'payment.tab2.colunm.typeInscription', key: 'typeInscription' },
+  { label: 'payment.tab2.colunm.memberType', key: 'memberType' },
   { label: 'payment.tab2.colunm.createdAt', key: 'createdAt' },
   { label: 'payment.tab2.colunm.subscriptionCode', key: 'subscriptionCode' },
   { label: 'payment.tab2.colunm.civility', key: 'civility' },
@@ -18,42 +19,34 @@ const columns = [
   { label: 'payment.tab2.colunm.firstName', key: 'firstName' },
   { label: 'payment.tab2.colunm.lastName', key: 'lastName' },
   { label: 'payment.tab2.colunm.country', key: 'country' },
+  { label: 'payment.tab2.colunm.society', key: 'society' },
   { label: 'payment.tab2.colunm.districtFunction', key: 'districtFunction' },
   { label: 'payment.tab2.colunm.contributionLevel', key: 'contributionLevel' },
   { label: 'payment.tab2.colunm.email', key: 'email' },
   { label: 'payment.tab2.colunm.phoneNumber', key: 'phoneNumber' },
   { label: 'payment.tab2.colunm.rotaryClub', key: 'rotaryClub' },
-
   { label: 'payment.tab2.colunm.districtNumber', key: 'districtNumber' },
-  { label: 'payment.tab2.colunm.NumTransaction', key: 'NumTransaction' },
-  { label: 'payment.tab2.colunm.dpo', key: 'dpo'},
-
+  { label: 'payment.tab2.colunm.transactionId', key: 'transactionId' },
   { label: 'payment.tab2.colunm.paymentDate', key: 'paymentDate' },
   { label: 'payment.tab2.colunm.paymentMethod', key: 'paymentMethod' },
+  { label: 'payment.tab2.colunm.amountHT', key: 'amountHT' },
   { label: 'payment.tab2.colunm.paidAmount', key: 'paidAmount' },
-  { label: 'payment.tab2.colunm.amount', key: 'amount' },
-  { label: 'payment.tab2.colunm.fees', key: 'fees' },
-
-
   { label: 'payment.tab2.colunm.state', key: 'state' },
   { label: 'payment.tab2.colunm.guestNumber', key: 'guestNumber' },
 
-//   { label: 'payment.tab2.colunm.classification', key: 'classification' },
+
+//   { label: 'payment.tab2.colunm.uniqId', key: 'uniqId' },
+
 //   { label: 'payment.tab2.colunm.nameOnBadge', key: 'nameOnBadge' },
+//   { label: 'payment.tab2.colunm.classification', key: 'classification' },
 //   { label: 'payment.tab2.colunm.rotaryClubFunction', key: 'rotaryClubFunction' },
-//   { label: 'payment.tab2.colunm.districtNumber', key: 'districtNumber' },
+//   { label: 'payment.tab2.colunm.districtFunction', key: 'districtFunction' },
 //   { label: 'payment.tab2.colunm.dietaryPlan', key: 'dietaryPlan' },
-//   { label: 'payment.tab2.colunm.guestNumber', key: 'guestNumber' },
+ 
 //   { label: 'payment.tab2.colunm.clientUniqId', key: 'clientUniqId' },
 //   { label: 'payment.tab2.colunm.clientEmail', key: 'clientEmail' },
-//   { label: 'payment.tab2.colunm.subscriptionCode', key: 'subscriptionCode' },
-//   { label: 'payment.tab2.colunm.paidAmount', key: 'paidAmount' },            // Amount
-
- 
- 
 //   { label: 'payment.tab2.colunm.message', key: 'message' },
-//   { label: 'payment.tab2.colunm.transactionId', key: 'transactionId'},
-];
+]
 
 const filters = reactive({
     // rotaryClubName: '',
@@ -73,47 +66,48 @@ const getPayement=async(params={})=>{
         dateFin: params.dateFin || filters.dateFin,
     });
     let data =  await useCustomFetch(`https://api.acd.district9101.org/public/api/v1.0/subscriptions/gala-members/success-payments?${queryParams.toString()}`)
-    response.value = data.data.data.map((item) => ({
-        uniqId: item?.uniqId,
-        civility: item?.civility,
-        title: item?.title,
-        firstName: item?.firstName,
-        lastName: item?.lastName,
-        nameOnBadge: item?.nameOnBadge,
-        email: item?.email,
-        country: item?.country,
-        phoneNumber: item?.phoneNumber,
-        classification: item?.classification,
-        rotaryClub: item?.rotaryClub,
-        otherRotaryClub: item?.otherRotaryClub,
-        rotaryClubFunction: item?.rotaryClubFunction,
-        districtNumber: item?.districtNumber,
-        otherDistrictNumber: item?.otherDistrictNumber,
-        districtFunction: item?.districtFunction,
-        contributionLevel: item?.contributionLevel,
-        dietaryPlan: item?.dietaryPlan,
-        guestNumber: item?.guestNumber,
-        subscription: item?.subscription?.subscriptionCode || null,
-        clientUniqId: item?.uniqId, // ou une autre valeur si différent
-        clientEmail: item?.email,   // ou autre si différent
-        subscriptionCode: item?.subscription?.subscriptionCode || null,
-        paymentMethod: null, // Pas fourni dans l’API, à compléter si dispo
-        paymentDate: item?.subscription?.createdAt || null,
-        message: null, // Pas fourni dans l’API
-        transactionId: null, // Pas fourni dans l’API
-        state: null, // Peut-être à extraire de activities ? Sinon à compléter
-        paidAmount: null, // Idem, à calculer à partir des activités si dispo
-        paymentStatus: item?.activities?.[0]?.paymentStatus || null,
-        createdAt: item?.createdAt,
-        updatedAt: item?.updatedAt,
-        
-        TypeInscription	: item?.TypeInscription || null,
-        dpo: item?.dpo || null,
-        fees: item?.fees || null,
-        amount: item?.amount || null,
-        }));
 
-    console.log(response.value);
+    response.value = data.data.data
+    
+    // .map((item) => ({
+    //     uniqId: item?.uniqId,
+    //     civility: item?.civility,
+    //     title: item?.title,
+    //     firstName: item?.firstName,
+    //     lastName: item?.lastName,
+    //     nameOnBadge: item?.nameOnBadge,
+    //     email: item?.email,
+    //     country: item?.country,
+    //     phoneNumber: item?.phoneNumber,
+    //     classification: item?.classification,
+    //     rotaryClub: item?.rotaryClub,
+    //     otherRotaryClub: item?.otherRotaryClub,
+    //     rotaryClubFunction: item?.rotaryClubFunction,
+    //     districtNumber: item?.districtNumber,
+    //     otherDistrictNumber: item?.otherDistrictNumber,
+    //     districtFunction: item?.districtFunction,
+    //     contributionLevel: item?.contributionLevel,
+    //     dietaryPlan: item?.dietaryPlan,
+    //     guestNumber: item?.guestNumber,
+    //     subscription: item?.subscription?.subscriptionCode || null,
+    //     clientUniqId: item?.uniqId, // ou une autre valeur si différent
+    //     clientEmail: item?.email,   // ou autre si différent
+    //     subscriptionCode: item?.subscription?.subscriptionCode || null,
+    //     paymentMethod: null, // Pas fourni dans l’API, à compléter si dispo
+    //     paymentDate: item?.subscription?.createdAt || null,
+    //     message: null, // Pas fourni dans l’API
+    //     transactionId: null, // Pas fourni dans l’API
+    //     state: null, // Peut-être à extraire de activities ? Sinon à compléter
+    //     paidAmount: null, // Idem, à calculer à partir des activités si dispo
+    //     paymentStatus: item?.activities?.[0]?.paymentStatus || null,
+    //     createdAt: item?.createdAt,
+    //     updatedAt: item?.updatedAt,
+        
+    //     TypeInscription	: item?.TypeInscription || null,
+    //     dpo: item?.dpo || null,
+    //     fees: item?.fees || null,
+    //     amount: item?.amount || null,
+    //     }));
     
 }
 
