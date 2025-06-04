@@ -52,6 +52,15 @@ export const useAuthViewModel = defineStore('AuthViewModel', () => {
                 setCookie('token',data.data?.data?.token);
                 navigateTo('/account/home')
             }else{
+                let route = useRoute();
+                let pay = localStorage.getItem('pay');
+
+                if (route.query?.pay && !pay){
+                    localStorage.setItem('pay', route.query?.pay as string);
+                }if (!route.query?.pay && pay){
+                    localStorage.removeItem('pay');
+                    
+                }
                 navigateTo({
                     path: '/auth/login',
                     query: { success: 'true'}
@@ -76,6 +85,12 @@ export const useAuthViewModel = defineStore('AuthViewModel', () => {
         
         if (!data.error) {
             setCookie('token',data.data?.data?.token);
+            let pay = localStorage.getItem('pay');
+            if (pay) {
+                localStorage.removeItem('pay');
+                navigateTo(`/account/factures/${pay}`)
+                return
+            }
             navigateTo('/account/home')
         }
         else if (data.error && data.error?.code === 403) {

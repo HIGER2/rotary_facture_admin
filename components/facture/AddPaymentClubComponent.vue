@@ -9,6 +9,52 @@ const props = defineProps<{
     paymentAmount: any,
 }>()
 
+function calculerPaiement(montantNetSouhaite, tauxCommission) {
+    if (tauxCommission >= 100) {
+        return {
+            montant_brut: 0,
+            montant_frais: 0,
+            montant_net: 0,
+            status: false,
+            message: 'Le taux de commission ne peut pas être supérieur ou égal à 100%',
+        };
+    }
+
+    const taux = 1 - (tauxCommission / 100);
+    const montantBrut = Math.ceil(montantNetSouhaite / taux);
+    const montantFrais = montantBrut - montantNetSouhaite;
+    const montantNet = montantBrut - montantFrais; // identique à montantNetSouhaite
+
+    return {
+        montant_brut: montantBrut,
+        montant_frais: montantFrais,
+        montant_net: montantNet,
+        status: true,
+        message: 'Calcul effectué avec succès',
+    };
+}
+
+const frais = computed(() => {
+    let tauxCommission = 0; // taux de commission par défaut
+    if (props.paymentAmount.mode_paiement === 'mobile_money') {
+        tauxCommission = 2.5; // 5% pour Mobile Money
+    } else if (props.paymentAmount.mode_paiement === 'credit_card') {
+        tauxCommission = 3.5; // 3% pour Carte de Crédit
+    }
+    return calculerPaiement(props.paymentAmount.amount,tauxCommission)['montant_frais']; 
+});
+
+
+const paidAmount = computed(() => {
+    let tauxCommission = 0; // taux de commission par défaut
+    if (props.paymentAmount.mode_paiement === 'mobile_money') {
+        tauxCommission = 2.5; // 5% pour Mobile Money
+    } else if (props.paymentAmount.mode_paiement === 'credit_card') {
+        tauxCommission = 3.5; // 3% pour Carte de Crédit
+    }
+    return calculerPaiement(props.paymentAmount.amount, tauxCommission)['montant_brut']; 
+});
+
 </script>
 
 <template>
@@ -48,7 +94,18 @@ const props = defineProps<{
                                     </div>
                                 </div>
                             </div>
-                            <UiButtonSubmit :label="$t('facture.detail.payment_form.button_new')" :isLoading="isLoading"/>
+                            <div class="w-full mb-3">
+                                <h3 class="mb-3">Récapitulatif</h3>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-[13px] font-[500] text-zinc-700">Frais</span>
+                                    <span class="text-[13px] font-[500] text-zinc-700">{{frais }} FCFA</span>
+                                </div>
+                                <div class="flex justify-between items-center mt-2">
+                                    <span class="text-[13px] font-[500] text-zinc-700">Montant à payer</span>
+                                    <span class="text-[13px] font-[500] text-zinc-700">{{ paidAmount }} FCFA</span>
+                                </div>
+                            </div>
+                            <UiButtonSubmit :label="$t('facture.detail.payment_form.button_new')+` ( ${paidAmount} )`" :isLoading="isLoading"/>
                         </form>
                 </div>
         </UiModal>

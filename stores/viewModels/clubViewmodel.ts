@@ -90,6 +90,26 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
         return data
     }
 
+    async function findByMember(params:any) {
+        resetUpdateClub()
+        const data = await useClub.findByMember(params);
+        let response  = data?.data?.data
+        updateClub.id = response.id
+        updateClub.name = response.name
+        updateClub.country_id =response.country_id
+        updateClub.status =response.status
+        updateClub.effectif =response.effectif
+        data?.data?.data?.personels.map((item:any,index)=>(
+            updateClub.club_personel[index] =  {
+                id:item?.id ?? "",
+                name:item?.name ?? "",
+                email:item?.email ?? "",
+                phone: item?.phone ?? ""
+            }
+           ))
+        return data
+    }
+
     async function create() {
         isLoading.value = true
         let items={...newClub}
@@ -115,7 +135,6 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
         isLoading.value = true
         let items={...updateClub}
 
-        console.log('updateClub',updateClub);
         const data = await useClub.update(items);
         if (data?.error) {
             alert(data?.error?.message)
@@ -166,6 +185,39 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
     }
 
     
+    function resetUpdateClub() {
+        Object.assign(updateClub, {
+            name: "",
+            country_id: "",
+            status: "",
+            effectif: "",
+            club_personel: [
+                {
+                    name: "",
+                    last_name: "",
+                    function: "président",
+                    phone: "",
+                    email: "",
+                },
+                {
+                    name: "",
+                    last_name: "",
+                    function: "secrétaire",
+                    phone: "",
+                    email: "",
+                },
+                {
+                    name: "",
+                    last_name: "",
+                    function: "trésorier",
+                    phone: "",
+                    email: "",
+                }
+            ]
+        });
+    }
+
+    
     return {
         all,
         club,
@@ -176,6 +228,8 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
         findDetail,
         allByFilter,
         updateClub,
-        update
+        update,
+        findByMember,
+        resetUpdateClub
     }
 })

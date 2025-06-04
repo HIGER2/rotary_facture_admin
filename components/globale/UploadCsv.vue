@@ -13,7 +13,7 @@ defineProps<{
 }>()
 
 const upload=(data,colunm,lang=false)=>{
-    useCsv(data,colunm, lang && t)
+    useXlsx(data,colunm, lang && t)
 }
 </script>
 

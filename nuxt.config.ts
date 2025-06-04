@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     server: {
       allowedHosts: [
         'localhost',
-        '6501-149-33-219-229.ngrok-free.app',
+        '8621-38-230-215-138.ngrok-free.app',
       ]
     }
   },
@@ -50,7 +50,8 @@ export default defineNuxtConfig({
   },
  
   modules: [
-    '@nuxt/image', '@nuxt/scripts', // '@nuxt/ui'
+    '@nuxt/image', 
+    '@nuxt/scripts', // '@nuxt/ui'
     '@nuxt/test-utils',
     '@pinia/nuxt', 
     'nuxt-toastify',

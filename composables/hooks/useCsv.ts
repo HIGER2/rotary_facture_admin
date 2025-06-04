@@ -26,12 +26,11 @@ export const useCsv = (
     columns.forEach(({ key, label }) => {
         const columnLabel = t ? t(label) : label 
         let value = item[key];
-
         if (value && typeof value === "string" && value.match(/^\d{4}-\d{2}-\d{2} /)) {
           value = dayjs(value).format("DD/MM/YYYY HH:mm"); // ou juste "DD/MM/YYYY"
         }
   
-        row[columnLabel] = item[key]
+        row[columnLabel] = value
   
     })
     
@@ -47,7 +46,6 @@ export const useCsv = (
 
   const csvWithBom = '\uFEFF' + csv
 
-  console.log(JSON.stringify(csv, null, 2));
   
   const blob = new Blob([csvWithBom], { type: "text/csv" });
   const link = document.createElement("a");

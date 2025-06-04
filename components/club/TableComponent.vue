@@ -32,9 +32,8 @@ const editUser = (user) => {
                     <i class="uil uil-eye "></i>
                         <!-- <i class="uil uil-info-circle"></i> -->
                 </NuxtLink>
-                    <button 
-                        type="button"
-                        @click="props.setUpdate(item)"
+                    <NuxtLink 
+                        :to="`/account/clubs/update?id=${item.id}&uid=${item.uid}`"
                         class=" h-7 w-7 cursor-pointer hover:bg-gray-200  
                         flex items-center justify-center text-center 
                         rounded-full
@@ -43,7 +42,7 @@ const editUser = (user) => {
                         ">
                         <!-- <i class="uil uil-eye text-sm"></i> -->
                         <i class="uil uil-pen"></i>
-                    </button>
+                    </NuxtLink>
                    
                 </div>
             </template>

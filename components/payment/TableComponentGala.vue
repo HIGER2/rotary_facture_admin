@@ -9,6 +9,13 @@ interface TableProps {
 }
 const props = defineProps<TableProps>()
 const response = ref([])
+const stats = ref()
+const optionState =[
+    {label:'total souscription', key:'totalSubscribedGalaMembers'},
+    {label:'total souscription Membre', key:'totalAmountSubscribedGalaMembers'},
+    {label:'total remboursement', key:'totalRefundAmountSubscribedGalaMembers'},
+]
+const loading = ref(true);
 
 const columns = [
   { label: 'payment.tab2.colunm.memberType', key: 'memberType' },
@@ -19,7 +26,7 @@ const columns = [
   { label: 'payment.tab2.colunm.firstName', key: 'firstName' },
   { label: 'payment.tab2.colunm.lastName', key: 'lastName' },
   { label: 'payment.tab2.colunm.country', key: 'country' },
-  { label: 'payment.tab2.colunm.society', key: 'society' },
+//   { label: 'payment.tab2.colunm.society', key: 'society' },
   { label: 'payment.tab2.colunm.districtFunction', key: 'districtFunction' },
   { label: 'payment.tab2.colunm.contributionLevel', key: 'contributionLevel' },
   { label: 'payment.tab2.colunm.email', key: 'email' },
@@ -58,7 +65,9 @@ const filters = reactive({
     dateDebut:"" ,
     dateFin: "",
 });
+
 const getPayement=async(params={})=>{
+    loading.value = true;
     const queryParams = new URLSearchParams({
         search: params.search || filters.search,
         status: params.status || filters.status,
@@ -66,7 +75,7 @@ const getPayement=async(params={})=>{
         dateFin: params.dateFin || filters.dateFin,
     });
     let data =  await useCustomFetch(`https://api.acd.district9101.org/public/api/v1.0/subscriptions/gala-members/success-payments?${queryParams.toString()}`)
-
+    loading.value = false;
     response.value = data.data.data
     
     // .map((item) => ({
@@ -112,6 +121,14 @@ const getPayement=async(params={})=>{
 }
 
 
+const getStats=async(params={})=>{
+    let data =  await useCustomFetch(`https://api.acd.district9101.org/public/api/v1.0/subscriptions/stats`)
+    response.value = data.data.data
+
+    stats.value = data.data.data
+}
+
+
 watch(filters, () => {
   let interval = setTimeout(async() => {
     getPayement();
@@ -121,13 +138,27 @@ watch(filters, () => {
 }, { deep: true });
 
 onMounted(async () => {
-     getPayement()
+    Promise.all([
+        getPayement(),
+        getStats()
+    ]);
 })
 </script>
 
 <template>
-    <div>
-        <div class="w-full flex items-center justify-between mb-3 ">
+    <div>   
+            <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4 p-2 mb-5">
+                    <template v-for="(item, index) in optionState" :key="index">
+                        <div class="box">
+                            <span class=" text-xs text-gray-500 font-medium">
+                                {{ item.label}}
+                            </span>
+                            <h2 class="text-lg font-extrabold">{{stats && stats[item?.key]  }}</h2>
+                        </div>
+                    </template>
+            </div>
+            <div class="w-full flex items-center justify-between mb-3 ">
+           
             <div class="w-full  gap-2 flex items-center justify-end  mb-4">
                 <select 
                 v-model="filters.status"

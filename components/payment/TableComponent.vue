@@ -9,6 +9,8 @@ const props = defineProps<TableProps>()
 
 const columns = [
     { label: 'payment.tab1.colunm.td1', key: 'reference' },
+    { label: 'payment.tab1.colunm.provider_reference', key: 'provider_reference' },
+
     { label: 'payment.tab1.colunm.td2', key: 'club' },
     { label: 'payment.tab1.colunm.td3', key: 'fac' },
     // { label: 'montant à regler', key: 'club' },
@@ -16,7 +18,6 @@ const columns = [
     { label: 'payment.tab1.colunm.fees', key: 'fee' },
     { label: 'payment.tab1.colunm.total_amount', key: 'total_amount' },
     { label: 'payment.tab1.colunm.td5', key: 'status' },
-    { label: 'payment.tab1.colunm.provider_reference', key: 'provider_reference' },
     { label: 'payment.tab1.colunm.td6', key: 'mode_paiement' },
     { label: 'payment.tab1.colunm.td7', key: 'date' },
 

@@ -37,20 +37,26 @@ const checkPayment = async (token) => {
     isActive.value=false
 }
 
-const factureDetails = [
-  { label: "facture.detail.label1", value: "reference" },
-  { label: "facture.detail.label2", value: "total_rubrique" },
-  { label: "facture.detail.label3", value:"total_quantity" },
-  { label: "facture.detail.label4", value: "amount" },
-  { label: "facture.detail.label5", value: "amount_pay" },
-  { label: "facture.detail.label6", value: "remaining_amount" },
+const factureDetails ={
+    left :[
+    { label: "facture.detail.label1", value: "reference" },
+    { label: "facture.detail.label2", value: "total_rubrique" },
+    { label: "facture.detail.label3", value:"total_quantity" },
+    { label: "facture.detail.label4", value: "amount" },
+    { label: "facture.detail.label5", value: "amount_pay" },
+    { label: "facture.detail.label6", value: "remaining_amount" },
+    ],
+    right:[
+ 
   { label: "facture.detail.label7", value: "type", isComponent: FactureType },
   { label: "facture.detail.label8", value: "status", isComponent: FactureStatus },
   { label: "facture.detail.label9", value: "objet" },
   { label: "facture.detail.label10", value: "club.name" },
   { label: "facture.detail.label11", value: "date_emission" },
   { label: "facture.detail.label12", value:"date_echeance" },
-];
+]
+}
+
 
 function getNestedValue(obj: any, path: string): any {
   return path.split('.').reduce((acc, part) => acc?.[part], obj);
@@ -97,7 +103,7 @@ onMounted(() => {
                             <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
                                 {{ $t('facture.detail.desc') }}
                             </p>
-                            <template v-if="storeFacture.facture?.status === 'brouillon' && userConnected?.role !== 'club'">
+                            <template v-if="userConnected?.role !== 'club'">
                                 <UiButtonSubmit
                                 @click="sendFacture(storeFacture.facture?.reference)"
                                 type="button"
@@ -106,10 +112,39 @@ onMounted(() => {
                             </template>
                         </div>
                     </div>
-                    <div class="mt-6 bg-white p-4 border overflow-hidden  border-gray-200 rounded-lg">
+                    <div class="w-full flex gap-3 items-center">
+                    <div class="w-full mt-6 bg-white p-4 border overflow-hidden  border-gray-200 rounded-lg">
                         <div class="divide-y divide-gray-100">
                             <div
-                                    v-for="(item, index) in factureDetails"
+                                    v-for="(item, index) in factureDetails.left"
+                                    :key="index"
+                                    class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
+                                    >
+                                    <div class="text-sm font-medium leading-6 text-gray-900">
+                                        {{ $t(item.label) }}
+                                    </div>
+                                    <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                                        <component
+                                        v-if="item.isComponent"
+                                        :is="item.isComponent"
+                                        :status="getNestedValue(storeFacture.facture, item.value) || 'N/A'"
+                                        />
+                                        <span v-else>
+                                            {{ item.value === 'date_emission' || item.value === 'date_echeance'
+                                                ? formatDate(getNestedValue(storeFacture.facture, item.value))
+                                                : getNestedValue(storeFacture.facture, item.value) || 'N/A'
+                                            }}
+
+                                        <!-- {{storeFacture.facture[item.value] || 'N/A'}} -->
+                                        </span>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full mt-6 bg-white p-4 border overflow-hidden  border-gray-200 rounded-lg">
+                        <div class="divide-y divide-gray-100">
+                            <div
+                                    v-for="(item, index) in factureDetails.right"
                                     :key="index"
                                     class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
                                     >
@@ -132,106 +167,8 @@ onMounted(() => {
                                         </span>
                                     </div>
                                     </div>
-                            <!-- <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <div class="text-sm font-medium leading-6 text-gray-900">
-                                    N°Facture
-                                </div>
-                                
-                                <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                    {{ storeFacture.facture?.reference }}
-                                </div>
-                            </div> -->
-                            <!-- <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <div class="text-sm font-medium leading-6 text-gray-900">
-                                    Total rubrique
-                                </div>
-                                <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        {{ storeFacture.facture?.total_rubrique }}
-                                </div>
-                            </div>
-                            
-                            <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <div class="text-sm font-medium leading-6 text-gray-900">
-                                    Total quantité
-                                </div>
-                                <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        {{ storeFacture.facture?.total_quantity }}
-                                </div>
-                            </div>
-
-                            <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <div class="text-sm font-medium leading-6 text-gray-900">
-                                    Montant total
-                                </div>
-                                <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        {{ storeFacture.facture?.amount }}
-                                </div>
-                            </div>
-                            <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <div class="text-sm font-medium leading-6 text-gray-900">
-                                    Montant payé
-                                </div>
-                                <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                        {{ storeFacture.facture?.amount_pay }}
-                                </div>
-                            </div>
-                            <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <div class="text-sm font-medium leading-6 text-gray-900">
-                                    Reste à payer
-                                </div>
-                                <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                    {{ storeFacture.facture?.remaining_amount }}
-                                </div>
-                            </div>
-                            <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <dt class="text-sm font-medium leading-6 text-gray-900">
-                                    Type
-                                </dt>
-                                <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                    <FactureType :status="storeFacture.facture?.type"/>
-                                </div>
-                            </div>
-                            <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <dt class="text-sm font-medium leading-6 text-gray-900">
-                                    Statut
-                                </dt>
-                                <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                    <FactureStatus :status="storeFacture.facture?.status"/>
-                                </div>
-                            </div>
-                            <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <div class="text-sm font-medium leading-6 text-gray-900">
-                                    Description
-                                </div>
-                                <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                    {{ storeFacture.facture?.objet }}
-                                </div>
-                            </div>
-                            <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <div class="text-sm font-medium leading-6 text-gray-900">
-                                    Club
-                                </div>
-                                <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                    {{ storeFacture.facture?.club?.name }}
-                                </div>
-                            </div>
-                            <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <div class="text-sm font-medium leading-6 text-gray-900">
-                                    Date 
-                                </div>
-                                <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                    {{ storeFacture.facture?.date_emission }}
-                                </div>
-                            </div>
-                            <div class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <div class="text-sm font-medium leading-6 text-gray-900">
-                                    date échéance
-                                </div>
-                                <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                                    {{ storeFacture.facture?.date_echeance }}
-                                </div>
-                            </div> -->
                         </div>
+                    </div>
                     </div>
                 </section>
 

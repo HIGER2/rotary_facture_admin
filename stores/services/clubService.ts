@@ -16,6 +16,10 @@ export const useClubServices = defineStore('club', () => {
     async function findDetail(params: any) {
         return await useCustomFetch(`/club/${params.id}/${params.uid}`)
     }
+
+    async function findByMember(params: any) {
+        return await useCustomFetch(`/club/by/member/${params.id}/${params.uid}`)
+    }
     async function create(items:any) {
         return await useCustomFetch(`/club/create`, {
                 method: 'POST',
@@ -34,6 +38,7 @@ export const useClubServices = defineStore('club', () => {
         create,
         findDetail,
         allByFilter,
-        update
+        update,
+        findByMember
     }
 })

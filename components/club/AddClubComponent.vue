@@ -40,35 +40,37 @@ onMounted(() => {
                         </h2>
                     </div>
                     <form class="" @submit.prevent="createClub()">
-                            <div class=" mb-4">
-                            <UiFormInput 
-                            required
-                            v-model="newClub.name"
-                            :label="$t('club.form.label1')" 
-                            :placeholder="$t('club.form.label1')" 
-                            name="title" />
-                        </div>
-                        <div class="">
-                        <UiFormSelect 
-                            required
-                            :options="country"
-                            v-model="newClub.country_id"
-                            :label="$t('club.form.label2')" 
-                            :placeholder="$t('club.form.label2')" 
-                            />
+                                <div class=" mb-4">
+                                <UiFormInput 
+                                required
+                                v-model="newClub.name"
+                                :label="$t('club.form.label1')" 
+                                :placeholder="$t('club.form.label1')" 
+                                name="title" />
+                            </div>
+                            <div class="">
                             <UiFormSelect 
-                            required
-                            :options="optionStatus"
-                            v-model="newClub.status"
-                            :label="$t('club.form.label3')" 
-                            :placeholder="$t('club.form.label3')"
-                            />
-                            
-                        </div>
-                        <div class="w-full mt-4">
-                            <UiButtonSubmit :label="$t('club.form.button_new')" :isLoading="isLoading"/>    
-                        </div>
-                </form>
+                                required
+                                :options="country"
+                                v-model="newClub.country_id"
+                                :label="$t('club.form.label2')" 
+                                :placeholder="$t('club.form.label2')" 
+                                />
+                                <UiFormSelect 
+                                required
+                                :options="optionStatus"
+                                v-model="newClub.status"
+                                :label="$t('club.form.label3')" 
+                                :placeholder="$t('club.form.label3')"
+                                />
+                                
+                            </div>
+                         
+                            <div class="w-full mt-4">
+                                <UiButtonSubmit :label="$t('club.form.button_new')" :isLoading="isLoading"/>    
+                            </div>
+                    </form>
+                   
             </div>
         </UiModal>
     </div>
