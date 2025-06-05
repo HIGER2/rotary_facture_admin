@@ -103,7 +103,7 @@ onMounted(() => {
                             <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
                                 {{ $t('facture.detail.desc') }}
                             </p>
-                            {{ userConnected?.role }}
+                            <!-- {{ userConnected?.role }} -->
                             <template v-if="userConnected?.role !== 'club'">
                                 <UiButtonSubmit
                                 @click="sendFacture(storeFacture.facture?.reference)"

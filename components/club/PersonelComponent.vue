@@ -31,12 +31,12 @@ const columns = [
                 <h3 class="text-base font-semibold leading-7 text-gray-900">
                     {{ $t('club.personnel.title') }}
                 </h3>
-                <button 
+                <!-- <button 
                 @click="setActive(true)"
                 class="inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1  disabled:pointer-events-none text-xs disabled:opacity-50 bg-primary text-slate-50 shadow   px-4 py-3 self-start"
                 >
                 {{ $t('club.personnel.button') }}
-                </button>
+                </button> -->
             </div>
             <div class="mt-6 border-t border-gray-100">
                 <UiDynamicTable  :columns="columns" :data="data?.personels"/>

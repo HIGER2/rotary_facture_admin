@@ -7,7 +7,7 @@ definePageMeta({
   breadcrumb: 'Détail du club'
 })
 const storeClub = useClubViewModel()
-const isActive = ref(2)
+const isActive = ref(1)
 
 const setTabs = (state:number) => {
     isActive.value = state
