@@ -117,8 +117,8 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
         if (data?.error) {
             alert(data?.error?.message)
         }
-        resetNewClub()
         if (data?.data) {
+            resetNewClub()
             useToastify("Opération éffectuée", {
                 autoClose: 1000,
                 type: ToastifyOption.TYPE.SUCCESS,

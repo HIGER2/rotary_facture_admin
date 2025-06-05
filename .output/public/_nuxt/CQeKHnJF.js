@@ -1,0 +1,1 @@
+import{G as r,r as s}from"./7f7kRU4D.js";import{u}from"./DjuaHcYr.js";const a=r("setting",()=>{async function t(){return await u("setting/countrie/all")}return{allCoutry:t}}),l=r("SettingViewModel",()=>{s(!1);const t=a();async function o(){var n;const e=await t.allCoutry();return(n=e==null?void 0:e.data)==null?void 0:n.data}return{allCoutry:o}});export{l as u};

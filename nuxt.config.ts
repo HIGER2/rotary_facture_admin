@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     server: {
       allowedHosts: [
         'localhost',
-        '8621-38-230-215-138.ngrok-free.app',
+        'sterling-moth-actual.ngrok-free.app',
       ]
     }
   },
