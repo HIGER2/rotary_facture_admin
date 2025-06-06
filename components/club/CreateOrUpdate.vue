@@ -147,7 +147,10 @@ onMounted(() => {
                                 </div>
                             </div>
                             <div class="w-full mt-4">
-                                <UiButtonSubmit :label="$t('club.form.button_new')" :isLoading="loading"/>    
+                                <div class="max-w-max min-w-50 ms-auto ">
+                                    <UiButtonSubmit label="Modifier" :isLoading="loading"/> 
+                                </div>   
+                                <!-- <UiButtonSubmit :label="$t('club.form.button_new')" :isLoading="loading"/>     -->
                             </div>
                     </form>
                 </div>
