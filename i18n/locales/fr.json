@@ -2,7 +2,8 @@
     "navbar": {
         "btn2":{
             "logout": "Déconnexion",
-            "user": "Utilisateurs"
+            "user": "Utilisateurs",
+            "setting": "Paramètres"
         },
         "bread":{
             "dashboard": "Tableau de bord",
@@ -246,8 +247,8 @@
                 "uniqId": "ID",
                 "civility": "Civilité",
                 "title": "Titre",
-                "firstName": "Nom",
-                "lastName": "Prénoms",
+                "lastName": "Nom",
+                "firstName": "Prénoms",
                 "nameOnBadge": "Nom sur badge",
                 "email": "Email",
                 "country": "Pays",
@@ -270,9 +271,11 @@
                 "paymentDate": "Date de paiement",
                 "message": "Message",
                 "transactionId": "Réf. interne de paiement",
+                "transRef":"DPO ref",
                 "state": "Statut",
                 "amountHT": "Montant HT",
-                "paidAmount": "Montant payé"
+                "paidAmount": "Montant payé",
+                "fees": "Frais"
               }
 
         },
@@ -308,6 +311,7 @@
         "button":"Nouvelle Facture",
         "colunm":{
             "td1":"N°Facture",
+            "total_amount_usd":"montant USD",
             "td2":"Montant",
             "td3":"Montant payé",
             "td4":"restet à payer",
@@ -347,6 +351,7 @@
             },
             "payment_colunm":{
                 "td1":"référence",
+               
                 "td2":"montant",
                 "td3":"statut",
                 "td6":"référence DPO",

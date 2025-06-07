@@ -105,7 +105,7 @@ onMounted(() => {
                             />
                         </div>
                 </div>
-                <div class="w-full p-2">
+                <div class="w-full">
                     <FactureTableComponent :columns="storeFacture.columns" :loading="loading" :user="userConnected" :data="storeFacture?.factures"/>
                 </div>
             </div>

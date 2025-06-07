@@ -15,6 +15,7 @@ export const useUserViewModel = defineStore('UserViewModel', () => {
     const stats = reactive<any>({
         data: "",
         analityc: "",
+        exercice: "",
     });
     
     const users = reactive({
@@ -43,6 +44,7 @@ export const useUserViewModel = defineStore('UserViewModel', () => {
     async function rapport(queryParams) {
         const data = await userService.rapport(queryParams);
 
+        rapports.exercice = data?.data?.data?.exercice
         rapports.analityc = data?.data?.data?.analityc
         rapports.club = data?.data?.data?.club
         

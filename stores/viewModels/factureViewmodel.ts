@@ -15,6 +15,7 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
     
     const sharedAdminColumns = [
         { label: 'facture.colunm.td1', key: 'reference' },
+        { label: 'facture.colunm.total_amount_usd', key: 'total_amount_usd' },
         { label: 'facture.colunm.td2', key: 'amount' },
         { label: 'facture.colunm.td3', key: 'amount_pay' },
         { label: 'facture.colunm.td4', key: 'remaining_amount' },
@@ -22,7 +23,7 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
         { label: 'facture.colunm.td6', key: 'status' },
         { label: 'facture.colunm.td7', key: 'date_emission' },
         { label: 'facture.colunm.td8', key: 'date_echeance' },
-        { label: 'facture.colunm.td9', key: 'action' }
+        { label: 'facture.colunm.td9', key: 'action' },
         ];
     
     
@@ -33,6 +34,7 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
     { label: 'facture.colunm.td1', key: 'reference' },
         // { label: 'Club', key: 'club' },
         { label: 'facture.colunm.td2', key: 'amount' },
+        { label: 'facture.colunm.total_amount_usd', key: 'total_amount_usd' },
         { label: 'facture.colunm.td3', key: 'amount_pay' },
         { label: 'facture.colunm.td3', key: 'remaining_amount' },
         { label: 'facture.colunm.td5', key: 'type' },
@@ -85,6 +87,9 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
     async function create(send='send') {
         if (newRubrique.length==0) {
             alert('Merci de bien vouloir saisir au moins une rubrique')
+            return
+        }
+        if (!confirm('Voulez-vous éffectuer cette action ?')) {
             return
         }
         isLoading.value= send
