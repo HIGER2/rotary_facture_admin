@@ -28,6 +28,14 @@ onMounted(() => {
                  
                     <div class="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <div class="text-sm font-medium leading-6 text-gray-900">
+                            {{$t('club.detail.code')}}
+                        </div>
+                        <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                          {{ data?.code }}
+                        </div>
+                    </div>
+                    <div class="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <div class="text-sm font-medium leading-6 text-gray-900">
                             {{$t('club.detail.label1')}}
                         </div>
                         <div class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">

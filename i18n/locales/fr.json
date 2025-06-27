@@ -33,6 +33,7 @@
     //     "td9":"Action"
     // },
     "colunm_club":{
+        "code":"Code",
         "td1":"nom club",
         "td2":"pays",
         "td3":"langue",
@@ -94,6 +95,7 @@
             },
             "colunm":{
                 "td1":"Nom",
+              
                 "td2":"Prénoms",
                 "td3":"Fonction",
                 "td4":"email",
@@ -114,6 +116,7 @@
             }
         },
         "detail":{
+            "code":"Code",
             "label1":"Nom du club",
             "label2":"Pays",
             "label3":"Langue",

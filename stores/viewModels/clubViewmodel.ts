@@ -62,7 +62,8 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
       
         clubs.data = [...response.map((item:any,index) => (
             {
-                id : item?.code,
+                id : item?.id,
+                code : item?.code,
                 uid : item?.club_uid,
                 name : item?.name,
                 language : item?.country?.langage,

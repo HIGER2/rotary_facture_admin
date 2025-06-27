@@ -20,7 +20,7 @@ const filters = reactive({
 
 
 const columns = [
-    { label: '#', key: 'id' },
+    { label: 'colunm_club.code', key: 'code' },
     { label: 'colunm_club.td1', key: 'name' },
     { label: 'colunm_club.td2', key: 'country' },
     { label: 'colunm_club.td3', key: 'language' },
