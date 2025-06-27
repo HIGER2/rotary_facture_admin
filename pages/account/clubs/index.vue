@@ -15,7 +15,7 @@ const loading=ref(false)
 const filters = reactive({
   search: "",
   status: "",
-  limit: "1",
+  limit: "all",
 });
 
 
@@ -132,17 +132,16 @@ onMounted(() => {
                         :placeholder="`${$t('placeholder_search')}...`" autocomplete="off">
                     </div>
                     <div class="w-auto gap-2 flex items-center justify-between">
-                        <div class="flex gap-2 w-auto rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500  h-8 ">
+                        <!-- <div class="flex gap-2 w-auto rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500  h-8 ">
                             <div class="w-auto px-1 block border-r border-gray-300 ">{{ $t('filter_page') }}</div>
                             <div class="w-auto flex items-center justify-center h-full">
                                 <select v-model="filters.limit" class="w-full h-full bg-transparent border-none outline-none">
                                     <option 
                                     v-for="(item, index) in storeClub?.clubs.page" :key="index"
                                     :value="item?.label">{{ item?.label }}</option>
-                                    <!-- <option value="all">Tout</option> -->
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <GlobaleUploadCsv
                         :data="storeClub?.clubs.data"
                             :colunm="columns"

@@ -7,6 +7,13 @@ const storeStting = useSettingViewModel()
 const {newClub,create} = useClubViewModel()
 const {isLoading} = storeToRefs(useClubViewModel())
 
+definePageMeta({
+  breadcrumb: [
+    {label:'Clubs',path:"/account/clubs"},
+    {label:'Créer un club',path:null}
+  ]
+})
+
 const createClub = async () => {
     let validate = newClub.club_personel[0]
     if (validate.name =="" && validate.emil == "" && validate.phone =="") {
@@ -139,7 +146,6 @@ onMounted(() => {
                                     :placeholder="$t(item?.email)" 
                                     name="title" />
                                     <UiFormInput 
-                                    :required="index==0"
                                     v-model="newClub.club_personel[index].phone"
                                     :label="$t(item?.phone)" 
                                     :placeholder="$t(item?.phone)" 

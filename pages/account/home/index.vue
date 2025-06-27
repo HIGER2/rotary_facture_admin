@@ -6,7 +6,7 @@ import { useUserViewModel } from '~/stores/viewModels/userViewmodel'
 
 const  userStore=useUserViewModel()
 const storeFacture = useFactureViewModel()
-
+const {formatNumber}=Utils()
 const loading=ref(false)
 const handleSats = async() => {
     if (userStore?.stats?.data?.length == 0) {
@@ -36,7 +36,7 @@ onMounted(() => {
          <template v-for="(item, index) in userStore?.stats?.analityc" :key="index">
             <div class="box">
                 <span class="text-xs text-gray-500 font-medium">{{$t(item?.label) }}</span>
-                <h2 class="text-lg font-extrabold">{{ item?.value }}</h2>
+                <h2 class="text-lg font-extrabold">{{formatNumber(item?.value) }}</h2>
             </div>
          </template>
        </div>

@@ -15,7 +15,7 @@ onMounted(() => {
 <template>
         <section>
             <!-- <pre>  {{ data }}</pre> -->
-            <div class="px-4 sm:px-0">
+            <div class="px-2 sm:px-0">
                 <h3 class="text-base font-semibold leading-7 text-gray-900">
                     {{ $t('detail_title') }}
                 </h3>
@@ -26,7 +26,7 @@ onMounted(() => {
             <div class="mt-6 bg-white p-4 border overflow-hidden  border-gray-200 rounded-lg">
                 <div class="divide-y divide-gray-100">
                  
-                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <div class="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <div class="text-sm font-medium leading-6 text-gray-900">
                             {{$t('club.detail.label1')}}
                         </div>
@@ -34,7 +34,7 @@ onMounted(() => {
                           {{ data?.name }}
                         </div>
                     </div>
-                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <div class="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <div class="text-sm font-medium leading-6 text-gray-900">
                             {{$t('club.detail.label2')}}
                         </div>
@@ -42,7 +42,7 @@ onMounted(() => {
                             {{ data?.country?.name }}
                         </div>
                     </div>
-                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <div class="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <div class="text-sm font-medium leading-6 text-gray-900">
                             {{$t('club.detail.label3')}}
                         </div>
@@ -50,7 +50,7 @@ onMounted(() => {
                             {{ data?.country?.langage }}
                         </div>
                     </div>
-                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <div class="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <div class="text-sm font-medium leading-6 text-gray-900">
                             {{$t('club.detail.label4')}}
                         </div>

@@ -47,14 +47,14 @@ watch(
                             </h3>
                         </div>
                         <div class="p-6 pt-0 px-2 sm:px-6 w-full text-[13px]">
-                            <div class="w-full my-5 cursor-pointer h-auto items-center justify-center rounded-lg bg-slate-100 p-2 text-slate-500 dark:bg-slate-800 dark:text-slate-400"  style="outline: none;">
+                            <div class="w-full my-5 cursor-pointer h-auto items-center justify-center rounded-lg bg-slate-100 p-2 text-slate-500 "  style="outline: none;">
                                 <p class="text-center">
                                     {{ $t('login.notfy.title2') }}
                                 </p>
                             </div>
                             <div class="w-full text-center">
                                 <h3>{{ $t('login.notfy.title3') }}</h3>
-                                <p class="text-sm text-slate-500 dark:text-slate-400 mt-5">
+                                <p class="text-sm text-slate-500  mt-5">
                                     {{ $t('login.notfy.title4') }}
                                     <NuxtLink to="/auth/login" class="text-blue-800 underline">
                                         {{ $t('login.notfy.title5') }}

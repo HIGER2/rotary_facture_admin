@@ -1,0 +1,1 @@
+function e(){function r(t,i=2){const n=Number(t);return isNaN(n)?"0":n.toLocaleString("fr-FR",{minimumFractionDigits:0,maximumFractionDigits:i})}function o(t){const i={year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:!1};return new Date(t).toLocaleDateString("fr-FR",i)}return{formatDate:o,formatNumber:r}}export{e as U};

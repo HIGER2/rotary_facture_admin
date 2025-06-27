@@ -31,6 +31,8 @@ const setActiveUpdate = (state:boolean) => {
 
 
 const setUpdate = (item:any) => {
+    console.log(item);
+    
     storeRubrique.updateRubrique.status = item?.status
     storeRubrique.updateRubrique.id = item?.id
     storeRubrique.updateRubrique.designation = item?.designation
@@ -79,7 +81,7 @@ watch(
     { deep: true }
 );
 
-onMounted(() => {
+onBeforeMount(() => {
    handleListe()
 })
 </script>
@@ -95,14 +97,14 @@ onMounted(() => {
                     <h5 class="text-sm font-semibold uppercase text-neutral-500">
                         {{ $t('rubrique.title') }}
                     </h5>
-                    <!-- <div class="w-auto">
+                    <div class="w-auto">
                         <button 
                         @click="setActive(true)"
-                        class=" cursor-pointer items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none text-xs disabled:opacity-50 bg-[#1F2923] text-slate-50 shadow hover:bg-[#2f3a34]  px-4 py-3 self-start"
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1  disabled:pointer-events-none text-xs disabled:opacity-50 bg-primary text-slate-50 shadow  px-4 py-3 self-start"
                         >
                         {{ $t('rubrique.button') }}
                         </button>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="w-full flex items-center justify-between mb-3 ">
                     <div class="w-auto">
@@ -142,7 +144,7 @@ onMounted(() => {
                 </div>
             </div>
             <div class="w-full p-2">
-                <RubriqueTableComponent :loading="loading" :data="storeRubrique?.rubriques.data" :setUpdate="setUpdate"/>
+                <RubriqueTableComponent :loading="loading" :data="storeRubrique?.rubriques?.data" :setUpdate="setUpdate"/>
             </div>
            <RubriqueAddRubriqueComponent
            :new-rubrique="storeRubrique.newRubrique"

@@ -139,7 +139,6 @@ onMounted(() => {
                                     :placeholder="$t(item?.email)" 
                                     name="title" />
                                     <UiFormInput 
-                                    :required="index==0"
                                     v-model="payload.club_personel[index].phone"
                                     :label="$t(item?.phone)" 
                                     :placeholder="$t(item?.phone)" 

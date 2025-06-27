@@ -5,6 +5,13 @@ import { useClubViewModel } from '~/stores/viewModels/clubViewmodel'
 const useStore  = useClubViewModel()
 const {isLoading} = storeToRefs(useClubViewModel())
 const route = useRoute()
+
+definePageMeta({
+  breadcrumb: [
+    {label:'Clubs',path:"/account/clubs"},
+    {label:'Modifier le club',path:null}
+  ]
+})
 const updateClub = async () => {
     let validate = useStore.updateClub.club_personel[0]
     if (validate.name =="" && validate.email == "" && validate.phone =="") {

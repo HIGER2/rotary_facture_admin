@@ -4,10 +4,13 @@ import { ClubFactureComponent, ClubPaymentComponent, ClubPersonelComponent } fro
 import { useClubViewModel } from '~/stores/viewModels/clubViewmodel'
 
 definePageMeta({
-  breadcrumb: 'Détail du club'
+  breadcrumb: [
+    {label:'Clubs',path:"/account/clubs"},
+    {label:'Détail du club',path:null}
+  ]
 })
 const storeClub = useClubViewModel()
-const isActive = ref(2)
+const isActive = ref(1)
 
 const setTabs = (state:number) => {
     isActive.value = state

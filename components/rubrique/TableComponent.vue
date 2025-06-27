@@ -9,12 +9,12 @@ interface TableProps {
 const props = defineProps<TableProps>()
 
 const columns = [
-    { label: 'rubrique.colunm.td1', key: 'code' },
-    { label: 'rubrique.colunm.td2', key: 'libele' },
-    { label: 'rubrique.colunm.td3', key: 'quantity' },
-    { label: 'rubrique.colunm.td4', key: 'amount' },
+    { label: 'rubrique.colunm.code', key: 'code' },
+    { label: 'rubrique.colunm.libele', key: 'libele' },
+    { label: 'rubrique.colunm.status', key: 'status' },
+    { label: 'rubrique.colunm.price', key: 'price' },
     // { label: 'rubrique.colunm.td5', key: 'designation' },
-    // { label: 'rubrique.colunm.td6', key: 'action' },
+    { label: 'rubrique.colunm.action', key: 'action' },
 ]
 
 const editUser = (user) => {

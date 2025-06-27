@@ -29,6 +29,7 @@ const filters = reactive({
     search: "",
     status: "",
 });
+const {formatNumber}=Utils()
 
 const setTabs=(state:number)=>{
     isActive.value =state
@@ -98,7 +99,7 @@ onMounted(() => {
                                 <span class=" text-xs text-gray-500 font-medium">
                                     {{ $t(item.label) }}
                                 </span>
-                                <h2 class="text-lg font-extrabold">{{ item?.value }}</h2>
+                                <h2 class="text-lg font-extrabold">{{formatNumber(item?.value) }}</h2>
                             </div>
                         </template>
                     </div>

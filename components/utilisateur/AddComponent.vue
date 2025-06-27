@@ -23,7 +23,7 @@ const optionStatus = [
         <div  class=" grid  w-full max-w-300  gap-4">
                 <div class="flex flex-col space-y-1.5 text-center sm:text-left">
                     <h2 id="radix-:r70:" class="text-lg font-semibold leading-none tracking-tight">
-                       {{ $t('user.form.title_new') }}
+                        {{ $t('user.form.title_new') }}
                     </h2>
                 </div>
                 <form class="" @submit.prevent="createUser()">

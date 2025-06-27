@@ -34,9 +34,9 @@ export const useRubriqueViewModel = defineStore('RubriqueViewModel', () => {
                 id : item?.id,
                 uid : item?.rubrique_uid,
                 libele : item?.libele,
-                comment : item?.comment,
-                quantity : item?.quantity,
-                amount : item?.amount,
+                designation : item?.designation,
+                price : item?.price,
+                status : item?.status,
                 // status : item?.status,
             }
         ))]
@@ -70,10 +70,12 @@ export const useRubriqueViewModel = defineStore('RubriqueViewModel', () => {
         isLoading.value = true
         let items={...newRubrique}
         const data = await useRubrique.create(items);
+        
         if (data?.error) {
             alert(data?.error?.message)
         }
         if (data?.data) {
+            reset()
             useToastify("Opération éffectuée", {
                 autoClose: 1000,
                 type: ToastifyOption.TYPE.SUCCESS,
@@ -106,6 +108,10 @@ export const useRubriqueViewModel = defineStore('RubriqueViewModel', () => {
         }
         isLoading.value = false
 
+    }
+
+    function reset() {
+        Object.assign(newRubrique,{...initial} );
     }
     return {
         all,

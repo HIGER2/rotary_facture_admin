@@ -9,6 +9,8 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   typescript: {
   strict: false
+  },ui: {
+    colorMode: false,
   },
   runtimeConfig: {
     public: {
@@ -51,7 +53,8 @@ export default defineNuxtConfig({
  
   modules: [
     '@nuxt/image', 
-    '@nuxt/scripts', // '@nuxt/ui'
+    '@nuxt/scripts', 
+    '@nuxt/ui',
     '@nuxt/test-utils',
     '@pinia/nuxt', 
     'nuxt-toastify',

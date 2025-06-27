@@ -15,8 +15,9 @@ const columns = {
     "admin":[
     { label: 'libélé', key: 'libele' },
     // { label: 'montant à regler', key: 'club' },
+    { label: 'prix', key: 'price' },
     { label: 'quantité', key: 'quantity' },
-    { label: 'montant', key: 'amount' },
+    { label: 'montant total', key: 'total_amount' },
     
     // { label: 'mode paiement', key: 'mode_paiement' },
     // { label: 'date', key: 'date' },
@@ -25,18 +26,17 @@ const columns = {
 "super_admin":[
     { label: 'libélé', key: 'libele' },
     // { label: 'montant à regler', key: 'club' },
+    { label: 'prix', key: 'price' },
     { label: 'quantité', key: 'quantity' },
-    { label: 'montant', key: 'amount' },
+    { label: 'montant total', key: 'total_amount' },
     
-    // { label: 'mode paiement', key: 'mode_paiement' },
-    // { label: 'date', key: 'date' },
-    // { label: 'action', key: 'action'},
 ],
 "club":[
     { label: 'libélé', key: 'libele' },
     // { label: 'montant à regler', key: 'club' },
+    { label: 'prix', key: 'price' },
     { label: 'quantité', key: 'quantity' },
-    { label: 'montant', key: 'amount' },
+    { label: 'montant total', key: 'total_amount' },
 ]
 }
 
@@ -46,6 +46,7 @@ const columns = {
 <template>
   <section class="mt-4">
         <div class="px-4 sm:px-0 flex items-center justify-between">
+            <!-- <pre>{{ rubriques }}</pre> -->
             <h3 class="text-base font-semibold leading-7 text-gray-900">Rubriques</h3>
             <!-- <template v-if="user?.role=='admin'">
                 <button 

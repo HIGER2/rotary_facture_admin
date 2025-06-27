@@ -38,6 +38,7 @@ const columns = [
 //         ))]
 // }
 
+const {formatNumber}=Utils()
 
 const handleRapport =async (params:any={}) => {
 const queryParams = new URLSearchParams({
@@ -111,7 +112,7 @@ onBeforeMount(async() => {
                         <template v-for="(item, index) in userStore?.rapports?.analityc" :key="index">
                             <div class="box">
                                 <span class="text-xs text-gray-500 font-medium">{{$t(item?.label) }}</span>
-                                <h2 class="text-lg font-extrabold">{{ item?.value }}</h2>
+                                <h2 class="text-lg font-extrabold">{{formatNumber(item?.value) }}</h2>
                             </div>
                         </template>
                     </div>

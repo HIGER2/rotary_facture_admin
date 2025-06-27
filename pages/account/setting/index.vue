@@ -23,7 +23,7 @@ const setTabs=(state:number)=>{
 <template>
     <div>
         <NuxtLayout v-slot="{userConnected}">
-            <SettingButtonTabsComponent :setTabs="setTabs" :is-active="isActive" />
+            <!-- <SettingButtonTabsComponent :setTabs="setTabs" :is-active="isActive" /> -->
             <div class="w-full">
                 <component :is="component[isActive]"></component>
             </div>

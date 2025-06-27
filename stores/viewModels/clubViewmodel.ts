@@ -47,15 +47,22 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
     
 
     async function allByFilter(queryParams ="") {
+
+        
         const data = await useClub.allByFilter(queryParams);
+        let response = [];
+        if (queryParams.get('page') =='all') {
+            response = data.data?.data
+        }else{
+            data.data?.data?.links.shift()
+            data.data?.data?.links.pop()
+            clubs.page = data.data?.data?.links
+            response = data.data?.data?.data
+        }
       
-        data.data?.data?.links.shift()
-        data.data?.data?.links.pop()
-        clubs.page = data.data?.data?.links
-        console.log(data.data?.data?.data);
-        clubs.data = [...data.data?.data?.data.map((item:any,index) => (
+        clubs.data = [...response.map((item:any,index) => (
             {
-                id : item?.id,
+                id : item?.code,
                 uid : item?.club_uid,
                 name : item?.name,
                 language : item?.country?.langage,
@@ -183,7 +190,6 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
             ]
         });
     }
-
     
     function resetUpdateClub() {
         Object.assign(updateClub, {
@@ -217,7 +223,6 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
         });
     }
 
-    
     return {
         all,
         club,

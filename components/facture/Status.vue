@@ -7,18 +7,20 @@ const props = defineProps<{
 }>();
 
 const statusChange = (status:string)=>{
-  return  status == 'brouillon' ? "text-blue-600 bg-blue-50"  :
-  status == 'en_cours' ? "text-yellow-600 bg-yellow-50"  :
-  status == 'payée' ? "text-green-600 bg-green-50" :
-  status == 'annulée'  ? "text-red-600 bg-red-50" :
-  status == 'partiellement_payé' ? "text-violet-600 bg-violet-50" :
-  status == 'arriérée' && "text-orange-500 bg-orange-50"
+  return  status == 'brouillon' ? "text-blue-600 bg-blue-50" :
+  status == 'courante' ? "text-yellow-600 bg-yellow-50"  :
+  status == 'arriere' && "text-orange-500 bg-orange-50"
  };
+
+ const text = (status:string)=>{
+  return status == 'brouillon'? 'brouillon': status == 'courante' ? "courante" :
+  status == 'arriere'  && "arriérée";
+  }
 </script>
 
 <template>
     <div>
-      <div aria-label="status" :class="statusChange(status)" class=" text-center  font-medium text-md min-w-[80px] max-w-max  px-3 rounded-md">{{ status }}</div>
+      <div aria-label="status" :class="statusChange(status)" class=" text-center  font-medium text-md min-w-[80px] max-w-max  px-3 rounded-md">{{ text(status) }}</div>
     </div>
 </template>
 

@@ -5,18 +5,26 @@ interface TableProps {
   data: any,
   user:any,
   loading?:boolean,
-  columns: any
+  columns: any,
+  type?: string,
 }
 const props = withDefaults(defineProps<TableProps>(),{
     loading: false
 })
-
+const {formatNumber}=Utils()
 
 const handleclick = (item) => {
     navigateTo(`/account/factures/${item?.reference}`)
 }
-const editUser = (user) => {
-  console.log('Modifier :', user)
+const path = (type,item) => {
+    if (type === 'invoice_unpaid') {
+        return `/account/factures/club/invoice-unpaid/${item?.reference}`
+    }
+    if (type === 'invoice_paid') {
+        return `/account/factures/club/invoice-paid/${item?.reference}`
+    }
+    return `/account/factures/${item?.reference}`
+
 }
 
 </script>
@@ -24,8 +32,19 @@ const editUser = (user) => {
 <template>
     <div>
         <UiDynamicTable :loading="loading" :columns="columns[user?.role]" :data="props.data">
+
+            <template #amount="{ item }">
+                <span>{{ formatNumber(item?.amount) }}</span>
+            </template>
+            <template #amount_pay="{ item }">
+               <span>{{ formatNumber(item?.amount_pay) }}</span>
+            </template>
+            <template #remaining_amount="{ item }">
+               <span>{{ formatNumber(item?.remaining_amount) }}</span>
+            </template>
+
             <template #reference="{ item }">
-                <NuxtLink :to="`/account/factures/${item?.reference}`"
+                <NuxtLink :to="path(type,item)"
                 class="text-blue-500 hover:text-blue-700 hover:underline"
                 >{{ item?.reference}}</NuxtLink>
             </template>
@@ -53,13 +72,12 @@ const editUser = (user) => {
                     </NuxtLink> -->
                 </div>
             </template>
-            <template #type="{ item }">
-                <FactureType :status="item?.type"/>
-            </template>
             <template #status="{ item }">
                 <FactureStatus :status="item?.status"/>
             </template>
-          
+            <template #status_payment="{ item }">
+                <FactureStatusPayment :status="item?.status_payment"/>
+            </template>
         </UiDynamicTable>
     </div>
 </template>

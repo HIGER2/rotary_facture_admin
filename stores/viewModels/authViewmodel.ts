@@ -25,7 +25,7 @@ export const useAuthViewModel = defineStore('AuthViewModel', () => {
         type:"member",
         password:"",
     })
-    
+
     const clear = () => {
         userConnected.value = ''
     }
@@ -88,7 +88,7 @@ export const useAuthViewModel = defineStore('AuthViewModel', () => {
             let pay = localStorage.getItem('pay');
             if (pay) {
                 localStorage.removeItem('pay');
-                navigateTo(`/account/factures/${pay}`)
+                navigateTo(`/account/factures/club/invoice-unpaid/${pay}`)
                 return
             }
             navigateTo('/account/home')
@@ -116,6 +116,6 @@ export const useAuthViewModel = defineStore('AuthViewModel', () => {
         isLoading,
         loginWithToken,
         setMessageError,
-        messageError
+        messageError,
     }
 })

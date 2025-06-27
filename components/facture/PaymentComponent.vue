@@ -46,7 +46,7 @@ const createPayment = async (item) => {
 const processPayment = async (item) => {
     await Promise.all([
         storePayment.processePayment(item),
-        props.handleListe()
+        // props.handleListe()
     ])
 }
 

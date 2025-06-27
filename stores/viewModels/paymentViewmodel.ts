@@ -54,7 +54,7 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
         isLoading.value = true
         let items = {
             ...newPayment,
-             facture_id:item.id,
+            facture_id:item.id,
             facture_uid:item.facture_uid
         }
         const data = await usePayment.create(items);
@@ -143,6 +143,7 @@ export const usePaymentViewModel = defineStore('PaymentViewModel', () => {
         processePayment,
         paymentAmount,
         checkPayment,
-        analityc
+        analityc,
+        resetPaymentAmount
     }
 })

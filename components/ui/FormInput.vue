@@ -12,7 +12,7 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void;
 }>();
 
-const inputValue = ref(props.modelValue);
+const inputValue = ref(props.modelValue ?? '');
 
 watch(() => props.modelValue, (newValue) => {
   inputValue.value = newValue;

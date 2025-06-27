@@ -1,6 +1,7 @@
- @import "tailwindcss";
+
+@import "@nuxt/ui";
+@import "tailwindcss";
  /* @plugin "daisyui"; */
-/* @import "@nuxt/ui"; */
 @plugin "daisyui" {
   themes: false;
 }
@@ -16,10 +17,10 @@
 
 @layer components {
   .link {
-    @apply p-2 !no-underline gap-2 flex  items-center cursor-pointer text-gray-600 font-[400] rounded-md w-full text-sm hover:bg-primary hover:text-gray-300;
+    @apply !p-[7px] !no-underline gap-2 flex  items-center !cursor-pointer text-gray-600 font-[400] rounded-md w-full text-sm hover:bg-primary hover:!text-gray-200;
   }
   .box {
-    @apply rounded-xl border border-slate-200 shadow-xs bg-white text-slate-950  p-6 flex flex-col justify-between gap-3;
+    @apply rounded-xl !border !border-slate-200 !shadow-xs bg-white text-slate-950  !p-6 flex flex-col justify-between gap-3;
   }
   a {
     @apply no-underline;

@@ -16,6 +16,7 @@ const optionState =[
     {label:'total remboursement', key:'totalRefundAmountSubscribedGalaMembers'},
 ]
 const loading = ref(true);
+const {formatNumber}=Utils()
 
 const columns = [
   { label: 'payment.tab2.colunm.memberType', key: 'memberType' },
@@ -155,7 +156,7 @@ onMounted(async () => {
                             <span class=" text-xs text-gray-500 font-medium">
                                 {{ item.label}}
                             </span>
-                            <h2 class="text-lg font-extrabold">{{stats && stats[item?.key]  }}</h2>
+                            <h2 class="text-lg font-extrabold">{{stats && formatNumber(stats[item?.key]) }}</h2>
                         </div>
                     </template>
             </div>

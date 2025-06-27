@@ -6,6 +6,7 @@ import { useFactureViewModel } from '~/stores/viewModels/factureViewmodel'
 
 const storeFacture = useFactureViewModel()
 const loading=ref(false)
+const {formatNumber}=Utils()
 
 definePageMeta({
   breadcrumb: 'navbar.bread.invoices'
@@ -25,6 +26,7 @@ const handleListe =async (params:any={}) => {
     const queryParams = new URLSearchParams({
         search: filters.search || '',
         status: params.status || '',
+        statusPayment: '',
     });
     await storeFacture.all(queryParams) 
     loading.value = false
@@ -77,7 +79,7 @@ onMounted(() => {
                             <span class=" text-xs text-gray-500 font-medium">
                                 {{$t(item?.label) }}
                             </span>
-                            <h2 class="text-lg font-extrabold">{{ item?.value }}</h2>
+                            <h2 class="text-lg font-extrabold">{{formatNumber(item?.value) }}</h2>
                         </div>
                     </template>
                 </div>
@@ -91,12 +93,12 @@ onMounted(() => {
                         <div class="w-auto gap-2 flex items-center justify-between">
                             <select v-model="filters.status" class="flex rounded-lg border border-slate-200 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 h-8 w-[150px] lg:w-[120px]">
                                 <option value="" >{{ $t('facture.filter.x1') }}</option>
-                                <option value="en_cours">{{ $t('facture.filter.x2') }}</option>
                                 <option value="brouillon">{{ $t('facture.filter.x3') }}</option>
-                                <option value="payée">{{ $t('facture.filter.x4') }}</option>
-                                <option value="annulée">{{ $t('facture.filter.x5') }}</option>
-                                <option value="partiellement_payé">{{ $t('facture.filter.x6') }}</option>
-                                <option value="arriérée">{{ $t('facture.filter.x7') }}</option>
+                                <option value="courante">{{ $t('facture.filter.x2') }}</option>
+                                <option value="arriere">{{ $t('facture.filter.x4') }}</option>
+                                <!-- <option value="annulée">{{ $t('facture.filter.x5') }}</option> -->
+                                <!-- <option value="partiellement_payé">{{ $t('facture.filter.x6') }}</option> -->
+                                <!-- <option value="arriérée">{{ $t('facture.filter.x7') }}</option> -->
                             </select>
                             <GlobaleUploadCsv
                             :data="storeFacture?.factures"

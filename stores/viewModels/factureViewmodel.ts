@@ -12,35 +12,31 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
     const analityc = ref([]);
     const facture = ref({});
     const isLoading =ref<any>(false)
-    
+    const today = new Date().toISOString().split('T')[0]
     const sharedAdminColumns = [
-        { label: 'facture.colunm.td1', key: 'reference' },
-        { label: 'facture.colunm.total_amount_usd', key: 'total_amount_usd' },
-        { label: 'facture.colunm.td2', key: 'amount' },
-        { label: 'facture.colunm.td3', key: 'amount_pay' },
-        { label: 'facture.colunm.td4', key: 'remaining_amount' },
-        { label: 'facture.colunm.td5', key: 'type' },
-        { label: 'facture.colunm.td6', key: 'status' },
-        { label: 'facture.colunm.td7', key: 'date_emission' },
-        { label: 'facture.colunm.td8', key: 'date_echeance' },
-        { label: 'facture.colunm.td9', key: 'action' },
-        ];
+    { label: 'facture.colunm.td1', key: 'reference' },
+    // { label: 'facture.colunm.total_amount_usd', key: 'total_amount_usd' },
+    { label: 'facture.colunm.td2', key: 'amount' },
+    { label: 'facture.colunm.td3', key: 'amount_pay' },
+    { label: 'facture.colunm.td4', key: 'remaining_amount' },
+    { label: 'facture.colunm.td5', key: 'status' },
+    { label: 'facture.colunm.td6', key: 'status_payment' },
+    { label: 'facture.colunm.td7', key: 'date_emission' },
+    { label: 'facture.colunm.td8', key: 'date_echeance' },
+    { label: 'facture.colunm.td9', key: 'action' },
+    ];
     
     
     const columns = {
         "admin":sharedAdminColumns,
         "super_admin":sharedAdminColumns,
     "club":[
-    { label: 'facture.colunm.td1', key: 'reference' },
-        // { label: 'Club', key: 'club' },
+        { label: 'facture.colunm.td1', key: 'reference' },
         { label: 'facture.colunm.td2', key: 'amount' },
-        { label: 'facture.colunm.total_amount_usd', key: 'total_amount_usd' },
         { label: 'facture.colunm.td3', key: 'amount_pay' },
-        { label: 'facture.colunm.td3', key: 'remaining_amount' },
-        { label: 'facture.colunm.td5', key: 'type' },
-    
-        { label: 'facture.colunm.td6', key: 'status' },
-    
+        { label: 'facture.colunm.td4', key: 'remaining_amount' },
+        { label: 'facture.colunm.td5', key: 'status' },
+        { label: 'facture.colunm.td6', key: 'status_payment' },
         { label: 'facture.colunm.td7', key: 'date_emission' },
         { label: 'facture.colunm.td8', key: 'date_echeance' },
     ]
@@ -54,14 +50,17 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
     //     status:"en_cours",
     // }
     let initiaRubrique={
-        libele:"",
-        amount:"",
+        rubrique_id:null,
+        price:"",
         quantity:"",
-        comment:""
+        designation:"",
+        libele:""
     }
     let initial = {
         club_id: "",
         objet: "",
+        date_emission:today,
+        date_echeance:"",
     }
     const newFacture = reactive({...initial});
     const newRubrique = reactive([]);
@@ -76,19 +75,33 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
     })
     const total_amount =computed(()=>{
         return newRubrique.reduce((total,item)=>{
-            return  total += Number(item.quantity) * Number(item.amount)
+            return  total += Number(item.quantity) * Number(item.price)
         },0)
     })
     async function all(queryParams) {
         const data = await useFacture.all(queryParams);
         analityc.value =data?.data?.analytic
         factures.value = [...data.data?.data?.data]
+
+        return data?.data?.data?.data
     }
+
     async function create(send='send') {
         if (newRubrique.length==0) {
             alert('Merci de bien vouloir saisir au moins une rubrique')
             return
         }
+        // let element = newRubrique.find((element,index) => {
+        //     if (!element?.rubrique_id) {
+        //         return index
+        //     }
+        //     return
+        //     //  alert(`Veuillez selectionner les champs de la rubirique #${index}`)
+        // });
+
+        // console.log(element);
+        // return
+        
         if (!confirm('Voulez-vous éffectuer cette action ?')) {
             return
         }
@@ -107,9 +120,9 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
         if (data?.error) {
             alert(data?.error?.message)
         }
-        resetNewFacture()
-        resetNewRubrique()
         if (data?.data) {
+            resetNewFacture()
+            resetNewRubrique()
             useToastify("Opération éffectuée", {
                 autoClose: 1000,
                 type: ToastifyOption.TYPE.SUCCESS,
@@ -180,10 +193,7 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
     }
 
     function resetNewFacture() {
-        Object.assign(newFacture, {
-            club_id: "",
-            objet: ""
-        });
+        Object.assign(newFacture,{...initial});
     }
     function resetNewRubrique() {
         newRubrique.splice(0, newRubrique.length);
@@ -203,6 +213,14 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
             id: null
         });
     }
+    const cancel = ()=>{
+        if (confirm('Voulez-vous vraiment annuler cette action ?')) {
+            resetNewFacture()
+            resetNewRubrique()
+            resetUpdateFacture()
+            navigateTo('/account/factures')
+        }
+    }
     return {
         all,
         factures,
@@ -215,6 +233,7 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
         find,
         updateFacture,
         update,
+        cancel,
         analityc,
         addRubrique,
         removeRubrique,

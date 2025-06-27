@@ -23,9 +23,19 @@
   console.log(route);
   
   const breadcrumbs = computed(() => {
-    const matched = route.matched.filter(r => r.meta?.breadcrumb)
-    return matched.map(r => ({
-      label: r.meta.breadcrumb,
+
+    if (!route?.meta?.breadcrumb) {
+      return []
+    }
+    if (typeof route?.meta?.breadcrumb == 'string') {
+       const matched = route.matched.filter(r => r.meta?.breadcrumb)
+      return matched.map(r => ({
+        label: r.meta.breadcrumb,
+        to: r.path
+      }))
+    }
+    return  route?.meta?.breadcrumb.map(r => ({
+      label: r.label,
       to: r.path
     }))
   })

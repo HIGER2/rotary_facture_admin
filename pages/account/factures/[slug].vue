@@ -3,15 +3,22 @@
 import { FactureRubriqueComponent } from '#components';
 import { useFactureViewModel } from '~/stores/viewModels/factureViewmodel';
 import { usePaymentViewModel } from '~/stores/viewModels/paymentViewmodel';
-import { FactureType } from '#components';
-import { FactureStatus } from '#components';
+import { FactureStatus ,FactureStatusPayment} from '#components';
+
 const storeFacture = useFactureViewModel()
 const storePayment = usePaymentViewModel()
 const route = useRoute()
 const router = useRouter()
 const isActive=ref(false)
 const loading = ref(false)
+const {formatNumber}=Utils()
 
+definePageMeta({
+  breadcrumb: [
+    {label:'Factures',path:"/account/factures"},
+    {label:'Détail facture',path:null}
+  ]
+})
 const handleListe = async () => {
     // loading.value = true
     await storeFacture.findWithPaiement(route?.params?.slug) 
@@ -39,26 +46,29 @@ const checkPayment = async (token) => {
 
 const factureDetails ={
     left :[
-    { label: "facture.detail.label1", value: "reference" },
-    { label: "facture.detail.label2", value: "total_rubrique" },
-    { label: "facture.detail.label3", value:"total_quantity" },
-    { label: "facture.detail.label4", value: "amount" },
-    { label: "facture.detail.label5", value: "amount_pay" },
-    { label: "facture.detail.label6", value: "remaining_amount" },
+    { label: "facture.detail.label1", key: "reference" },
+    { label: "facture.detail.label2", key: "total_rubrique" },
+    { label: "facture.detail.label3", key:"total_quantity" },
+    { label: "facture.detail.label4", key: "amount" },
+    { label: "facture.detail.label5", key: "amount_pay" },
+    { label: "facture.detail.label6", key: "remaining_amount" },
     ],
     right:[
  
-  { label: "facture.detail.label7", value: "type", isComponent: FactureType },
-  { label: "facture.detail.label8", value: "status", isComponent: FactureStatus },
-  { label: "facture.detail.label9", value: "objet" },
-  { label: "facture.detail.label10", value: "club.name" },
-  { label: "facture.detail.label11", value: "date_emission" },
-  { label: "facture.detail.label12", value:"date_echeance" },
+  { label: "facture.detail.label7", key: "status", isComponent: FactureStatus },
+  { label: "facture.detail.label8", key: "status_payment", isComponent: FactureStatusPayment },
+  { label: "facture.detail.label9", key: "objet" },
+  { label: "facture.detail.label10", key: "club.name" },
+  { label: "facture.detail.label11", key: "date_emission" },
+  { label: "facture.detail.label12", key:"date_echeance" },
 ]
 }
 
 
 function getNestedValue(obj: any, path: string): any {
+    // console.log(obj);
+    // console.log(path.split('.').reduce((acc, part) => acc?.[part], obj));
+    
   return path.split('.').reduce((acc, part) => acc?.[part], obj);
 }
 
@@ -72,6 +82,24 @@ function formatDate(dateString: string): string {
     day: 'numeric',
   });
 }
+
+const showValue = (key: any,data) => {
+    switch (key) {
+        case 'date_emission':
+        case 'date_echeance':
+            return formatDate(getNestedValue(data, key));
+        case 'amount':
+        case 'amount_pay':
+        case 'remaining_amount':
+        case 'total_quantity':
+            return formatNumber(getNestedValue(data, key));
+        default:
+            return getNestedValue(data, key) || 'N/A';
+    }
+
+}
+// const FacturePaymentComponent = defineAsyncComponent(() => import('#components/facture/FacturePaymentComponent.vue'))
+
 onMounted(() => {
     handleListe() 
     if (Object.keys(route.query).length > 0 && route.query?.TransactionToken) {
@@ -113,13 +141,13 @@ onMounted(() => {
                             </template>
                         </div>
                     </div>
-                    <div class="w-full flex gap-3 items-center">
+                    <div class="w-full flex gap-3 ">
                     <div class="w-full mt-6 bg-white p-4 border overflow-hidden  border-gray-200 rounded-lg">
                         <div class="divide-y divide-gray-100">
                             <div
                                     v-for="(item, index) in factureDetails.left"
                                     :key="index"
-                                    class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
+                                    class="px-4 py-[7px] sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
                                     >
                                     <div class="text-sm font-medium leading-6 text-gray-900">
                                         {{ $t(item.label) }}
@@ -128,15 +156,12 @@ onMounted(() => {
                                         <component
                                         v-if="item.isComponent"
                                         :is="item.isComponent"
-                                        :status="getNestedValue(storeFacture.facture, item.value) || 'N/A'"
+                                        :status="getNestedValue(storeFacture.facture, item.key) || 'N/A'"
                                         />
                                         <span v-else>
-                                            {{ item.value === 'date_emission' || item.value === 'date_echeance'
-                                                ? formatDate(getNestedValue(storeFacture.facture, item.value))
-                                                : getNestedValue(storeFacture.facture, item.value) || 'N/A'
+                                            {{ 
+                                            showValue(item.key,storeFacture.facture) || 'N/A'
                                             }}
-
-                                        <!-- {{storeFacture.facture[item.value] || 'N/A'}} -->
                                         </span>
                                     </div>
                             </div>
@@ -147,7 +172,7 @@ onMounted(() => {
                             <div
                                     v-for="(item, index) in factureDetails.right"
                                     :key="index"
-                                    class="px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
+                                    class="px-4 py-[7px] sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
                                     >
                                     <div class="text-sm font-medium leading-6 text-gray-900">
                                         {{ $t(item.label) }}
@@ -156,15 +181,10 @@ onMounted(() => {
                                         <component
                                         v-if="item.isComponent"
                                         :is="item.isComponent"
-                                        :status="getNestedValue(storeFacture.facture, item.value) || 'N/A'"
+                                        :status="getNestedValue(storeFacture.facture, item.key) || 'N/A'"
                                         />
                                         <span v-else>
-                                            {{ item.value === 'date_emission' || item.value === 'date_echeance'
-                                                ? formatDate(getNestedValue(storeFacture.facture, item.value))
-                                                : getNestedValue(storeFacture.facture, item.value) || 'N/A'
-                                            }}
-
-                                        <!-- {{storeFacture.facture[item.value] || 'N/A'}} -->
+                                        {{ showValue(item.key,storeFacture.facture) || 'N/A' }}
                                         </span>
                                     </div>
                                     </div>
