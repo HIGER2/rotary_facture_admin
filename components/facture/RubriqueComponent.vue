@@ -14,7 +14,7 @@ const {formatNumber}=Utils()
 
 const getPriority=(item)=>{
     return item.priority == 'low' ? 'faible' :
-            item.priority == 'medium' ? 'moyenne' :
+            item.priority == 'medium' ? 'normal' :
             item.priority == 'high' && 'élevé' 
 }
 const columns = {
