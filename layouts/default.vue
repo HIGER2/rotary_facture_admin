@@ -97,7 +97,7 @@ onMounted(() => {
                             :class="{'hidden': !isOpen}"
                             class="min-w-45 z-50 rounded-lg p-2 absolute right-0 top-[140%] bg-white shadow-sm min-h-1">
                                 <li class="w-full  cursor-pointer " v-if=" storeAuth.userConnected?.role!=='club'">
-                                    {{ storeAuth.userConnected?.role }}
+                                    <!-- {{ storeAuth.userConnected?.role }} -->
                                     <NuxtLink 
                                     to="/account/setting"
                                     class="cursor-pointer flex items-center  gap-2 p-2 hover:bg-gray-100 rounded-md w-full">
