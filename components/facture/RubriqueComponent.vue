@@ -12,6 +12,11 @@ const props = defineProps<{
 
 const {formatNumber}=Utils()
 
+const getPriority=(item)=>{
+    return item.priority == 'low' ? 'faible' :
+            item.priority == 'medium' ? 'moyenne' :
+            item.priority == 'high' && 'élevé' 
+}
 const columns = {
     "admin":[
     { label: 'libélé', key: 'libele' },
@@ -93,6 +98,9 @@ const columns = {
                     </template>   
                     <template #remaining_amount="{ item }">
                        <span>{{ formatNumber(item.amount_pay) }}</span>
+                    </template>   
+                     <template #priority="{ item }">
+                       <span>{{ getPriority(item) }}</span>
                     </template>   
                     <!-- <template #action="{ item }">
                         <button 

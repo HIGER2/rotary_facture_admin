@@ -21,8 +21,7 @@ const columns = [
 const getPriority=(item)=>{
     return item.priority == 'low' ? 'faible' :
             item.priority == 'medium' ? 'moyenne' :
-            item.priority == 'middle' ? 'normale' :
-            item.priority == 'hight' && 'eleve' 
+            item.priority == 'high' && 'élevé' 
 }
 
 const editUser = (user) => {
