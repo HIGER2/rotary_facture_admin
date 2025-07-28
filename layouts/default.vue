@@ -17,7 +17,7 @@ const connected = async () => {
 }
 
 onMounted(() => {
-    // connected()
+    connected()
 })
 </script>
 
