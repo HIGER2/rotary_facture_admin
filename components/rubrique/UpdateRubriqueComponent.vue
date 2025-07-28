@@ -17,9 +17,9 @@ const optionStatus = [
 
 
 const optionPriority = [
-    { label: 'Eleve', value:"hight"},
-    { label: 'Normal', value:"middle"},
-    { label: 'Moyenne', value:"medium"},
+    { label: 'Eleve', value:"high"},
+    { label: 'Normal', value:"medium"},
+    // { label: 'Moyenne', value:"medium"},
     { label: 'Faible', value:"low"},
 ]
 
