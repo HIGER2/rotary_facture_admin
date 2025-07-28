@@ -16,6 +16,8 @@ const isActiveUpdate = ref(false)
 const isActiveClub = ref(false)
 
 
+const {formatNumber}=Utils()
+
 const setActiveUpdate = (state:boolean) => {
     isActiveUpdate.value =state
 }
@@ -124,8 +126,18 @@ const optionMethode = [
             <UiDynamicTable  :columns="columns[user?.role]" :data="payments">
                 <template #status="{ item }">
                     <PaymentStatus :status="item?.status" />
+                </template>  
+                <template #fee="{ item }">
+                    <span>{{ formatNumber(item.fee) }}</span>
+                </template>  
+                 <template #amount="{ item }">
+                    <span>{{ formatNumber(item.amount) }}</span>
+                </template>  
+                <template #total_amount="{ item }">
+                    <span>{{ formatNumber(item.total_amount) }}</span>
                 </template>   
-                    <template #action="{ item }">
+
+                <template #action="{ item }">
                         <button 
                             type="button"
                             @click="setUpdate(item)"

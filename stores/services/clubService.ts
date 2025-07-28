@@ -1,9 +1,21 @@
 
 import { defineStore } from 'pinia'
+import axios from 'axios'
 import { ref } from 'vue'
 
 
 export const useClubServices = defineStore('club', () => { 
+
+    async function createFromFile(items:any) {
+
+        return await useCustomFetch(`/club/createFromFile`, {
+            method: 'POST',
+            // headers: {
+            //     'Content-Type': 'multipart/form-data'
+            // },
+            body: items
+        })
+    }
 
     async function all(queryParams:any) {
         return await useCustomFetch(`/club/all?${queryParams.toString()}`)
@@ -39,6 +51,7 @@ export const useClubServices = defineStore('club', () => {
         findDetail,
         allByFilter,
         update,
-        findByMember
+        findByMember,
+        createFromFile
     }
 })

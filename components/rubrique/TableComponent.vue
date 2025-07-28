@@ -13,9 +13,17 @@ const columns = [
     { label: 'rubrique.colunm.libele', key: 'libele' },
     { label: 'rubrique.colunm.status', key: 'status' },
     { label: 'rubrique.colunm.price', key: 'price' },
+    { label: 'rubrique.colunm.priority', key: 'priority' },
     // { label: 'rubrique.colunm.td5', key: 'designation' },
     { label: 'rubrique.colunm.action', key: 'action' },
 ]
+
+const getPriority=(item)=>{
+    return item.priority == 'low' ? 'faible' :
+            item.priority == 'medium' ? 'moyenne' :
+            item.priority == 'middle' ? 'normale' :
+            item.priority == 'hight' && 'eleve' 
+}
 
 const editUser = (user) => {
   console.log('Modifier :', user)
@@ -43,6 +51,9 @@ const editUser = (user) => {
                         <i class="uil uil-pen"></i>
                     </button>
                 </div>
+            </template>
+            <template #priority="{ item }">
+             <span>{{ getPriority(item) }}</span>
             </template>
         </UiDynamicTable>
     </div>

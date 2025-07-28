@@ -8,9 +8,14 @@ const storeFacture = useFactureViewModel()
 const loading=ref(false)
 const {formatNumber}=Utils()
 
+const isActive = ref(false)
+const  setActive = (state:boolean) => {
+    isActive.value = state
+}
 definePageMeta({
   breadcrumb: 'navbar.bread.invoices'
 })
+
 const filters = reactive({
   search: "",
   status: "",
@@ -62,7 +67,15 @@ onMounted(() => {
                             {{ $t('facture.title') }}
                         </h5>
                         <template v-if="userConnected?.role !== 'club'">
-                            <div class="w-auto">
+                            <div class="w-auto flex gap-2 items-center">
+                                <UiButtonSubmit
+                                @click="setActive(true)"
+                                class="!bg-gray-100 !text-black  
+                                border border-slate-200
+                                "
+                                type="button"
+                                label="Importer" 
+                                />
                                 <NuxtLink 
                                 class="inline-flex items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1  disabled:pointer-events-none text-xs disabled:opacity-50 bg-primary text-slate-50 shadow  px-4 py-3 self-start"
                                 to="/account/factures/create"
@@ -112,6 +125,7 @@ onMounted(() => {
                 </div>
             </div>
         </div>
+            <FactureImportComponent :callback="handleListe" :isActive="isActive" :setActive="setActive"/>
         </NuxtLayout>
     </div>
 </template>

@@ -91,7 +91,7 @@ export const useAuthViewModel = defineStore('AuthViewModel', () => {
                 navigateTo(`/account/factures/club/invoice-unpaid/${pay}`)
                 return
             }
-            navigateTo('/account/home')
+            navigateTo('/account/factures/club/invoice-unpaid')
         }
         else if (data.error && data.error?.code === 403) {
             navigateTo('/auth/login')

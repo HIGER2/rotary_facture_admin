@@ -13,6 +13,7 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
     const club = ref();
     const isLoading = ref(false);
     const useClub = useClubServices();
+    const payload = reactive({file:null});
     let initial = {
         name: "",
         country_id: "",
@@ -45,6 +46,32 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
     const newClub = reactive({ ...initial });
     const updateClub = reactive({ ...initial, id:""});
     
+    async function createFromFile() {
+        if (!payload.file) {
+            alert('Merci de bien vouloir selectionner un fichier')
+            return
+        }
+        const formData = new FormData();
+        
+        formData.append('file', payload.file);
+
+        isLoading.value= true
+        const data = await useClub.createFromFile(formData);
+        if (data?.error) {
+            alert(data?.error?.message)
+        }
+        if (data?.data) {
+            payload.file= null
+            useToastify("Opération éffectuée", {
+                autoClose: 1000,
+                type: ToastifyOption.TYPE.SUCCESS,
+                // position: ToastifyOption.POSITION.TOP_RIGHT,
+                // transition: ToastifyOption.TRANSITIONS.,
+                // theme: ToastifyOption.THEME.LIGHT,
+            });
+        }
+        isLoading.value= false
+    }
 
     async function allByFilter(queryParams ="") {
 
@@ -236,6 +263,8 @@ export const useClubViewModel = defineStore('ClubViewModel', () => {
         updateClub,
         update,
         findByMember,
-        resetUpdateClub
+        resetUpdateClub,
+        payload,
+        createFromFile,
     }
 })

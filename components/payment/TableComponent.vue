@@ -6,6 +6,7 @@ interface TableProps {
   loading: boolean
 }
 const props = defineProps<TableProps>()
+const {formatNumber}=Utils()
 
 const columns = [
     { label: 'payment.tab1.colunm.td1', key: 'reference' },
@@ -43,6 +44,15 @@ const columns = [
                 class="text-blue-500 hover:text-blue-700 hover:underline"
                 >{{ item?.fac}}</NuxtLink>
             </template>
+             <template #fee="{ item }">
+                    <span>{{ formatNumber(item.fee) }}</span>
+                </template>  
+                 <template #amount="{ item }">
+                    <span>{{ formatNumber(item.amount) }}</span>
+                </template>  
+                <template #total_amount="{ item }">
+                    <span>{{ formatNumber(item.total_amount) }}</span>
+                </template>  
             <template #status="{ item }">
                <PaymentStatus :status="item?.status" />
             </template>

@@ -9,7 +9,8 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   typescript: {
   strict: false
-  },ui: {
+  },
+  ui: {
     colorMode: false,
   },
   runtimeConfig: {

@@ -18,7 +18,8 @@ export const useRubriqueViewModel = defineStore('RubriqueViewModel', () => {
         libele: "",
         price:"",
         designation:'',
-        status:'actif'
+        status:'actif',
+        priority:'medium'
     }
     const newRubrique = reactive({ ...initial });
     const updateRubrique = reactive({ ...initial, id:""});
@@ -36,6 +37,7 @@ export const useRubriqueViewModel = defineStore('RubriqueViewModel', () => {
                 libele : item?.libele,
                 designation : item?.designation,
                 price : item?.price,
+                priority : item?.priority,
                 status : item?.status,
                 // status : item?.status,
             }
@@ -53,6 +55,7 @@ export const useRubriqueViewModel = defineStore('RubriqueViewModel', () => {
                 libele : item?.libele,
                 designation : item?.designation,
                 price : item?.price,
+                priority : item?.priority,
                 status : item?.status,
             }
         ))]

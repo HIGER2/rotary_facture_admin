@@ -163,6 +163,7 @@
                 "libele":"libélé",
                 "status":"statut",
                 "price":"prix",
+                "priority":"priorite",
                 "action":"action"
             },
         "form":{

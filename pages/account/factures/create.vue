@@ -25,6 +25,7 @@ definePageMeta({
     {label:'Créer une facture',path:null}
   ]
 })
+
 const optionStatus = [
     { label: 'en cours', value:"en_cours"},
     { label: 'payée', value:"payée"},
@@ -71,6 +72,7 @@ const handRubrique = async () => {
             {
                 label : item?.libele,
                 id : item?.id,
+                priority : item?.priority,
                 price:item?.price
             }
         ))]
@@ -113,24 +115,24 @@ const today = new Date().toISOString().split('T')[0]
                         <div class="w-full flex items-start gap-2">
                             <form class="flex-1"  @submit.prevent="handleSubmit">
                                 <div class="w-full bg-white p-4 border overflow-hidden  border-gray-200 rounded-lg">
+                                   
                                     <div class="space-y-2 mb-4">
                                         <div class="mt-4 flex w-full  justify-start gap-2">
                                             <UiFormInput
                                             type="date"
-                                            :max="today"
+                                            :min="today"
                                             required
                                             v-model="newFacture.date_emission"
                                             :placeholder="$t('facture.form.dateEmsion')"
                                             :label="$t('facture.form.dateEmsion')"
-                                            rows="4"
                                             />
                                             <UiFormInput
                                             type="date"
                                             required
+                                            :min="today"
                                             v-model="newFacture.date_echeance"
                                             :placeholder="$t('facture.form.dateEcheance')"
                                             :label="$t('facture.form.dateEcheance')"
-                                            rows="4"
                                             />
                                         </div>
                                     </div>

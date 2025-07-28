@@ -31,13 +31,13 @@ const setActiveUpdate = (state:boolean) => {
 
 
 const setUpdate = (item:any) => {
-    console.log(item);
-    
     storeRubrique.updateRubrique.status = item?.status
     storeRubrique.updateRubrique.id = item?.id
     storeRubrique.updateRubrique.designation = item?.designation
     storeRubrique.updateRubrique.price = item?.price
+    storeRubrique.updateRubrique.priority = item?.priority
     storeRubrique.updateRubrique.libele = item?.libele
+    
     setActiveUpdate(true)
 }
 

@@ -5,13 +5,13 @@ import { useCookies } from '#imports';
 import { useFactureServices } from '../services/factureService';
 
 export const useFactureViewModel = defineStore('FactureViewModel', () => {
-   
     const useFacture = useFactureServices();
     
     const factures = ref([]);
     const analityc = ref([]);
     const facture = ref({});
     const isLoading =ref<any>(false)
+    const file = ref<any>(null);
     const today = new Date().toISOString().split('T')[0]
     const sharedAdminColumns = [
     { label: 'facture.colunm.td1', key: 'reference' },
@@ -86,6 +86,39 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
         return data?.data?.data?.data
     }
 
+    async function createFactureFromFile() {
+
+        
+        if (!file.value) {
+            alert('Merci de bien vouloir selectionner un fichier')
+            return
+        }
+        const formData = new FormData();
+
+        
+        formData.append('file', file.value);
+
+        isLoading.value= true
+        const data = await useFacture.createFactureFromFile(formData);
+        if (data?.error) {
+            alert(data?.error?.message)
+        }
+
+        // console.log(data?.data);
+        
+        if (data?.data) {
+            resetNewFacture()
+            resetNewRubrique()
+            useToastify("Opération éffectuée", {
+                autoClose: 1000,
+                type: ToastifyOption.TYPE.SUCCESS,
+                // position: ToastifyOption.POSITION.TOP_RIGHT,
+                // transition: ToastifyOption.TRANSITIONS.,
+                // theme: ToastifyOption.THEME.LIGHT,
+            });
+        }
+        isLoading.value= false
+    }
     async function create(send='send') {
         if (newRubrique.length==0) {
             alert('Merci de bien vouloir saisir au moins une rubrique')
@@ -241,6 +274,8 @@ export const useFactureViewModel = defineStore('FactureViewModel', () => {
         total_quantity,
         total_amount,
         sendFacture,
-        columns
+        columns,
+        file,
+        createFactureFromFile
     }
 })

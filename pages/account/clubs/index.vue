@@ -109,18 +109,20 @@ onMounted(() => {
                     <h5 class="text-sm font-semibold uppercase text-neutral-500">
                         {{ $t("club.title") }}
                     </h5>
-                    <div class="w-auto">
+                    <div class="w-auto flex items-center gap-2">
+                        <UiButtonSubmit
+                            @click="setActive(true)"
+                            class="!bg-gray-100 !text-black  
+                            border border-slate-200
+                            "
+                            type="button"
+                            label="Importer" 
+                            />
                         <nuxt-link 
                         class=" cursor-pointer items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors e text-xs disabled:opacity-50 bg-primary text-slate-50 shadow   px-4 py-3 self-start"
                         to="/account/clubs/create">
                             {{ $t("club.button") }}
                         </nuxt-link>
-                            <!-- <button 
-                            @click="setActive(true)"
-                            class=" cursor-pointer items-center justify-center whitespace-nowrap rounded-full  font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none text-xs disabled:opacity-50 bg-[#1F2923] text-slate-50 shadow hover:bg-[#2f3a34]  px-4 py-3 self-start"
-                            >
-                            {{ $t("club.button") }}
-                            </button> -->
                         
                     </div>
                 </div>
@@ -165,7 +167,16 @@ onMounted(() => {
             <div class="w-full p-2">
                 <ClubTableComponent :loading="loading" :columns="columns" :data="storeClub?.clubs.data" :setUpdate="setUpdate"/>
             </div>
-           <ClubAddClubComponent
+
+            <GlobaleImportComponent
+            :payload="storeClub.payload"
+            :loading="storeClub.isLoading"
+            :action="storeClub.createFromFile"
+            :isActive="isActive" 
+            :setActive="setActive"
+            :callback="handleListe"
+            />
+           <!-- <ClubAddClubComponent
            :new-club="storeClub.newClub"
            :create-club="createClub"
            :set-active="setActive"
@@ -179,7 +190,7 @@ onMounted(() => {
            :set-active="setActiveUpdate"
            :is-active="isActiveUpdate"
            :is-loading="storeClub.isLoading"
-           />
+           /> -->
         </div>
     </div>
     

@@ -4,17 +4,26 @@ export async function useCustomFetch<T>(url: string | (() => string),options: Us
     const config = useRuntimeConfig()
     const { getCookie } = useCookies()
     const token = getCookie('token')
+            let headers = {
+            'Accept': 'application/json',
+            'Authorization': token ? `Bearer ${token}` : '',
+            ...options.headers
+            }
+        
+        if (options.body instanceof FormData) {
+        delete headers['Content-Type']
+        } else {
+        headers['Content-Type'] = 'application/json'
+        }
+
     let option = {
         ...options,
         // baseURL:'http://localhost:8000/api/',
         baseURL:`${config.public.apiBase}`,
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': token ? `Bearer ${token}` : '',
-        }
-    
+        headers
     }
+
+    
 //     return useFetch(url, {
 //     ...option,
 //     $fetch: useNuxtApp().$customFetch,
@@ -25,11 +34,11 @@ export async function useCustomFetch<T>(url: string | (() => string),options: Us
     let response = await $fetch<T>(url, {
         ...option,
         onResponseError({ response }) {
-                if (response.status === 401 && response._data?.message === 'Unauthenticated.') {
-                    const { removeCookie } = useCookies()
-                    removeCookie('token')
-                    navigateTo('/auth/login')
-                }
+            if (response.status === 401 && response._data?.message === 'Unauthenticated.') {
+                const { removeCookie } = useCookies()
+                removeCookie('token')
+                navigateTo('/auth/login')
+            }
         },
     })
 

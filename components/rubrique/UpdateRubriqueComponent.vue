@@ -14,6 +14,15 @@ const optionStatus = [
     { label: 'actif', status:"actif"},
     { label: 'inactif', status:"inactif"},
 ]
+
+
+const optionPriority = [
+    { label: 'Eleve', value:"hight"},
+    { label: 'Normal', value:"middle"},
+    { label: 'Moyenne', value:"medium"},
+    { label: 'Faible', value:"low"},
+]
+
 </script>
 
 <template>
@@ -25,6 +34,7 @@ const optionStatus = [
                         Modifier rubrique
                     </h2>
                 </div>
+                <!-- {{ update }} -->
                 <form class="" @submit.prevent="updateRubrique()">
                     <div class=" mb-4 flex gap-1.5">
                         <UiFormInput 
@@ -49,6 +59,16 @@ const optionStatus = [
                         :label="$t('rubrique.form.label3')" 
                         :placeholder="$t('rubrique.form.label3')"
                         name="Prix" />
+                    </div>
+                     <div class="space-y-4 mb-4">
+                        <UiFormSelect 
+                            required
+                            v-model="update.priority"
+                            :options="optionPriority" 
+                            :label="$t('Niveau de priorite')" 
+                            :placeholder="$t('Niveau de priorite')"
+                            name="title" 
+                            />
                     </div>
                     <div class="">
                         <UiFormTextArea

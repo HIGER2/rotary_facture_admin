@@ -19,9 +19,15 @@ const props = defineProps({
 
 function onCreate(item: string,index) {
     console.log(item,index);
+    let exist = props.newRubrique.find((i)=>i.rubrique_id ==item.id)
+    if (exist) {
+        alert('Vous avez deja selectionnee cette rubrique')
+        return;
+    }
     props.newRubrique[index].rubrique_id = item?.id
     props.newRubrique[index].price = item?.price
     props.newRubrique[index].libele = item?.label
+    props.newRubrique[index].priority = item?.priority
 }
 
 

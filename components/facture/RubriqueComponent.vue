@@ -10,6 +10,7 @@ const props = defineProps<{
     user:any,
 }>()
 
+const {formatNumber}=Utils()
 
 const columns = {
     "admin":[
@@ -18,6 +19,11 @@ const columns = {
     { label: 'prix', key: 'price' },
     { label: 'quantité', key: 'quantity' },
     { label: 'montant total', key: 'total_amount' },
+    { label: 'Montant payé', key: 'amount_pay' },
+    { label: 'Reste à payer', key: 'remaining_amount' },
+    { label: 'Reste à payer', key: 'remaining_amount' },
+    { label: 'priorité', key: 'priority' },
+
     
     // { label: 'mode paiement', key: 'mode_paiement' },
     // { label: 'date', key: 'date' },
@@ -29,6 +35,10 @@ const columns = {
     { label: 'prix', key: 'price' },
     { label: 'quantité', key: 'quantity' },
     { label: 'montant total', key: 'total_amount' },
+    { label: 'Montant payé', key: 'amount_pay' },
+    { label: 'Reste à payer', key: 'remaining_amount' },
+    { label: 'priorité', key: 'priority' },
+
     
 ],
 "club":[
@@ -69,10 +79,22 @@ const columns = {
         </div>
         <div class="mt-6 ">
             <UiDynamicTable  :columns="columns[user?.role]" :data="rubriques">
-                <template #status="{ item }">
-                    <PaymentStatus :status="item?.status" />
-                </template>   
-                    <template #action="{ item }">
+                    <template #price="{ item }">
+                       <span>{{ formatNumber(item.price) }}</span>
+                    </template>  
+                      <template #quantity="{ item }">
+                       <span>{{ formatNumber(item.quantity) }}</span>
+                    </template>  
+                      <template #total_amount="{ item }">
+                       <span>{{ formatNumber(item.total_amount) }}</span>
+                    </template>   
+                     <template #amount_pay="{ item }">
+                       <span>{{ formatNumber(item.amount_pay) }}</span>
+                    </template>   
+                    <template #remaining_amount="{ item }">
+                       <span>{{ formatNumber(item.amount_pay) }}</span>
+                    </template>   
+                    <!-- <template #action="{ item }">
                         <button 
                             type="button"
                             @click="setUpdate(item)"
@@ -82,10 +104,12 @@ const columns = {
                             border border-gray-200 text-gray-500 hover:text-gray-700
                             shadow
                             ">
-                            <!-- <i class="uil uil-eye text-sm"></i> -->
+                            <i class="uil uil-eye text-sm"></i>
                             <i class="uil uil-pen"></i>
                         </button>
-                    </template>    
+                    </template>     -->
+
+
             </UiDynamicTable>
         </div>
         <!-- <FactureAddPaymentComponent

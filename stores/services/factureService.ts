@@ -9,6 +9,13 @@ export const useFactureServices = defineStore('facture', () => {
         return await useCustomFetch(`/facture/all?${queryParams.toString()}`)
     }
 
+    async function createFactureFromFile(items:any) {
+
+        return await useCustomFetch(`/facture/createFromFile`, {
+            method: 'POST',
+            body: items
+        })
+    }
     async function create(items:any,send:string ='send') {
         return await useCustomFetch(`/facture/create?send=${send}`, {
                 method: 'POST',
@@ -44,6 +51,7 @@ export const useFactureServices = defineStore('facture', () => {
         findWithPaiement,
         find,
         update,
-        sendFacture
+        sendFacture,
+        createFactureFromFile
     }
 })
